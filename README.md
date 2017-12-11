@@ -65,22 +65,26 @@ Vickie's primary responsibilities will be:
 Researching and setting up the Chrome extension infrastructure
 * Figure out how to efficiently use HTML elements with the code for users to type
 * Implement colors/indicators when a user is typing
-* Splash Page Design
+* Splash/About Us Page Design
 
 ## Implementation Timeline
 
 **Monday Dec 11th**
+- Make sure to have fully functional node app with express and postgres
 - Implement authentication system on backend and frontend
-- Start creating splash page with session forms
 
 **Tuesday Dec 12th**
-- 
+- Start creating splash page with session forms
+- Start building single user gameplay
 
 **Wednesday Dec 13th**
-- Implement algorithm to turn code snippets into html elements that users can traverse
-
+- Start implementing algorithm to turn code snippets into html elements that users can traverse
+- Create database schema and routes for users/rooms
 
 **Thursday Dec 14th**
+- Further improve on algorithm to turn code snippets into html elements that users can traverse
+- Start working on frontend work when users
+
 
 **Friday Dec 15th**
 
