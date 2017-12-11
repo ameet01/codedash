@@ -24,21 +24,21 @@ Bonus:
 ## Wireframes
 
 - Splash Page
-![splash](https://github.com/ameet01/flexproject/blob/master/wireframes/splash.png?raw=true =500x270)
+<img src="https://github.com/ameet01/flexproject/blob/master/wireframes/splash.png?raw=true" alt="splash" width="500">
 
 - Auth Page
-![login](https://github.com/ameet01/flexproject/blob/master/wireframes/login.png?raw=true =500x270)
+<img src="https://github.com/ameet01/flexproject/blob/master/wireframes/login.png?raw=true" alt="login" width="500">
 
 - Room Page
-![rooms lobby](https://github.com/ameet01/flexproject/blob/master/wireframes/rooms.png?raw=true =500x270)
+<img src="https://github.com/ameet01/flexproject/blob/master/wireframes/rooms.png?raw=true" alt="rooms lobby" width="500">
   * Modal for creating the room, single player or multiplayer, pick language
-![create room modal](https://raw.githubusercontent.com/ameet01/flexproject/master/wireframes/create-rooms.png?raw=true =500x270)
+  <img src="https://raw.githubusercontent.com/ameet01/flexproject/master/wireframes/create-rooms.png?raw=true" alt="create room modal" width="500">
 
 - Race Page
-![race end game](https://github.com/ameet01/flexproject/blob/master/wireframes/race.png?raw=true =500x270)
+<img src="https://github.com/ameet01/flexproject/blob/master/wireframes/race.png?raw=true" alt="race endgame" width="500">
 
 - About Us Page
-![about us](https://github.com/ameet01/flexproject/blob/master/wireframes/about.png?raw=true =500x270)
+<img src="https://github.com/ameet01/flexproject/blob/master/wireframes/about.png?raw=true" alt="about us" width="500">
 
 ## Technologies & Technical Challenges
 
