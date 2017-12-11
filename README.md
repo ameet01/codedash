@@ -24,13 +24,16 @@ Bonus:
 ## Wireframes
 
 - Splash Page
-
+![splash](https://github.com/ameet01/flexproject/blob/master/wireframes/splash.png?raw=true)
 - Auth Page
 
 - Room Page
+![rooms lobby](https://github.com/ameet01/flexproject/blob/master/wireframes/rooms.png?raw=true)
+  * Modal for creating the room, single player or multiplayer, pick language
+![create room modal](https://raw.githubusercontent.com/ameet01/flexproject/master/wireframes/create-rooms.png)
 
 - Race Page
- - Modal for creating the room, singleplayer or multieplayer, pick language
+![race end game](https://github.com/ameet01/flexproject/blob/master/wireframes/race.png?raw=true)
 
 - About us page
 
