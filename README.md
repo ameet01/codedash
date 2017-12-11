@@ -49,6 +49,7 @@ Bonus:
 ## Things we accomplished this weekend
 - Watched a node.js/express/react tutorial
 - Implemented a Node application and incorporated Express/PostgreSQL/React that has very basic routing/implementation when displayed on our server.
+- Looked up auth, having a lot of trouble implementing it.
 
 ## Group Members & Work Breakdown
 
@@ -70,24 +71,27 @@ Researching and setting up the Chrome extension infrastructure
 ## Implementation Timeline
 
 **Monday Dec 11th**
-- Make sure to have fully functional node app with express and postgres
-- Implement authentication system on backend and frontend
+- Make sure to have fully functional node app with express and postgres (Ameet)
+- Implement authentication system on backend and frontend (Ameet)
+- Start react views (Vickie)
 
 **Tuesday Dec 12th**
-- Start creating splash page with session forms
-- Start building single user gameplay
+- Start creating splash page with session forms (Vickie)
+- Start building single user gameplay (Vickie & Ameet)
 
 **Wednesday Dec 13th**
-- Start implementing algorithm to turn code snippets into html elements that users can traverse
-- Create database schema and routes for users/rooms
+- Start implementing algorithm to turn code snippets into html elements that users can traverse (Vickie & Ameet)
+- Create database schema and routes for users/rooms/statistics (Ameet)
 
 **Thursday Dec 14th**
-- Further improve on algorithm to turn code snippets into html elements that users can traverse
-- Start working on frontend work when users
-
+- Further improve on algorithm to turn code snippets into html elements that users can traverse (Vickie & Ameet)
+- Start working on indicators on the code when users traverse it, like errors, and correct letters.
 
 **Friday Dec 15th**
+- Implement websockets for rooms and start building the logic for users joining another user's room to play
 
 **Saturday Dec 16th**
+- Further improve on websockets
 
 **Sunday Dec 17th**
+- Final touches to styling
