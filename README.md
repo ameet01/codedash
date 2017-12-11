@@ -24,21 +24,21 @@ Bonus:
 ## Wireframes
 
 - Splash Page
-![splash](https://github.com/ameet01/flexproject/blob/master/wireframes/splash.png?raw=true)
+![splash](https://github.com/ameet01/flexproject/blob/master/wireframes/splash.png?raw=true =500x270)
 
 - Auth Page
-![login](https://github.com/ameet01/flexproject/blob/master/wireframes/login.png?raw=true)
+![login](https://github.com/ameet01/flexproject/blob/master/wireframes/login.png?raw=true =500x270)
 
 - Room Page
-![rooms lobby](https://github.com/ameet01/flexproject/blob/master/wireframes/rooms.png?raw=true)
+![rooms lobby](https://github.com/ameet01/flexproject/blob/master/wireframes/rooms.png?raw=true =500x270)
   * Modal for creating the room, single player or multiplayer, pick language
-![create room modal](https://raw.githubusercontent.com/ameet01/flexproject/master/wireframes/create-rooms.png)
+![create room modal](https://raw.githubusercontent.com/ameet01/flexproject/master/wireframes/create-rooms.png?raw=true =500x270)
 
 - Race Page
-![race end game](https://github.com/ameet01/flexproject/blob/master/wireframes/race.png?raw=true)
+![race end game](https://github.com/ameet01/flexproject/blob/master/wireframes/race.png?raw=true =500x270)
 
 - About Us Page
-![about us](https://github.com/ameet01/flexproject/blob/master/wireframes/about.png?raw=true)
+![about us](https://github.com/ameet01/flexproject/blob/master/wireframes/about.png?raw=true =500x270)
 
 ## Technologies & Technical Challenges
 
@@ -46,7 +46,7 @@ Bonus:
 - **Backend: Node.js/Express**
 - **Database: PostgreSQL**
 - **Frontend: React**
-- **Other: websockets**
+- **Other: Websockets**
 
 ### Challenges
 - Displaying indicators to users typing through the code. Every single letter would have to be its own separate HTML element, and they would need to be constantly updated with different selectors in order to style them.
