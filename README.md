@@ -19,6 +19,7 @@ Bonus:
 - [ ] Logs history of players games
 - [ ] Private rooms with passwords
 - [ ] Let more than 2 users in a room race
+- [ ] Filter rooms for specific language
 
 ## Wireframes
 
@@ -37,7 +38,7 @@ Bonus:
 
 ### Technologies
 - **Backend: Node.js/Express**
-- **Database: MongoDB**
+- **Database: PostgreSQL**
 - **Frontend: React**
 - **Other: Websockets**
 
@@ -46,7 +47,8 @@ Bonus:
 - Allowing players to play and race at the exact same time using Websockets.
 
 ## Things we accomplished this weekend
-- We have started a basic Node application and incorporated Express/MongoDB/React that has very basic routing/implementation when displayed on our server.
+- Watched a node.js/express/react tutorial
+- Implemented a Node application and incorporated Express/PostgreSQL/React that has very basic routing/implementation when displayed on our server.
 
 ## Group Members & Work Breakdown
 
@@ -69,11 +71,14 @@ Researching and setting up the Chrome extension infrastructure
 
 **Monday Dec 11th**
 - Implement authentication system on backend and frontend
+- Start creating splash page with session forms
 
 **Tuesday Dec 12th**
--
+- 
 
 **Wednesday Dec 13th**
+- Implement algorithm to turn code snippets into html elements that users can traverse
+
 
 **Thursday Dec 14th**
 
