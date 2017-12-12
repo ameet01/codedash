@@ -29,7 +29,8 @@ class NavBar extends Component {
   }
 
   logout() {
-    axios.get('./api/logout').then(() => this.props.fetchUser()).then(() => this.setState({username: "", password: "", error: ""}));
+    axios.get('./api/logout').then(() => this.props.fetchUser()).then(() => this.setState({username: "", password: "", error: ""}))
+    .then(() => this.props.history.push('/'));
   }
 
   renderContent() {

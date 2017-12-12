@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
+import axios from 'axios';
 
-class Lobby extends React.Component {
+class Lobby extends Component {
+  constructor(props) {
+    super(props);
+  }
 
+  render() {
+    return <div></div>;
+  }
 }
 
-export default Lobby;
+export default connect(null, actions)(Lobby);

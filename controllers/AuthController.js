@@ -16,13 +16,13 @@ userController.register = function(req, res) {
 
 // Post registration
 userController.doRegister = function(req, res) {
-  User.register(new User({ username : req.body.username, name: req.body.name }), req.body.password, function(err, user) {
+  User.register(new User({ username : req.body.username }), req.body.password, function(err, user) {
     if (err) {
       return res.render('register', { user : user });
     }
 
     passport.authenticate('local')(req, res, function () {
-      res.redirect('/');
+      // res.redirect('/');
     });
   });
 };

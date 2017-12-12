@@ -4,6 +4,7 @@ import Routes from './routes';
 
 import './styles/index.css';
 import './styles/NavBar.css';
+import './styles/session.css';
 
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
