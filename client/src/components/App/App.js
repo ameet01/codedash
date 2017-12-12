@@ -53,6 +53,7 @@ class App extends Component {
 
     return (
       <div className={classnames('App', className)} props={this.props}>
+        <h1>Hello!</h1>
         {this.renderContent()}
         {this.state.error}
       </div>
