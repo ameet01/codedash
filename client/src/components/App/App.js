@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import './style.css';
@@ -57,9 +56,6 @@ class App extends Component {
       <div className={classnames('App', className)} props={this.props}>
         {this.renderContent()}
         {this.state.error}
-        <div className="App-header">
-          <h2>Welcome to React - yay!</h2>
-        </div>
       </div>
     );
   }

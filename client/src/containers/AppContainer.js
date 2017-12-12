@@ -6,7 +6,6 @@ import App from '../components/App/App';
 
 function mapStateToProps(state) {
   return {
-    results: state.demo.results,
     auth: state.auth
   };
 }
