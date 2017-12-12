@@ -19,7 +19,6 @@ class App extends Component {
   }
 
   update(property) {
-    console.log(this.state);
     return (e) => this.setState({[property]: e.target.value});
   }
 
