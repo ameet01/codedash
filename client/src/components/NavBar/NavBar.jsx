@@ -4,7 +4,6 @@ import * as actions from '../../actions';
 import axios from 'axios';
 
 
-
 class NavBar extends Component {
   constructor(props) {
     super(props);

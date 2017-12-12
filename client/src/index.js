@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Routes from './routes';
 
+
+import './styles/reset.css';
 import './styles/index.css';
 import './styles/NavBar.css';
+import './styles/Footer.css';
 import './styles/session.css';
 
 import { Provider } from 'react-redux';
