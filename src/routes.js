@@ -12,7 +12,7 @@ const Routes = () => {
         <Route exact path="/about" component={About} />
       </div>
     </Router>
-  )
+  );
 };
 
 export default Routes;
