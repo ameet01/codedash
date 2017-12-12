@@ -6,9 +6,9 @@ import './style.css';
 
 export default class About extends Component {
   render() {
-    const { className, ...props } = this.props;
+    const { className } = this.props;
     return (
-      <div className={classnames('About', className)} {...props}>
+      <div className={classnames('About', className)} props={this.props}>
         <h1>
           React Router working!
         </h1>
