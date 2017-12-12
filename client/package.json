@@ -3,12 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "proxy": {
-    "/login": {
-      "target": "http://localhost:5000"
-    },
-    "/logout": {
-      "target": "http://localhost:5000"
-    },
     "/api/*": {
       "target": "http://localhost:5000"
     }
