@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import classnames from 'classnames';
 import axios from 'axios';
 
-import './style.css';
+import './NavBar.css';
 
 class NavBar extends Component {
   constructor(props) {
@@ -44,18 +43,21 @@ class NavBar extends Component {
           <button>Submit</button>
         </form>);
       default:
-        return <button onClick={() => this.logout()}>Log Out</button>;
+        return <div>
+          <h4>Welcome {this.props.auth.username}</h4>
+          <button onClick={() => this.logout()}>Log Out</button>
+        </div>;
     }
   }
 
   render() {
-    const { className } = this.props;
-
     return (
-      <div className={classnames('App', className)} props={this.props}>
-        <h1>Hello!</h1>
-        {this.renderContent()}
-        {this.state.error}
+      <div className='navbar' props={this.props}>
+        <div className='inside-navbar'>
+          <h1>Code Typer!</h1>
+          {this.renderContent()}
+          <div className='navbar-error'>{this.state.error}</div>
+        </div>
       </div>
     );
   }
