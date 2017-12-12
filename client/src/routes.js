@@ -11,7 +11,6 @@ const Routes = () => {
     <Router>
       <div>
         <Route path="/" component={NavBarContainer} />
-        <Route exact path="/" component={SplashPageContainer} />
         <Route exact path="/signup" component={SessionContainer} />
         <Route exact path="/lobby" component={LobbyContainer} />
         <Route exact path="/game" component={GameContainer} />
