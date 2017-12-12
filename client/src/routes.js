@@ -6,6 +6,7 @@ import SplashContainer from './containers/SplashContainer';
 import SessionContainer from './containers/SessionContainer';
 import LobbyContainer from './containers/LobbyContainer';
 import GameContainer from './containers/GameContainer';
+import Footer from './components/Footer/Footer';
 
 const Routes = () => {
   return (
@@ -17,6 +18,7 @@ const Routes = () => {
           <Route exact path="/signup" component={SessionContainer} />
           <Route exact path="/lobby" component={LobbyContainer} />
           <Route exact path="/game" component={GameContainer} />
+          <Route path="/" component={Footer} />
         </div>
       </Router>
     </div>

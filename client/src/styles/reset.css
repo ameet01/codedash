@@ -45,8 +45,7 @@ hr {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin: 0;
 }
 
 p {
@@ -234,6 +233,7 @@ textarea {
 button,
 input {
   overflow: visible;
+  box-sizing: border-box;
 }
 
 button,
@@ -331,4 +331,12 @@ template {
 
 [hidden] {
   display: none !important;
+}
+
+button:focus, input:focus {
+  outline: none;
+}
+
+a:hover, button:hover {
+  cursor: pointer;
 }

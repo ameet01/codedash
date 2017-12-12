@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
+import axios from 'axios';
 
-class Splash extends React.Component {
+import '../../styles/Splash.css';
+
+class Splash extends Component {
   constructor(props) {
     super(props);
   }
@@ -8,10 +13,13 @@ class Splash extends React.Component {
   render() {
     return(
       <div className="splash-container">
-        
+        <div className="tagline">
+          <h2></h2>
+          <button>Play Now</button>
+        </div>
       </div>
     );
   }
 }
 
-export default Splash;
+export default connect(null, actions)(Splash);
