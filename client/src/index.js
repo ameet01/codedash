@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Routes from './routes';
 
-import './index.css';
+import './styles/index.css';
+import './styles/NavBar.css';
 
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
