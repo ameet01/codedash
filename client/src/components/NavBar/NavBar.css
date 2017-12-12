@@ -1,0 +1,19 @@
+.navbar {
+  width: 70%;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+.inside-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.navbar-error {
+  position: absolute;
+  color: red;
+  top: 5px;
+  right: 5px;
+}
