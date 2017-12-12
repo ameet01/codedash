@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import './style.css';
 
-class App extends Component {
+class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {username: "", password: "", error: ""};
@@ -61,4 +61,4 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+export default connect(null, actions)(NavBar);
