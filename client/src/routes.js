@@ -18,8 +18,8 @@ const Routes = () => {
           <Route path="/" component={NavBarContainer} />
           <AuthRoute path="/" component={SplashContainer} />
           <AuthRoute path="/signup" component={SessionContainer} />
-          <ProtectedRoute path="/lobby" component={LobbyContainer} />
-          <ProtectedRoute path="/game" component={GameContainer} />
+          <Route path="/lobby" component={LobbyContainer} />
+          <Route path="/game" component={GameContainer} />
           <Route path="/" component={Footer} />
         </div>
       </Router>

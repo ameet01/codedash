@@ -1,0 +1,10 @@
+.active {
+  background: lightgreen;
+}
+
+pre {
+  background: white;
+  padding: 30px;
+  width: 30%;
+  margin: 0 auto;
+}

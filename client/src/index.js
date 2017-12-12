@@ -8,6 +8,7 @@ import './styles/index.css';
 import './styles/NavBar.css';
 import './styles/Footer.css';
 import './styles/session.css';
+import './styles/game.css';
 
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
