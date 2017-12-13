@@ -12,7 +12,7 @@ class Footer extends Component {
             © 2017 CodeTyper
           </div>
           <div className="footer-links">
-            <a href="/about">About Us</a>
+            <a onClick={() => this.props.history.push('/about')}>About Us</a>
             <a href="https://www.github.com/ameet01/flexproject" target="_blank">GitHub</a>
           </div>
         </div>
@@ -20,5 +20,4 @@ class Footer extends Component {
     );
   }
 }
-
 export default connect(null, actions)(Footer);
