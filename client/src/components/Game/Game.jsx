@@ -38,16 +38,18 @@ class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0};
+    this.registerKeyPress = this.registerKeyPress.bind(this);
+    this.backspace = this.backspace.bind(this);
   }
 
   componentDidMount() {
-    document.addEventListener('keypress', (e) => this.registerKeyPress(e));
-    document.addEventListener('keydown', (e) => this.backspace(e));
+    document.addEventListener('keypress', this.registerKeyPress);
+    document.addEventListener('keydown', this.backspace);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keypress', (e) => this.registerKeyPress(e));
-    document.removeEventListener('keydown', (e) => this.backspace(e));
+    document.removeEventListener('keypress', this.registerKeyPress);
+    document.removeEventListener('keydown', this.backspace);
   }
 
   registerKeyPress(e) {
@@ -76,7 +78,7 @@ class Game extends Component {
             while(code[num].match(/\s/g)) {
               num += 1;
             }
-            this.setState({pointer: num+1, wrongstreak: this.state.wrongstreak += 1});
+            this.setState({pointer: num, wrongstreak: this.state.wrongstreak += 1});
           }
         }
 
@@ -102,7 +104,8 @@ class Game extends Component {
             num -= 1;
           }
           if(string.includes("\n")) {
-            this.setState({pointer: num, wrongstreak: this.state.wrongstreak -= 1 }, console.log(this.state.pointer));
+            console.log('hi');
+            this.setState({pointer: num+1, wrongstreak: this.state.wrongstreak -= 1 }, console.log(this.state.pointer));
           } else {
             this.setState({pointer: original, wrongstreak: this.state.wrongstreak -= 1});
           }
