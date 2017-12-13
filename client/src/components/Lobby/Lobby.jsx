@@ -33,13 +33,18 @@ class Lobby extends Component {
           </div>
           <div className='language-select'>
             <ul>
-              {languages.map((language, index) => <NavLink to={`/lobby/${language}`} activeClassName='activelanguage' key={index}>{language}</NavLink>)}
+              {languages.map((language, index) =>
+                <NavLink to={`/lobby/${language}`}
+                  activeClassName='activelanguage'
+                  key={index}>
+                  {language}
+                </NavLink>)}
             </ul>
           </div>
         </div>
-      </div>
 
-      <button onClick={() => this.createRoom()}>Submit</button>
+        <button onClick={() => this.createRoom()}>Submit</button>
+      </div>
     </div>;
   }
 }

@@ -5,8 +5,9 @@ import Routes from './routes';
 
 import './styles/reset.css';
 import './styles/index.css';
-import './styles/NavBar.css';
-import './styles/Footer.css';
+import './styles/navbar.css';
+import './styles/splash.css';
+import './styles/footer.css';
 import './styles/session.css';
 import './styles/game.css';
 import './styles/lobby.css';

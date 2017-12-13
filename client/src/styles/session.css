@@ -1,14 +1,61 @@
 .session {
-  width: 70%;
-  margin: 0 auto;
   display: flex;
+  align-items: center;
   justify-content: center;
+  flex: 1;
+  width: 100%;
+  background: #efefef;
+  font-size: 18px;
 }
-
 
 .inner-session {
   display: flex;
-  justify-content: center;
-  padding-top: 250px;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.session form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 300px;
+}
+
+.session h1 {
+  margin-bottom: 0.5em;
+}
+
+.session span {
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.session input {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.session input:focus {
+  border-color: #406E8E;
+}
+
+.session button {
+  margin: 20px auto;
+  width: 100%;
+  background: transparent;
+  border: 2px solid #406E8E;
+  border-radius: 3px;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: #406E8E;
+  transition: all 0.3s ease;
+}
+
+.session button:hover {
+  background: #406E8E;
+  color: #fff;
 }
