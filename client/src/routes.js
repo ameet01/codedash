@@ -15,12 +15,12 @@ const Routes = () => {
     <Router>
       <div className="app-container">
         <Route path="/" component={NavBarContainer} />
-        <Route exact path="/" component={SplashContainer} />
-        <Route exact path="/signup" component={SessionContainer} />
-        <Route exact path="/lobby" component={LobbyContainer} />
-        <Route exact path="/lobby/:language" component={LobbyContainer} />
-        <Route exact path="/game" component={GameContainer} />
-        <Route exact path="/game/:language" component={GameContainer} />
+        <AuthRoute path="/" component={SplashContainer} />
+        <AuthRoute path="/signup" component={SessionContainer} />
+        <ProtectedRoute exact path="/lobby" component={LobbyContainer} />
+        <ProtectedRoute exact path="/lobby/:language" component={LobbyContainer} />
+        <ProtectedRoute exact path="/game" component={GameContainer} />
+        <ProtectedRoute exact path="/game/:language" component={GameContainer} />
         <Route path="/" component={Footer} />
       </div>
     </Router>

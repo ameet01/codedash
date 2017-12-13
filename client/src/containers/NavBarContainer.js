@@ -1,4 +1,4 @@
-import * as Actions from '../actions';
+import * as Actions from '../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -12,7 +12,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Actions, dispatch)
+    actions: bindActionCreators(Actions, dispatch),
+    receiveUser: (user) => dispatch(Actions.receiveUser(user))
   };
 }
 

@@ -24,13 +24,18 @@ class NavBar extends Component {
   handleSubmit(e) {
     e.preventDefault();
     axios.post('/api/login', {username: this.state.username, password: this.state.password})
+    .then(user =>
+      this.props.receiveUser({
+      id: user.data._id,
+      username: this.state.username
+    }))
     .then(() => this.props.history.push('/lobby'))
-    .then(() => this.props.fetchUser()).then(() => this.setState({error: ''}))
-    .catch(error => { this.setState({error: 'Invalid Credentials'}); });
+    // .then(() => this.props.fetchUser()).then(() => this.setState({error: ''}))
+    .catch(error => { this.setState({error: 'Invalid Credentials'}); })
   }
 
   logout() {
-    axios.get('/api/logout').then(() => this.props.fetchUser()).then(() => this.setState({username: "", password: "", error: ""}))
+    axios.get('/api/logout').then(() => this.props.receiveUser(null)).then(() => this.setState({username: "", password: "", error: ""}))
     .then(() => this.props.history.push('/'));
   }
 

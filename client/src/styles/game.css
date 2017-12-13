@@ -45,3 +45,8 @@ code {
   padding: 0 .5em;
   color: white;
 }
+
+.game h1 {
+  color: white;
+  text-align: center;
+}

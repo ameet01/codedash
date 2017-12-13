@@ -5,10 +5,18 @@ export const FETCH_USER = 'FETCH_USER';
 
 export const fetchUser = () => (dispatch) => {
   axios.get('/api/current_user')
-    .then(res => dispatch({type: FETCH_USER, payload: res.data}));
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+      dispatch(receiveUser(res.data));
+    });
 };
 
-
+export const receiveUser = user => {
+  console.log(user);
+  return {type: FETCH_USER,
+  payload: user};
+};
 
 
 

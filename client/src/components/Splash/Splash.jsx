@@ -12,13 +12,6 @@ class Splash extends Component {
     this.demoLogin = this.demoLogin.bind(this);
   }
 
-  componentDidMount() {
-    if(this.props.auth) {
-      console.log('hi');
-      this.props.history.push('/lobby');
-    }
-  }
-
   demoLogin() {
     let randomNumber = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
     axios.post('/api/login', {username: `demo${randomNumber}`, password: "password"})
