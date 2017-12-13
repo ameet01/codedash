@@ -15,8 +15,8 @@ const Routes = () => {
     <Router>
       <div className="app-container">
         <Route path="/" component={NavBarContainer} />
-        <AuthRoute path="/" component={SplashContainer} />
-        <AuthRoute path="/signup" component={SessionContainer} />
+        <Route exact path="/" component={SplashContainer} />
+        <Route exact path="/signup" component={SessionContainer} />
         <Route exact path="/lobby" component={LobbyContainer} />
         <Route exact path="/game" component={GameContainer} />
         <Route path="/" component={Footer} />

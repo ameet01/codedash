@@ -23,6 +23,7 @@ class NavBar extends Component {
   handleSubmit(e) {
     e.preventDefault();
     axios.post('/api/login', {username: this.state.username, password: this.state.password})
+    .then(() => this.props.history.push('/lobby'))
     .then(() => this.props.fetchUser()).then(() => this.setState({error: ''}))
     .catch(error => { this.setState({error: 'Invalid Credentials'}); });
   }
@@ -38,8 +39,8 @@ class NavBar extends Component {
         return;
       case false:
         return (<form method='post' onSubmit={(e) => this.handleSubmit(e)}>
-          <input type='text' onChange={this.update('username')} name='username' value={this.state.username} autoComplete="new-username" placeHolder='username'/>
-          <input type='password'  onChange={this.update('password')} name='password' value={this.state.password} autoComplete="new-password" placeHolder='password'/>
+          <input type='text' onChange={this.update('username')} name='username' value={this.state.username} autoComplete="new-username" placeholder='username'/>
+          <input type='password'  onChange={this.update('password')} name='password' value={this.state.password} autoComplete="new-password" placeholder='password'/>
           <button>Log In</button>
         </form>);
       default:
