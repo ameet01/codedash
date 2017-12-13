@@ -17,10 +17,10 @@ const Routes = () => {
         <Route path="/" component={NavBarContainer} />
         <AuthRoute path="/" component={SplashContainer} />
         <AuthRoute path="/signup" component={SessionContainer} />
-        <ProtectedRoute exact path="/lobby" component={LobbyContainer} />
-        <ProtectedRoute exact path="/lobby/:language" component={LobbyContainer} />
-        <ProtectedRoute exact path="/game" component={GameContainer} />
-        <ProtectedRoute exact path="/game/:language" component={GameContainer} />
+        <ProtectedRoute path="/lobby" component={LobbyContainer} />
+        <ProtectedRoute path="/lobby/:language" component={LobbyContainer} />
+        <ProtectedRoute path="/game" component={GameContainer} />
+        <ProtectedRoute path="/game/:language" component={GameContainer} />
         <Route path="/" component={Footer} />
       </div>
     </Router>

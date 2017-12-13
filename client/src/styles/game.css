@@ -50,3 +50,7 @@ code {
   color: white;
   text-align: center;
 }
+
+#timer {
+  color: red;
+}

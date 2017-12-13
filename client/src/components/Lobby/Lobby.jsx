@@ -14,7 +14,9 @@ class Lobby extends Component {
   }
 
   createRoom() {
-    this.props.history.push(`/game/${this.props.match.params.language}`);
+    if(this.props.match.params.language) {
+      this.props.history.push(`/game/${this.props.match.params.language}`);
+    }
   }
 
   render() {
