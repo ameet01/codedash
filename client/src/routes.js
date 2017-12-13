@@ -20,6 +20,7 @@ const Routes = () => {
         <Route exact path="/lobby" component={LobbyContainer} />
         <Route exact path="/lobby/:language" component={LobbyContainer} />
         <Route exact path="/game" component={GameContainer} />
+        <Route exact path="/game/:language" component={GameContainer} />
         <Route path="/" component={Footer} />
       </div>
     </Router>
