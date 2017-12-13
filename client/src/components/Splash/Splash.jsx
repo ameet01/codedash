@@ -15,7 +15,7 @@ class Splash extends Component {
       <div className="splash-container">
         <div className="tagline">
           <h2>Dash to the finish</h2>
-          <p>Hone your code typing skills and race against your friends</p>
+          <p>Hone your code typing skills and race head to head against your friends</p>
           <button>Play Now</button>
         </div>
       </div>

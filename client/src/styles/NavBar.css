@@ -3,6 +3,7 @@
   padding: 10px 0;
   background: #23395B;
   color: #CBF7ED;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
 }
 
 .navbar h1 {

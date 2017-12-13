@@ -10,6 +10,7 @@ class NavBar extends Component {
     this.state = {username: "", password: "", error: ""};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.logout = this.logout.bind(this);
+    this.redirect = this.redirect.bind(this);
   }
 
   componentDidMount() {
@@ -51,11 +52,19 @@ class NavBar extends Component {
     }
   }
 
+  redirect() {
+    if (this.props.auth) {
+      this.props.history.push('/lobby');
+    } else {
+      this.props.history.push('/');
+    }
+  }
+
   render() {
     return (
       <div className='navbar' props={this.props}>
         <div className='inside-navbar'>
-          <h1 onClick={() => this.props.history.push('/')}>CodeTyper</h1>
+          <h1 onClick={this.redirect}>CodeTyper</h1>
           {this.renderContent()}
           <div className='navbar-error'>{this.state.error}</div>
         </div>
