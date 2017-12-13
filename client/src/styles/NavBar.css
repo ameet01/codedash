@@ -5,6 +5,15 @@
   color: #CBF7ED;
 }
 
+.navbar h1 {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.navbar h1:hover {
+  color: #dff;
+}
+
 .inside-navbar {
   display: flex;
   align-items: center;
@@ -23,7 +32,7 @@
 }
 
 .inside-navbar button {
-  margin-left: 10px;
+  margin-left: 20px;
   background: transparent;
   border: 2px solid #8EA8C3;
   border-radius: 3px;
@@ -47,4 +56,9 @@
   color: #fff;
   bottom: -10px;
   right: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
 }
