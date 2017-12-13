@@ -34,7 +34,8 @@ class Lobby extends Component {
               {languages.map((language, index) =>
                 <NavLink to={`/lobby/${language}`}
                   activeClassName='activelanguage'
-                  key={index}>{language}
+                  key={index}>
+                  {language}
                 </NavLink>)}
             </ul>
           </div>

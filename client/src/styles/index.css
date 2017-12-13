@@ -2,13 +2,13 @@ html, body, #root, .app-container {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background: #161925;
 }
 
 body {
   margin: 0;
   padding: 0;
   font-family: Lato;
-  background: #161925;
   color: #161925;
 }
 
