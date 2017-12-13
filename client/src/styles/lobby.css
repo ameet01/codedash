@@ -40,3 +40,8 @@
   flex-direction: column;
   list-style: none;
 }
+
+.activelanguage {
+  background: green;
+  color: white;
+}
