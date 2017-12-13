@@ -12,18 +12,16 @@ import {AuthRoute, ProtectedRoute} from './util/route_util';
 
 const Routes = () => {
   return (
-    <div className="app-container">
-      <Router>
-        <div>
-          <Route path="/" component={NavBarContainer} />
-          <AuthRoute path="/" component={SplashContainer} />
-          <AuthRoute path="/signup" component={SessionContainer} />
-          <Route path="/lobby" component={LobbyContainer} />
-          <Route path="/game" component={GameContainer} />
-          <Route path="/" component={Footer} />
-        </div>
-      </Router>
-    </div>
+    <Router>
+      <div className="app-container">
+        <Route path="/" component={NavBarContainer} />
+        <AuthRoute path="/" component={SplashContainer} />
+        <AuthRoute path="/signup" component={SessionContainer} />
+        <Route exact path="/lobby" component={LobbyContainer} />
+        <Route exact path="/game" component={GameContainer} />
+        <Route path="/" component={Footer} />
+      </div>
+    </Router>
   );
 };
 

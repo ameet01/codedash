@@ -40,11 +40,11 @@ class NavBar extends Component {
         return (<form method='post' onSubmit={(e) => this.handleSubmit(e)}>
           <input type='text' onChange={this.update('username')} name='username' value={this.state.username} autoComplete="new-username" />
           <input type='password'  onChange={this.update('password')} name='password' value={this.state.password} autoComplete="new-password" />
-          <button>Submit</button>
+          <button>Log In</button>
         </form>);
       default:
-        return <div>
-          <h4>Welcome {this.props.auth.username}</h4>
+        return <div className="user-info">
+          <h4>Welcome, {this.props.auth.username}</h4>
           <button onClick={() => this.logout()}>Log Out</button>
         </div>;
     }
@@ -54,7 +54,7 @@ class NavBar extends Component {
     return (
       <div className='navbar' props={this.props}>
         <div className='inside-navbar'>
-          <h1>Code Typer!</h1>
+          <h1 onClick={() => this.props.history.push('/')}>CodeTyper</h1>
           {this.renderContent()}
           <div className='navbar-error'>{this.state.error}</div>
         </div>
