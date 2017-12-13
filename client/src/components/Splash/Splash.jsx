@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {Redirect} from 'react-router';
 import * as actions from '../../actions';
 import axios from 'axios';
 
@@ -9,6 +10,12 @@ class Splash extends Component {
   constructor(props) {
     super(props);
     this.demoLogin = this.demoLogin.bind(this);
+  }
+
+  componentWillMount() {
+    if(this.props.auth) {
+      this.props.history.push('/lobby');
+    }
   }
 
   demoLogin() {
