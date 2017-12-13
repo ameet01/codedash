@@ -37,7 +37,7 @@ const codeLength = code.split(/\s+/g).length - 1;
 class Game extends Component {
   constructor(props) {
     super(props);
-    this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined};
+    this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0};
   }
 
   componentDidMount() {
@@ -52,7 +52,6 @@ class Game extends Component {
 
   registerKeyPress(e) {
     e.preventDefault();
-    console.log(this.state.pointer);
     if(this.state.wrongstreak <= 5) {
       if(e.keyCode === (code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
         this.setState({pointer: this.state.pointer += 1, incorrect: false});
@@ -61,7 +60,6 @@ class Game extends Component {
         } else {
           this.setState({incorrect: false});
         }
-
         let num = this.state.pointer + 1;
         if(code[num]) {
           while(code[num].match(/\s/g)) {
@@ -70,7 +68,18 @@ class Game extends Component {
           this.setState({pointer: num});
         }
       } else if(code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode !== 13) {
-        this.setState({incorrect: true});
+        if(this.state.incorrect === false) {
+          this.setState({incorrect: true});
+        } else {
+          let num = this.state.pointer + 1;
+          if(code[num]) {
+            while(code[num].match(/\s/g)) {
+              num += 1;
+            }
+            this.setState({pointer: num+1, wrongstreak: this.state.wrongstreak += 1});
+          }
+        }
+
       }else {
         if(this.state.wrongstreak === 0) {
           this.setState({key: this.state.pointer}, this.setState({incorrect: true, pointer: this.state.pointer += 1, wrongstreak: this.state.wrongstreak += 1}));
