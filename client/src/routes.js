@@ -18,6 +18,7 @@ const Routes = () => {
         <Route exact path="/" component={SplashContainer} />
         <Route exact path="/signup" component={SessionContainer} />
         <Route exact path="/lobby" component={LobbyContainer} />
+        <Route exact path="/lobby/:language" component={LobbyContainer} />
         <Route exact path="/game" component={GameContainer} />
         <Route path="/" component={Footer} />
       </div>
