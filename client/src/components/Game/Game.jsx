@@ -3,43 +3,16 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import axios from 'axios';
 
-const code = `render() {
-  return <div>
-    <h1>WHY GAME</h1>
-    <pre><code>{code.split('').map((char, index) => {
-        let span;
-        if(index === this.state.pointer) {
-          if(char === "/n") {
-            span = <span className='active enter' key={index}>{char}</span>;
-          } else {
-            if(this.state.incorrect) {
-              span = <span className='wrong' key={index}>{char}</span>;
-            } else {
-              span = <span className='active' key={index}>{char}</span>;
-            }
-          }
-        } else {
-          span = <span className='regular' key={index}>{char}</span>;
-        }
-
-        if(this.state.key === index) {
-          span = <span className='incorrect' key={index}>{char}</span>;
-        }
-        return span;
-      })}</code></pre>
-  </div>;
-`;
-
-const codeLength = code.split(/\s+/g).length - 1;
-
-
-
 class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0};
     this.registerKeyPress = this.registerKeyPress.bind(this);
     this.backspace = this.backspace.bind(this);
+
+    let language = this.props.languages[`${this.props.match.params.language}`];
+    this.code = language[Math.floor(Math.random()*language.length)];
+    this.codeLength = this.code.split(/\s+/g).length - 1;
   }
 
   componentDidMount() {
@@ -55,27 +28,27 @@ class Game extends Component {
   registerKeyPress(e) {
     e.preventDefault();
     if(this.state.wrongstreak <= 5) {
-      if(e.keyCode === (code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
+      if(e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
         this.setState({pointer: this.state.pointer += 1, incorrect: false});
-      } else if(code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode === 13) {
+      } else if(this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode === 13) {
         if(this.state.incorrect === true) {
         } else {
           this.setState({incorrect: false});
         }
         let num = this.state.pointer + 1;
-        if(code[num]) {
-          while(code[num].match(/\s/g)) {
+        if(this.code[num]) {
+          while(this.code[num].match(/\s/g)) {
             num += 1;
           }
           this.setState({pointer: num});
         }
-      } else if(code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode !== 13) {
+      } else if(this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode !== 13) {
         if(this.state.incorrect === false) {
           this.setState({incorrect: true});
         } else {
           let num = this.state.pointer + 1;
-          if(code[num]) {
-            while(code[num].match(/\s/g)) {
+          if(this.code[num]) {
+            while(this.code[num].match(/\s/g)) {
               num += 1;
             }
             this.setState({pointer: num, wrongstreak: this.state.wrongstreak += 1});
@@ -97,10 +70,10 @@ class Game extends Component {
       if(this.state.wrongstreak > 1) {
         let num = this.state.pointer - 1;
         let original = num;
-        if(code[num]) {
+        if(this.code[num]) {
           let string = "";
-          while(code[num].match(/\s/g)) {
-            string+=code[num];
+          while(this.code[num].match(/\s/g)) {
+            string+=this.code[num];
             num -= 1;
           }
           if(string.includes("\n")) {
@@ -116,10 +89,10 @@ class Game extends Component {
     } else if(this.state.incorrect === false && e.keyCode === 8) {
       let num = this.state.pointer - 1;
       let original = num;
-      if(code[num]) {
+      if(this.code[num]) {
         let string = "";
-        while(code[num].match(/\s/g)) {
-          string+=code[num];
+        while(this.code[num].match(/\s/g)) {
+          string+=this.code[num];
           num -= 1;
         }
         if(string.includes("\n")) {
@@ -135,7 +108,7 @@ class Game extends Component {
   render() {
     return <div>
       <h1>Test Game</h1>
-      <pre><code>{code.split('').map((char, index) => {
+      <pre><code>{this.code.split('').map((char, index) => {
           let span;
           if(index === this.state.pointer) {
             if(char === "\n") {
