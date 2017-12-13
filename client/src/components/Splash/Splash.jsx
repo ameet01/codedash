@@ -4,8 +4,6 @@ import {Redirect} from 'react-router';
 import * as actions from '../../actions';
 import axios from 'axios';
 
-import '../../styles/Splash.css';
-
 class Splash extends Component {
   constructor(props) {
     super(props);
