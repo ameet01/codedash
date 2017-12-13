@@ -134,7 +134,7 @@ class Game extends Component {
 
   render() {
     return <div>
-      <h1>WHY GAME</h1>
+      <h1>Test Game</h1>
       <pre><code>{code.split('').map((char, index) => {
           let span;
           if(index === this.state.pointer) {

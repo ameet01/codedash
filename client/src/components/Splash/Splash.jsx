@@ -12,8 +12,9 @@ class Splash extends Component {
     this.demoLogin = this.demoLogin.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if(this.props.auth) {
+      console.log('hi');
       this.props.history.push('/lobby');
     }
   }

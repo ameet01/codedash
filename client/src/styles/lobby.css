@@ -1,0 +1,36 @@
+.lobby {
+  width: 60%;
+  background: lightgray;
+  margin: 0 auto;
+}
+
+.inner-lobby {
+  text-align: center;
+}
+
+.rooms-and-language-select {
+  display: flex;
+}
+
+.rooms-list {
+  height: 600px;
+  width: 70%;
+}
+
+.rooms-list ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  text-align: left;
+}
+
+.language-select {
+  width: 30%;
+}
+
+.language-select ul{
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  list-style: none;
+}
