@@ -29,9 +29,9 @@ class Lobby extends Component {
             </ul>
           </div>
         </div>
+        
+        <button>Submit</button>
       </div>
-
-      <button>Submit</button>
     </div>;
   }
 }

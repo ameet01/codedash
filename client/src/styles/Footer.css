@@ -13,12 +13,12 @@ footer {
   margin: 0 auto;
 }
 
-.footer-links a {
+.footer-links, .footer-links a {
   margin-left: 20px;
   color: #8EA8C3;
   transition: all 0.3s ease;
 }
 
-.footer-links a:hover {
+.footer-links:hover, .footer-links a:hover {
   color: #CBF7ED;
 }
