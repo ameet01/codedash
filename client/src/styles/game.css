@@ -2,8 +2,24 @@
   background: lightgreen;
 }
 
+.regular {
+  box-sizing: border-box;
+}
+
 .wrong {
   background: pink;
+  position: relative;
+}
+
+.wrong:before {
+  position: absolute;
+  content: "<--";
+  left: 10px;
+  padding: 0 .5em;
+  color: white;
+  background: red;
+  font-size: 12px;
+  top: 0;
 }
 
 .incorrect {

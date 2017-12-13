@@ -41,7 +41,7 @@ class Game extends Component {
   registerKeyPress(e) {
     e.preventDefault();
     if(this.state.wrongstreak <= 5) {
-      if(e.keyCode === (code[this.state.pointer].charCodeAt(0))) {
+      if(e.keyCode === (code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
         this.setState({pointer: this.state.pointer += 1, incorrect: false});
       } else if(code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode === 13) {
         let num = this.state.pointer + 1;
@@ -71,7 +71,14 @@ class Game extends Component {
         this.setState({pointer: this.state.pointer -= 1, incorrect: false, key: undefined, wrongstreak: 0}, console.log(this.state.pointer));
       }
     } else if(this.state.incorrect === false && e.keyCode === 8) {
-      this.setState({pointer: this.state.pointer -= 1});
+      let num = this.state.pointer - 1;
+      if(code[num]) {
+        while(code[num].match(/\s/g)) {
+          num -= 1;
+        }
+        this.setState({pointer: num});
+      }
+      // this.setState({pointer: this.state.pointer -= 1});
     }
   }
 
