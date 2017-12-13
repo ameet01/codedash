@@ -3,45 +3,16 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import axios from 'axios';
 
-const code = `render() {
-  return <div>
-    <h1>WHY GAME</h1>
-    <pre><code>{code.split('').map((char, index) => {
-        let span;
-        if(index === this.state.pointer) {
-          if(char === "/n") {
-            span = <span className='active enter' key={index}>{char}</span>;
-          } else {
-            if(this.state.incorrect) {
-              span = <span className='wrong' key={index}>{char}</span>;
-            } else {
-              span = <span className='active' key={index}>{char}</span>;
-            }
-          }
-        } else {
-          span = <span className='regular' key={index}>{char}</span>;
-        }
-
-        if(this.state.key === index) {
-          span = <span className='incorrect' key={index}>{char}</span>;
-        }
-        return span;
-      })}</code></pre>
-  </div>;
-`;
-
-const codeLength = code.split(/\s+/g).length - 1;
-
-
-
 class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0};
     this.registerKeyPress = this.registerKeyPress.bind(this);
     this.backspace = this.backspace.bind(this);
+
     let language = this.props.languages[`${this.props.match.params.language}`];
     this.code = language[Math.floor(Math.random()*language.length)];
+    this.codeLength = this.code.split(/\s+/g).length - 1;
   }
 
   componentDidMount() {

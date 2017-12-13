@@ -4,7 +4,7 @@ import * as actions from '../../actions';
 import {NavLink} from 'react-router-dom';
 import axios from 'axios';
 
-const languages = ['javascript', 'ruby', 'c++', 'java'];
+const languages = ['javascript', 'ruby', 'c++', 'java', 'python', 'html', 'css'];
 
 class Lobby extends Component {
   constructor(props) {
