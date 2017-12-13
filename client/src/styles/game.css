@@ -2,9 +2,27 @@
   background: lightgreen;
 }
 
+.wrong {
+  background: pink;
+}
+
+.incorrect {
+  background: green !important;
+}
+
 pre {
   background: white;
   padding: 30px;
-  width: 30%;
+  width: max-content;
   margin: 0 auto;
+}
+
+code {
+}
+
+.enter:before {
+  content: "enter";
+  padding: 0 .5em;
+  color: white;
+  background: lightgreen;
 }
