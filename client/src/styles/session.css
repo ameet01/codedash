@@ -1,0 +1,14 @@
+.session {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+
+.inner-session {
+  display: flex;
+  justify-content: center;
+  padding-top: 250px;
+  flex-direction: column;
+}

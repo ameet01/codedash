@@ -1,0 +1,44 @@
+.active {
+  background: lightgreen;
+}
+
+.regular {
+  box-sizing: border-box;
+}
+
+.wrong {
+  background: pink;
+  position: relative;
+}
+
+.wrong:before {
+  position: absolute;
+  content: "<--";
+  left: 10px;
+  padding: 0 .5em;
+  color: white;
+  background: red;
+  font-size: 12px;
+  top: 0;
+}
+
+.incorrect {
+  background: green !important;
+}
+
+pre {
+  background: white;
+  padding: 30px;
+  width: max-content;
+  margin: 0 auto;
+}
+
+code {
+}
+
+.enter:before {
+  content: "enter";
+  padding: 0 .5em;
+  color: white;
+  background: lightgreen;
+}
