@@ -13,7 +13,7 @@ class Footer extends Component {
           </div>
           <div className="footer-links">
             <a href="/about">About Us</a>
-            <a href="https://www.github.com/ameet01/flexproject">GitHub</a>
+            <a href="https://www.github.com/ameet01/flexproject" target="_blank">GitHub</a>
           </div>
         </div>
       </footer>
