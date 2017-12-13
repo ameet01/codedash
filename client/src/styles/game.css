@@ -1,14 +1,21 @@
 .active {
   background: lightgreen;
+  color: white;
 }
 
 .regular {
   box-sizing: border-box;
 }
 
+.incorrect {
+  background: red !important;
+  color: white;
+}
+
 .wrong {
   background: pink;
   position: relative;
+  color: white;
 }
 
 .wrong:before {
@@ -22,12 +29,9 @@
   top: 0;
 }
 
-.incorrect {
-  background: green !important;
-}
 
 pre {
-  background: white;
+  background: #E0E0E0;
   padding: 30px;
   width: max-content;
   margin: 0 auto;
@@ -40,5 +44,4 @@ code {
   content: "enter";
   padding: 0 .5em;
   color: white;
-  background: lightgreen;
 }

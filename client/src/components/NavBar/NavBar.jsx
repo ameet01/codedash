@@ -38,8 +38,8 @@ class NavBar extends Component {
         return;
       case false:
         return (<form method='post' onSubmit={(e) => this.handleSubmit(e)}>
-          <input type='text' onChange={this.update('username')} name='username' value={this.state.username} autoComplete="new-username" />
-          <input type='password'  onChange={this.update('password')} name='password' value={this.state.password} autoComplete="new-password" />
+          <input type='text' onChange={this.update('username')} name='username' value={this.state.username} autoComplete="new-username" placeHolder='username'/>
+          <input type='password'  onChange={this.update('password')} name='password' value={this.state.password} autoComplete="new-password" placeHolder='password'/>
           <button>Submit</button>
         </form>);
       default:

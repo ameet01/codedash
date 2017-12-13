@@ -3,15 +3,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import axios from 'axios';
 
-let code = `d3.interpolate = d3_interpolate;
-
-function d3_interpolate(a, b) {
-  var i = d3.interpolators.length, f;
-  while (--i >= 0 && !(f = d3.interpolators[i](a, b)));
-  return f;
-}
-
-d3.interpolators = [
+const code = `d3.interpolators = [
   function(a, b) {
     var t = typeof b;
     return (t === "string" ? (d3_rgb_names.has(b) || /^(#|rgb\(|hsl\()/.test(b) ? d3_interpolateRgb : d3_interpolateString)
@@ -59,8 +51,6 @@ class Game extends Component {
         }
       }
     }
-
-
   }
 
   backspace(e) {
@@ -89,7 +79,7 @@ class Game extends Component {
           let span;
           if(index === this.state.pointer) {
             if(char === "\n") {
-              span = <span className='active enter' key={index}>{char}</span>;
+              span = <span style={ this.state.incorrect ? { background:'red'} : {background : 'lightgreen'} }  className='active enter' key={index}>{char}</span>;
             } else {
               if(this.state.incorrect) {
                 span = <span className='wrong' key={index}>{char}</span>;
