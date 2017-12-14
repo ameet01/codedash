@@ -8,7 +8,7 @@ import socketIOClient from "socket.io-client";
 const socket = socketIOClient("http://127.0.0.1:5000");
 
 
-class Game extends Component {
+class SingleGame extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,12 +19,12 @@ class Game extends Component {
       key: undefined,
       mistakes: 0,
       timer: 1,
-      gameStarted: false
+      gameStarted: false,
+      users: []
     };
 
     this.registerKeyPress = this.registerKeyPress.bind(this);
     this.backspace = this.backspace.bind(this);
-
     let language = this.props.languages[`${this.props.match.params.language}`];
     this.code = language[Math.floor(Math.random()*1)];
     let spaces = 0;
@@ -41,15 +41,26 @@ class Game extends Component {
     this.speed;
     this.accuracy;
     this.gameId = parseInt(this.props.match.params.gameId);
-    this.gametype = parseInt(this.props.match.params.gametype);
+
+    socket.on('new user join', (user) => this.joinUser(user));
   }
 
+  joinUser(user) {
+    const combinedUsers = [...this.state.users, user];
+    const newUsers = Array.from(new Set(combinedUsers));
+    this.setState({users: newUsers});
+  }
+
+
   componentDidMount() {
-    axios.put('/api/updateuser/', {
-      id: this.props.auth._id, currentGame: this.gameId, currentGameType: this.gametype, currentGameLang: this.props.match.params.language
+    axios.put(`/api/updateuser/`, {
+      id: this.props.auth._id, currentGame: this.gameId, currentGameType: 1, currentGameLang: this.props.match.params.language
     });
 
-    socket.emit('game', {game: this.gameId});
+    const user = this.props.auth;
+    const users = [...this.state.users, this.props.auth];
+    socket.emit('game', {game: this.gameId, user: this.props.auth});
+    this.setState({users: users});
 
     this.timer = setInterval(() => {
       this.setState({timer: this.state.timer -= 1});
@@ -67,14 +78,17 @@ class Game extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    socket.emit('game', {game: this.gameId});
+    const user = nextProps.auth;
+    const users = [...this.state.users, user];
+    socket.emit('game', {game: nextProps.match.params.gameId, user: nextProps.auth});
+    this.setState({users: users});
   }
 
   componentWillUnmount() {
     axios.put(`/api/updateuser/`, {
       id: this.props.auth._id, currentGame: null, currentGameType: null, currentGameLang: null
     });
-
+    socket.emit('lobby');
     clearInterval(this.timer);
     document.removeEventListener('keypress', this.registerKeyPress);
     document.removeEventListener('keydown', this.backspace);
@@ -174,7 +188,7 @@ class Game extends Component {
 
   render() {
     return <div className='game'>
-      <h1>Test Game</h1>
+      <h1>Single Game</h1>
       <h1 id='timer'>Timer: {this.state.timer}</h1>
       <pre><code>{this.code.split('').map((char, index) => {
           let span;
@@ -214,4 +228,4 @@ class Game extends Component {
   }
 }
 
-export default connect(null, actions)(Game);
+export default connect(null, actions)(SingleGame);

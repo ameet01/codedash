@@ -5,7 +5,8 @@ import NavBarContainer from './containers/NavBarContainer';
 import SplashContainer from './containers/SplashContainer';
 import SessionContainer from './containers/SessionContainer';
 import LobbyContainer from './containers/LobbyContainer';
-import GameContainer from './containers/GameContainer';
+import SingleGameContainer from './containers/SingleGameContainer';
+import MultiGameContainer from './containers/MultiGameContainer';
 import Footer from './components/Footer/Footer';
 
 import {AuthRoute, ProtectedRoute} from './util/route_util';
@@ -19,8 +20,8 @@ const Routes = () => {
         <AuthRoute path="/signup" component={SessionContainer} />
         <ProtectedRoute path="/lobby" component={LobbyContainer} />
         <ProtectedRoute path="/lobby/:language" component={LobbyContainer} />
-        <ProtectedRoute path="/game" component={GameContainer} />
-        <ProtectedRoute path="/game/:language/:gametype/:gameId" component={GameContainer} />
+        <ProtectedRoute path="/game/:language/1/:gameId" component={SingleGameContainer} />
+        <ProtectedRoute path="/game/:language/2/:gameId" component={MultiGameContainer} />
         <Route path="/" component={Footer} />
       </div>
     </Router>

@@ -2,7 +2,7 @@ import * as Actions from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Game from '../components/Game/Game';
+import Game from '../components/Game/MultiGame';
 
 let javascript1 = `const Auth = ({component: Component, path, auth}) => (
   <Route exact path={path} render={(props) => (\n`;

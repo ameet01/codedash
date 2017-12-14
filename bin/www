@@ -35,7 +35,15 @@ io.on('connection', function(socket) {
   });
 
   socket.on('game', function(data) {
+    console.log('socket-game');
+
     socket.join(data.game);
+    // socket.broadcast.to(data.game).emit('load users and code');
+    socket.broadcast.to(data.game).emit('new user join', data.user);
+  });
+
+  socket.on('lobby', function() {
+    socket.broadcast.emit('update room list');
   });
 });
 
