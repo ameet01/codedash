@@ -26,12 +26,12 @@ class NavBar extends Component {
     axios.post('/api/login', {username: this.state.username, password: this.state.password})
     .then(user =>
       this.props.receiveUser({
-      id: user.data._id,
+      _id: user.data._id,
       username: this.state.username
     }))
     .then(() => this.props.history.push('/lobby'))
-    // .then(() => this.props.fetchUser()).then(() => this.setState({error: ''}))
-    .catch(error => { this.setState({error: 'Invalid Credentials'}); })
+    .then(() => this.setState({error: ''}))
+    .catch(error => { this.setState({error: 'Invalid Credentials'}); });
   }
 
   logout() {

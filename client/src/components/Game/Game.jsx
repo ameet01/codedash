@@ -27,10 +27,15 @@ class Game extends Component {
     this.startTime;
     this.endTime;
     this.timeElapsed;
+    this.gameId = this.props.match.params.gameId;
   }
 
   componentDidMount() {
-    socket.emit('game', {game: this.props.match.params.language});
+    axios.put(`/api/updateuser/`, {
+      id: this.props.auth._id, currentGame: parseInt(this.gameId)
+    });
+
+    socket.emit('game', {game: this.gameId});
 
     this.timer = setInterval(() => {
       this.setState({timer: this.state.timer -= 1});
@@ -42,15 +47,20 @@ class Game extends Component {
         document.getElementById('timer').style.color = 'green';
       }
     }, 1000);
+
     document.addEventListener('keypress', this.registerKeyPress);
     document.addEventListener('keydown', this.backspace);
   }
 
   componentWillReceiveProps(nextProps) {
-    socket.emit('game', {game: this.props.match.params.language});
+    socket.emit('game', {game: this.gameId});
   }
 
   componentWillUnmount() {
+    axios.put(`/api/updateuser/`, {
+      id: this.props.auth._id, currentGame: null
+    });
+
     clearInterval(this.timer);
     document.removeEventListener('keypress', this.registerKeyPress);
     document.removeEventListener('keydown', this.backspace);

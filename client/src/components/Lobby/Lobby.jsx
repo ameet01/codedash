@@ -14,9 +14,14 @@ class Lobby extends Component {
     this.toggleGameType = this.toggleGameType.bind(this);
   }
 
+  componentDidMount() {
+    axios.get('/api/indexusers');
+  }
+
   createRoom() {
     if(this.props.match.params.language) {
-      this.props.history.push(`/game/${this.props.match.params.language}/${this.state.gameType}`);
+      let random = Math.floor(Math.random()*10);
+      this.props.history.push(`/game/${this.props.match.params.language}/${this.state.gameType}/${random}`);
     }
   }
 
