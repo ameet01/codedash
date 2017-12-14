@@ -5,14 +5,15 @@ import { bindActionCreators } from 'redux';
 import Game from '../components/Game/Game';
 
 let javascript1 = `const Auth = ({component: Component, path, auth}) => (
-  <Route exact path={path} render={(props) => (
-      !auth ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to='/lobby' />
-      )
-    )} />
-);`;
+  <Route exact path={path} render={(props) => (\n`;
+//       !auth ? (
+//         <Component {...props} />
+//       ) : (
+//         <Redirect to='/lobby' />
+//       )
+//     )} />
+// );
+// `;
 let javascript2 = `setTimeout("document.bgColor='white'", 1000)
 setTimeout("document.bgColor='lightpink'", 1500)
 setTimeout("document.bgColor = 'pink'", 2000)
