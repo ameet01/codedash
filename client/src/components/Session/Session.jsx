@@ -10,6 +10,20 @@ class Session extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    document.querySelector('html').classList.add('height100');
+    document.querySelector('body').classList.add('height100');
+    document.querySelector('#root').classList.add('height100');
+    document.querySelector('.app-container').classList.add('height100');
+  }
+
+  componentWillUnmount() {
+    document.querySelector('html').classList.remove('height100');
+    document.querySelector('body').classList.remove('height100');
+    document.querySelector('#root').classList.remove('height100');
+    document.querySelector('.app-container').classList.remove('height100');
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     axios.post(
