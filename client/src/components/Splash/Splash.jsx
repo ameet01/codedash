@@ -10,6 +10,20 @@ class Splash extends Component {
     this.demoLogin = this.demoLogin.bind(this);
   }
 
+  componentDidMount() {
+    document.querySelector('html').classList.add('height100');
+    document.querySelector('body').classList.add('height100');
+    document.querySelector('#root').classList.add('height100');
+    document.querySelector('.app-container').classList.add('height100');
+  }
+
+  componentWillUnmount() {
+    document.querySelector('html').classList.remove('height100');
+    document.querySelector('body').classList.remove('height100');
+    document.querySelector('#root').classList.remove('height100');
+    document.querySelector('.app-container').classList.remove('height100');
+  }
+
   demoLogin() {
     let randomNumber = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
     axios.post('/api/login', {username: `demo${randomNumber}`, password: "password"})

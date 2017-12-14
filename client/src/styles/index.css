@@ -1,7 +1,7 @@
 html, body, #root, .app-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
   background: #161925;
 }
 
@@ -19,4 +19,8 @@ h1, h2, h3, h4 {
 .navbar ,footer {
   flex: 0 0;
   z-index: 2;
+}
+
+.height100 {
+  height: 100%;
 }
