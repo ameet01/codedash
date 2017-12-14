@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('node-passport-auth:server');
 var http = require('http');
+var socketIo = require("socket.io");
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +21,10 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+
+
+const io = socketIo(server);
 
 /**
  * Listen on provided port, on all network interfaces.
