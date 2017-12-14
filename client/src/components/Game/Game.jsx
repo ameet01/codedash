@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import axios from 'axios';
 
+
+import socketIOClient from "socket.io-client";
+const socket = socketIOClient("http://127.0.0.1:5000");
+
 class Game extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +30,8 @@ class Game extends Component {
   }
 
   componentDidMount() {
+    socket.emit('game', {game: this.props.match.params.language});
+
     this.timer = setInterval(() => {
       this.setState({timer: this.state.timer -= 1});
       if(this.state.timer === 0) {
@@ -38,6 +44,10 @@ class Game extends Component {
     }, 1000);
     document.addEventListener('keypress', this.registerKeyPress);
     document.addEventListener('keydown', this.backspace);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    socket.emit('game', {game: this.props.match.params.language});
   }
 
   componentWillUnmount() {
@@ -144,7 +154,7 @@ class Game extends Component {
           let span;
           if(index === this.state.pointer) {
             if(char === "\n") {
-              span = <span 
+              span = <span
                 className={this.state.incorrect ? 'active enter-incorrect' : 'active enter'}
                 key={index}>
                 {char}
