@@ -19,6 +19,8 @@ footer {
   transition: all 0.3s ease;
 }
 
-.footer-links:hover, .footer-links a:hover {
+.footer-links span:hover, .footer-links a:hover {
+  cursor: pointer;
   color: #CBF7ED;
+  text-decoration: underline;
 }

@@ -12,7 +12,7 @@ class Footer extends Component {
             © 2017 CodeTyper
           </div>
           <div className="footer-links">
-            <a onClick={() => this.props.history.push('/about')}>About Us</a>
+            <span onClick={() => this.props.history.push('/about')}>About Us</span>
             <a href="https://www.github.com/ameet01/flexproject" target="_blank">GitHub</a>
           </div>
         </div>

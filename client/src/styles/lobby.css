@@ -1,9 +1,6 @@
 .lobby {
-  /*display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1 1;*/
   width: 100%;
+  min-height: 400px;
   background: lightgray;
 }
 
@@ -19,7 +16,6 @@
 }
 
 .rooms-list {
-  height: 600px;
   width: 70%;
 }
 
