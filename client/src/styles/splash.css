@@ -32,7 +32,6 @@
   justify-content: center;
   flex: 1 0;
   width: 500px;
-  /*height: 500px;*/
   font-size: 24px;
   text-align: center;
   z-index: 1;
@@ -44,6 +43,7 @@
   text-transform: uppercase;
   color: #fff;
   text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  font-style: italic;
 }
 
 .tagline button {
@@ -61,4 +61,17 @@
 
 .tagline button:hover {
   background: #7FB237;
+}
+
+.splash-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+}
+
+.tagline button:first-of-type {
+  background: #666;
+}
+.tagline button:first-of-type:hover {
+  background: #888;
 }

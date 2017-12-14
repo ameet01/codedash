@@ -39,7 +39,10 @@ class Splash extends Component {
         <div className="tagline">
           <h2>Dash to the finish</h2>
           <p>Hone your code typing skills and race head to head against your friends</p>
-          <button onClick={() => this.demoLogin()}>Play Now</button>
+          <div className="splash-buttons">
+            <button onClick={() => this.props.history.push('/signup')}>Sign Up</button>
+            <button onClick={() => this.demoLogin()}>Play Now</button>
+          </div>
         </div>
       </div>
     );
