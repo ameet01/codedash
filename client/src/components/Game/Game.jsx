@@ -144,7 +144,11 @@ class Game extends Component {
           let span;
           if(index === this.state.pointer) {
             if(char === "\n") {
-              span = <span style={ this.state.incorrect ? { background:'red'} : {background : 'lightgreen'} }  className='active enter' key={index}>{char}</span>;
+              span = <span 
+                className={this.state.incorrect ? 'active enter-incorrect' : 'active enter'}
+                key={index}>
+                {char}
+              </span>;
             } else {
               if(this.state.incorrect) {
                 span = <span className='wrong' key={index}>{char}</span>;
