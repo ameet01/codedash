@@ -10,10 +10,9 @@ const socket = socketIOClient("http://127.0.0.1:5000");
 class Game extends Component {
   constructor(props) {
     super(props);
-    this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0, timer: 1, gameStarted: false};
+    this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0, timer: 1, gameStarted: false, users: []};
     this.registerKeyPress = this.registerKeyPress.bind(this);
     this.backspace = this.backspace.bind(this);
-
     let language = this.props.languages[`${this.props.match.params.language}`];
     this.code = language[Math.floor(Math.random()*1)];
     let spaces = 0;
@@ -29,14 +28,26 @@ class Game extends Component {
     this.timeElapsed;
     this.gameId = parseInt(this.props.match.params.gameId);
     this.gametype = parseInt(this.props.match.params.gametype);
+
+    socket.on('new user join', (user) => this.joinUser(user));
   }
+
+  joinUser(user) {
+    const combinedUsers = [...this.state.users, user];
+    const newUsers = Array.from(new Set(combinedUsers));
+    this.setState({users: newUsers});
+  }
+
 
   componentDidMount() {
     axios.put(`/api/updateuser/`, {
       id: this.props.auth._id, currentGame: this.gameId, currentGameType: this.gametype, currentGameLang: this.props.match.params.language
     });
 
-    socket.emit('game', {game: this.gameId});
+    const user = this.props.auth;
+    const users = [...this.state.users, this.props.auth];
+    socket.emit('game', {game: this.gameId, user: this.props.auth});
+    this.setState({users: users});
 
     this.timer = setInterval(() => {
       this.setState({timer: this.state.timer -= 1});
@@ -54,14 +65,16 @@ class Game extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    socket.emit('game', {game: this.gameId});
+    const user = nextProps.auth;
+    const users = [...this.state.users, user];
+    socket.emit('game', {game: nextProps.match.params.gameId, user: nextProps.auth});
+    this.setState({users: users});
   }
 
   componentWillUnmount() {
     axios.put(`/api/updateuser/`, {
       id: this.props.auth._id, currentGame: null, currentGameType: null, currentGameLang: null
     });
-
     clearInterval(this.timer);
     document.removeEventListener('keypress', this.registerKeyPress);
     document.removeEventListener('keydown', this.backspace);

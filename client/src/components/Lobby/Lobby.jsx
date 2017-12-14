@@ -4,6 +4,9 @@ import * as actions from '../../actions';
 import {NavLink, Link} from 'react-router-dom';
 import axios from 'axios';
 
+import socketIOClient from "socket.io-client";
+const socket = socketIOClient("http://127.0.0.1:5000");
+
 const languages = ['javascript', 'ruby', 'c++', 'java', 'python', 'html', 'css'];
 
 class Lobby extends Component {
@@ -11,6 +14,12 @@ class Lobby extends Component {
     super(props);
     this.state = {gameType: 1, error: undefined};
     this.createRoom = this.createRoom.bind(this);
+
+    socket.on('update room list', () => {
+      setTimeout(() => {
+        axios.get('/api/indexusers').then(users => this.props.receiveUsers(users.data));
+      }, 100);
+    });
   }
 
   componentDidMount() {
@@ -22,9 +31,10 @@ class Lobby extends Component {
     if(this.props.match.params.language) {
       let random = Math.floor(Math.random() * 10) + 1;
       this.setState({error: undefined});
+      socket.emit('lobby');
       this.props.history.push(`/game/${this.props.match.params.language}/${this.state.gameType}/${random}`);
     } else {
-      this.setState({error: "Incomplete Inputs"})
+      this.setState({error: "Incomplete Inputs"});
     }
   }
 
