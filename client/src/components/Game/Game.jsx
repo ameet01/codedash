@@ -1,16 +1,27 @@
+import Stats from './stats';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import axios from 'axios';
 
-
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("http://127.0.0.1:5000");
+
 
 class Game extends Component {
   constructor(props) {
     super(props);
-    this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0, timer: 1, gameStarted: false};
+    this.state = {
+      showStats: false,
+      pointer: 0,
+      incorrect: false,
+      wrongstreak: 0,
+      key: undefined,
+      mistakes: 0,
+      timer: 1,
+      gameStarted: false
+    };
+
     this.registerKeyPress = this.registerKeyPress.bind(this);
     this.backspace = this.backspace.bind(this);
 
@@ -27,12 +38,14 @@ class Game extends Component {
     this.startTime;
     this.endTime;
     this.timeElapsed;
+    this.speed;
+    this.accuracy;
     this.gameId = parseInt(this.props.match.params.gameId);
     this.gametype = parseInt(this.props.match.params.gametype);
   }
 
   componentDidMount() {
-    axios.put(`/api/updateuser/`, {
+    axios.put('/api/updateuser/', {
       id: this.props.auth._id, currentGame: this.gameId, currentGameType: this.gametype, currentGameLang: this.props.match.params.language
     });
 
@@ -73,10 +86,12 @@ class Game extends Component {
       if(this.state.wrongstreak <= 5) {
         if(this.code[this.state.pointer + 1] === undefined && e.keyCode === 13) {
           this.endTime = new Date().getTime();
-          this.timeElapsed = (this.endTime - this.startTime)/1000;
-          let WPM = (this.codeLength / 5) / (this.timeElapsed / 60);
-          alert(`You took ${this.timeElapsed} seconds. Your WPM was ${(WPM).toPrecision(4)}. You had ${this.state.mistakes} mistakes! Your accuracy was ${((this.codeLength - this.state.mistakes) * 100/this.codeLength).toPrecision(4)}`);
-          this.setState({gameStarted: false});
+          this.timeElapsed = ((this.endTime - this.startTime)/1000).toPrecision(4);
+          this.speed = ((this.codeLength / 5) / (this.timeElapsed / 60)).toPrecision(4);
+          this.accuracy = ((this.codeLength - this.state.mistakes) * 100 / this.codeLength).toPrecision(4);
+          // alert(`You took ${this.timeElapsed} seconds. Your speed was ${this.speed} WPM. You had ${this.state.mistakes} mistakes! Your accuracy was ${this.accuracy}%.`);
+
+          this.setState({ gameStarted: false, showStats: true });
         }
         if(e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
           this.setState({pointer: this.state.pointer += 1, incorrect: false});
@@ -186,6 +201,14 @@ class Game extends Component {
           }
           return span;
         })}</code></pre>
+      <Stats
+        mounted={this.state.showStats}
+        onTransitionEnd={this.transitionEnd}
+        speed={this.speed}
+        time={this.timeElapsed}
+        errors={this.state.mistakes}
+        accuracy={this.accuracy}
+      />
     </div>;
 
   }

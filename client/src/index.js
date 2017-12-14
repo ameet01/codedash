@@ -11,6 +11,7 @@ import './styles/footer.css';
 import './styles/session.css';
 import './styles/game.css';
 import './styles/lobby.css';
+import './styles/stats.css';
 
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';

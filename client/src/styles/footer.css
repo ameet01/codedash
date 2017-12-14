@@ -13,7 +13,7 @@ footer {
   margin: 0 auto;
 }
 
-.footer-links, .footer-links a {
+.footer-links span, .footer-links a {
   margin-left: 20px;
   color: #8EA8C3;
   transition: all 0.3s ease;
