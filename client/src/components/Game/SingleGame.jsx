@@ -7,7 +7,7 @@ import axios from 'axios';
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("http://127.0.0.1:5000");
 
-class Game extends Component {
+class SingleGame extends Component {
   constructor(props) {
     super(props);
     this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0, timer: 1, gameStarted: false, users: []};
@@ -27,7 +27,6 @@ class Game extends Component {
     this.endTime;
     this.timeElapsed;
     this.gameId = parseInt(this.props.match.params.gameId);
-    this.gametype = parseInt(this.props.match.params.gametype);
 
     socket.on('new user join', (user) => this.joinUser(user));
   }
@@ -41,7 +40,7 @@ class Game extends Component {
 
   componentDidMount() {
     axios.put(`/api/updateuser/`, {
-      id: this.props.auth._id, currentGame: this.gameId, currentGameType: this.gametype, currentGameLang: this.props.match.params.language
+      id: this.props.auth._id, currentGame: this.gameId, currentGameType: 1, currentGameLang: this.props.match.params.language
     });
 
     const user = this.props.auth;
@@ -75,6 +74,7 @@ class Game extends Component {
     axios.put(`/api/updateuser/`, {
       id: this.props.auth._id, currentGame: null, currentGameType: null, currentGameLang: null
     });
+    socket.emit('lobby');
     clearInterval(this.timer);
     document.removeEventListener('keypress', this.registerKeyPress);
     document.removeEventListener('keydown', this.backspace);
@@ -172,7 +172,7 @@ class Game extends Component {
 
   render() {
     return <div className='game'>
-      <h1>Test Game</h1>
+      <h1>Single Game</h1>
       <h1 id='timer'>Timer: {this.state.timer}</h1>
       <pre><code>{this.code.split('').map((char, index) => {
           let span;
@@ -204,4 +204,4 @@ class Game extends Component {
   }
 }
 
-export default connect(null, actions)(Game);
+export default connect(null, actions)(SingleGame);
