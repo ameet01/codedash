@@ -39,7 +39,8 @@ for (var i = 1; i <= slen ; i++) {
 setTimeout("document.z.textdisplay.value = newMake()", i*300);
 setTimeout("window.status = newMake()", i*300);
 }
-}`;
+}
+`;
 let javascript4 = `class Session extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +54,8 @@ let javascript4 = `class Session extends Component {
     .then(() => this.props.fetchUser()).then(() => this.setState({error: ''}))
     .then(() => this.props.history.push('/lobby'))
     .catch(error => { this.setState({error: 'Invalid Credentials'}); });
-  }`;
+  }
+`;
 let javascript5 = `export const EXPRESS_TEST_START = "EXPRESS_TEST_START";
 export const expressTestStart = () => {
     return { type: EXPRESS_TEST_START };
@@ -67,7 +69,8 @@ export const expressTestResults = (data) => {
 export const EXPRESS_TEST_ERROR = "EXPRESS_TEST_ERROR";
 export const expressTestError = (data) => {
     return { type: EXPRESS_TEST_ERROR, data };
-};`;
+};
+`;
 let javascript6 = `const Routes = () => {
   return (
     <Router>
@@ -83,11 +86,12 @@ let javascript6 = `const Routes = () => {
       </div>
     </Router>
   );
-};`;
+};
+`;
 
 let ruby1 = `key.each { | k, v |
     if ct == 8 then
-        print "\n   "
+        print ": "
         ct = 0
     else
         print ", "
@@ -95,7 +99,7 @@ let ruby1 = `key.each { | k, v |
     ct = ct + 1
     print "#{v} => #{k}"
 }
-print "\n\n"
+print "!!"
 `;
 let ruby2 = `class List
   # Nodes for the linked list.
@@ -117,27 +121,28 @@ let ruby2 = `class List
   # Create the list with its first node.
   def initialize(first)
     @head = Node.new(first)
-  end`;
+  end
+`;
 let ruby3 = `for i in (1..4)
     print i," "
 end
-print "\n"
+print ": "
 
 for i in (1...4)
     print i," "
 end
-print "\n"
+print ", "
 
 # Running through a list (which is what they do).
 items = [ 'Mark', 12, 'goobers', 18.45 ]
 for it in items
     print it, " "
 end
-print "\n"
+print " - "
 
 # Go through the legal subscript values of an array.
 for i in (0...items.length)
-    print items[0..i].join(" "), "\n"
+    print items[0..i].join(" "), ": "
 end
 `;
 let ruby4 = `# Class names must be capitalized.  Technically, it's a constant.
@@ -157,7 +162,8 @@ class Fred
   def get
     return @val
   end
-end`;
+end
+`;
 let ruby5 = `class TwoLabs < TkFrame
   # Switch button colors.
   def cswap
@@ -188,13 +194,15 @@ let ruby5 = `class TwoLabs < TkFrame
       command { exit }
       pack('side' => 'bottom',  'fill' => 'both')
     }
-  end`;
+  end
+`;
 let ruby6 = `capitals = {
 :sindh  => 'Karachi',
 :punjab => 'Lahore'
 }
 capitals[:westbengal] = 'Kolkata'
-capitals[:karnataka] = 'Bengaluru'`;
+capitals[:karnataka] = 'Bengaluru'
+`;
 
 let java1 = `public class OracleJdbcTest {
     String driverClass = "oracle.jdbc.driver.OracleDriver";
@@ -212,7 +220,8 @@ let java1 = `public class OracleJdbcTest {
 
     public void fetch() throws SQLException, IOException {
         PreparedStatement ps = con.prepareStatement("select SYSDATE from dual");
-        ResultSet rs = ps.executeQuery();`;
+        ResultSet rs = ps.executeQuery();
+`;
 let java2 = `import java.util.zip.*;
 import java.io.*;
 public class ZipIt {
@@ -285,7 +294,8 @@ let java5 = `public class GeneratePDF {
             e.printStackTrace();
         }
     }
-}`;
+}
+`;
 let java6 = `import java.util.Map;
 import org.apache.commons.lang.ArrayUtils;
 
@@ -300,7 +310,8 @@ public class Main {
     System.out.println("Capital of Japan is " + countryCapitals.get("Japan"));
     System.out.println("Capital of France is " + countryCapitals.get("France"));
   }
-}`;
+}
+`;
 
 let python1 = `import urllib2
 import base64
@@ -348,7 +359,8 @@ let python2 = `class BaseCLI(object):
         self.parser.add_argument(
             "--stdout_log", action="store_true",
             help="log to stdout"
-        )`;
+        )
+`;
 let python3 = `class FtpFileItem(object):
     def __init__(self, ftp, name, dir, filepath, date_string, time_string, size=0):
         self.ftp = ftp
@@ -412,7 +424,8 @@ let python5 = `if __name__ == "__main__":
     elif action == "stop":
         stop_server()
     else:
-        OptParser.error("wrong argument!")`;
+        OptParser.error("wrong argument!")
+`;
 let python6 = `def scite_run():
     try:
         script_file = sys.argv[1]
@@ -437,7 +450,8 @@ let python6 = `def scite_run():
         #~ '__doc__': None,
         #~ '__package__': None
     }
-    sys.argv = [script_file]`;
+    sys.argv = [script_file]
+`;
 
 let cplusplus1 = `void heapify(int a[], int i, int n){
     int l = 2*i+1;
@@ -457,7 +471,8 @@ void heapsort(int a[], int n){
         int tmp = a[0]; a[0] = a[i]; a[i] = tmp;
         heapify(a, 0, i);
     }
-}`;
+}
+`;
 let cplusplus2 = `void merge(int a[], int temp[], int left, int mid, int right){
     int i = left, j = mid, k = left;
     while (i <= mid - 1 && j <= right){
@@ -480,7 +495,8 @@ void mergesort(int a[], int temp[], int left, int right){
         mergesort(a, temp, mid+1, right);
         merge(a, temp, left, mid+1, right);
     }
-}`;
+}
+`;
 let cplusplus3 = `quicksort(int s[],int left,int right)
 {
   int i=left,j=right,pivot;
@@ -494,7 +510,8 @@ let cplusplus3 = `quicksort(int s[],int left,int right)
   }
   if (left<j) quicksort(s,left,j);
   if (right>i) quicksort(s,i,right);
-}`;
+}
+`;
 let cplusplus4 = `int main()
 {
     int clear_i;
@@ -519,7 +536,8 @@ let cplusplus4 = `int main()
         temp->next = cl[i];
         cl[i] = temp;
 
-        cur_list = cl[i];`;
+        cur_list = cl[i];
+`;
 let cplusplus5 = `void StackLinkedList::destroyList()
 {
    while(front != NULL)
@@ -546,7 +564,8 @@ void disp(NODE *N)
         cout << "Salary     : " << setprecision(15)  << N->data.salary << endl;
         cout << "Tele_no    : " << N->data.tele_no<< endl << endl;
     }
-}`;
+}
+`;
 let cplusplus6 = `#include <iostream>
 using namespace std;
 class x
@@ -574,7 +593,8 @@ int main()
     y oop(12,24);
     disp(oop);
     return 0;
-}`;
+}
+`;
 
 let css1 = `@import url(https://fonts.googleapis.com/css?family=Roboto:100,700;);
 .snip1585 {
@@ -671,7 +691,8 @@ legend {
 }
 *:focus {
   outline: 0;
-}`;
+}
+`;
 let css5 = `.made-with-mk .brand {
   position: relative;
   top: 4px;
@@ -692,7 +713,8 @@ let css5 = `.made-with-mk .brand {
   -moz-transition: 0.55s cubic-bezier(0.6, 0, 0.4, 1);
   -o-transition: 0.55s cubic-bezier(0.6, 0, 0.4, 1);
   transition: 0.55s cubic-bezier(0.6, 0, 0.4, 1);
-}`;
+}
+`;
 let css6 = `label.control-label {
   font-size: 11px;
   line-height: 1.07143;
@@ -712,7 +734,8 @@ let css6 = `label.control-label {
 }
 .form-group .form-control {
   margin-bottom: 7px;
-}`;
+}
+`;
 
 let html1 = `<div class="snip1517">
   <div class="plan">
@@ -731,7 +754,8 @@ let html1 = `<div class="snip1517">
       <li><i class="ion-android-remove"> </i>24/7 Tech Support</li>
       <li><i class="ion-android-remove"> </i>Daily Backups</li>
     </ul>
-    <div class="plan-select"><a href="">Select Plan</a></div>`;
+    <div class="plan-select"><a href="">Select Plan</a></div>
+`;
 let html2 = `<!DOCTYPE html>
 <html>
 <body>
@@ -768,7 +792,8 @@ let html3 = `<figure class="snip1529 hover"><img src="https://s3-us-west-2.amazo
   </figcaption>
   <div class="hover"><i class="ion-android-open"></i></div>
   <a href="#"></a>
-</figure>`;
+</figure>
+`;
 let html4 = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -795,11 +820,13 @@ let html5 = `<a href="#" class="snip1489 ion-ios-star-outline"></a>
 <a href="#" class="snip1489 ion-ios-chatboxes-outline"></a>
 <a href="#" class="snip1489 ion-ios-home-outline"></a>
 <a href="#" class="snip1489 ion-ios-pie-outline"></a>
-<a href="#" class="snip1489 ion-ios-gear-outline"></a>`;
+<a href="#" class="snip1489 ion-ios-gear-outline"></a>
+`;
 let html6 = `<button class="snip1582">Submit</button>
 <button class="snip1582 hover">Read More</button>
 <button class="snip1582">Add to Cart</button>
-<button class="snip1582">Subscribe</button>`;
+<button class="snip1582">Subscribe</button>
+`;
 
 const LANGUAGES = {
   'javascript': [
