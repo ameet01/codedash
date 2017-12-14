@@ -20,7 +20,7 @@ const Routes = () => {
         <ProtectedRoute path="/lobby" component={LobbyContainer} />
         <ProtectedRoute path="/lobby/:language" component={LobbyContainer} />
         <ProtectedRoute path="/game" component={GameContainer} />
-        <ProtectedRoute path="/game/:language" component={GameContainer} />
+        <ProtectedRoute path="/game/:language/:gametype" component={GameContainer} />
         <Route path="/" component={Footer} />
       </div>
     </Router>

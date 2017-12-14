@@ -9,13 +9,22 @@ const languages = ['javascript', 'ruby', 'c++', 'java', 'python', 'html', 'css']
 class Lobby extends Component {
   constructor(props) {
     super(props);
-    this.state = {languageSelect: "", roomSelect: ""};
+    this.state = {languageSelect: "", roomSelect: "", gameType: 1};
     this.createRoom = this.createRoom.bind(this);
+    this.toggleGameType = this.toggleGameType.bind(this);
   }
 
   createRoom() {
     if(this.props.match.params.language) {
-      this.props.history.push(`/game/${this.props.match.params.language}`);
+      this.props.history.push(`/game/${this.props.match.params.language}/${this.state.gameType}`);
+    }
+  }
+
+  toggleGameType() {
+    if(this.state.gameType === 1) {
+      this.setState({gameType: 2});
+    } else {
+      this.setState({gameType: 1});
     }
   }
 
@@ -29,6 +38,12 @@ class Lobby extends Component {
               <li>Room 1</li>
               <li>Room 2</li>
               <li>Room 3</li>
+            </ul>
+          </div>
+          <div className='game-select'>
+            <ul>
+              <li onClick={() => this.toggleGameType()}>Singleplayer</li>
+              <li onClick={() => this.toggleGameType()}>Multiplayer</li>
             </ul>
           </div>
           <div className='language-select'>
