@@ -45,3 +45,7 @@
   background: green;
   color: white;
 }
+
+.game-select li {
+  cursor: pointer;
+}
