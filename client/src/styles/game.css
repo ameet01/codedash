@@ -30,7 +30,7 @@
   display: block;
   z-index: 2;
   position: absolute;
-  content: "<--";
+  content: "<==";
   left: 8px;
   padding: 0 5px;
   color: white;
@@ -44,13 +44,13 @@
 pre {
   display: flex;
   justify-content: center;
-  background: #E0E0E0;
-  width: 80%;
   margin: 20px auto;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  width: 80%;
+  height: max-content;
   border-radius: 5px;
+  background: #E0E0E0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 code {
