@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const FETCH_USER = 'FETCH_USER';
+export const FETCH_USERS = 'FETCH_USERS';
 
 export const fetchUser = () => (dispatch) => {
   axios.get('/api/current_user')
@@ -13,6 +14,13 @@ export const receiveUser = user => {
   return {
     type: FETCH_USER,
     payload: user
+  };
+};
+
+export const receiveUsers = users => {
+  return {
+    type: FETCH_USERS,
+    payload: users
   };
 };
 

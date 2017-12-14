@@ -6,7 +6,8 @@ import Lobby from '../components/Lobby/Lobby';
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
+    auth: state.auth,
+    users: state.users
   };
 }
 

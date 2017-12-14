@@ -27,12 +27,13 @@ class Game extends Component {
     this.startTime;
     this.endTime;
     this.timeElapsed;
-    this.gameId = this.props.match.params.gameId;
+    this.gameId = parseInt(this.props.match.params.gameId);
+    this.gametype = parseInt(this.props.match.params.gametype);
   }
 
   componentDidMount() {
     axios.put(`/api/updateuser/`, {
-      id: this.props.auth._id, currentGame: parseInt(this.gameId)
+      id: this.props.auth._id, currentGame: this.gameId, currentGameType: this.gametype, currentGameLang: this.props.match.params.language
     });
 
     socket.emit('game', {game: this.gameId});
@@ -58,7 +59,7 @@ class Game extends Component {
 
   componentWillUnmount() {
     axios.put(`/api/updateuser/`, {
-      id: this.props.auth._id, currentGame: null
+      id: this.props.auth._id, currentGame: null, currentGameType: null, currentGameLang: null
     });
 
     clearInterval(this.timer);
@@ -74,7 +75,7 @@ class Game extends Component {
           this.endTime = new Date().getTime();
           this.timeElapsed = (this.endTime - this.startTime)/1000;
           let WPM = (this.codeLength / 5) / (this.timeElapsed / 60);
-          alert(`You took ${this.timeElapsed} seconds. Your WPM was ${(WPM).toPrecision(4)}. You had ${this.state.mistakes} mistakes! Your accuracy was ${((this.codeLength - this.state.mistakes) * 100/this.codeLength).toPrecision(4)}`)
+          alert(`You took ${this.timeElapsed} seconds. Your WPM was ${(WPM).toPrecision(4)}. You had ${this.state.mistakes} mistakes! Your accuracy was ${((this.codeLength - this.state.mistakes) * 100/this.codeLength).toPrecision(4)}`);
           this.setState({gameStarted: false});
         }
         if(e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {

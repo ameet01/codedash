@@ -13,7 +13,9 @@ var UserSchema = new Schema({
     averageTime: { type: Number, default: 0 },
     averageSpeed: { type: Number, default: 0 },
     totalGames: { type: Number, default: 0 },
-    currentGame: { type: Number }
+    currentGame: { type: Number },
+    currentGameType: { type: Number },
+    currentGameLang: {type: String }
 });
 
 UserSchema.plugin(passportLocalMongoose);
