@@ -96,3 +96,11 @@ code span {
 .opponentPointer {
   background: yellow;
 }
+
+.user-list {
+  color: white;
+}
+
+.bolded {
+ font-weight: 700;
+}
