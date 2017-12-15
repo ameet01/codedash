@@ -7,6 +7,10 @@
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run start\" \"npm run client\""
   },
+  "engines": {
+    "node": "8.1.1",
+    "npm": "5.0.3"
+  },
   "dependencies": {
     "axios": "^0.17.1",
     "babel-cli": "^6.26.0",
