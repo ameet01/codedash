@@ -1,9 +1,9 @@
+import StatsModal from './StatsModal';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
-
 
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("http://127.0.0.1:5000");
@@ -11,7 +11,19 @@ const socket = socketIOClient("http://127.0.0.1:5000");
 class MultiGame extends Component {
   constructor(props) {
     super(props);
-    this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0, timer: 1, gameStarted: false, users: [], opponentPointer: 0};
+    this.state = {
+      showStats: false,
+      pointer: 0,
+      incorrect: false,
+      wrongstreak: 0,
+      key: undefined,
+      mistakes: 0,
+      timer: 1,
+      gameStarted: false,
+      users: [],
+      opponentPointer: 0
+    };
+
     this.registerKeyPress = this.registerKeyPress.bind(this);
     this.backspace = this.backspace.bind(this);
     let language = this.props.languages[`${this.props.match.params.language}`];
@@ -27,11 +39,15 @@ class MultiGame extends Component {
     this.startTime;
     this.endTime;
     this.timeElapsed;
+    this.speed;
+    this.accuracy;
     this.gameId = parseInt(this.props.match.params.gameId);
 
     socket.on('new user join', (user) => this.joinUser(user));
     socket.on('update opponent cursor', (pointer) => this.setState({opponentPointer: pointer}));
     this.once = false;
+
+    this.unmountModal = this.unmountModal.bind(this);
   }
 
   joinUser(user) {
@@ -41,8 +57,11 @@ class MultiGame extends Component {
   }
 
   componentDidMount() {
-    axios.put(`/api/updateuser/`, {
-      id: this.props.auth._id, currentGame: this.gameId, currentGameType: 2, currentGameLang: this.props.match.params.language
+    axios.put('/api/updateuser/', {
+      id: this.props.auth._id,
+      currentGame: this.gameId,
+      currentGameType: 2,
+      currentGameLang: this.props.match.params.language
     });
 
     const user = this.props.auth;
@@ -73,8 +92,11 @@ class MultiGame extends Component {
   }
 
   componentWillUnmount() {
-    axios.put(`/api/updateuser/`, {
-      id: this.props.auth._id, currentGame: null, currentGameType: null, currentGameLang: null
+    axios.put('/api/updateuser/', {
+      id: this.props.auth._id,
+      currentGame: null,
+      currentGameType: null,
+      currentGameLang: null
     });
     socket.emit('lobby');
     clearInterval(this.timer);
@@ -88,10 +110,11 @@ class MultiGame extends Component {
       if(this.state.wrongstreak <= 5) {
         if(this.code[this.state.pointer + 1] === undefined && e.keyCode === 13) {
           this.endTime = new Date().getTime();
-          this.timeElapsed = (this.endTime - this.startTime)/1000;
-          let WPM = (this.codeLength / 5) / (this.timeElapsed / 60);
-          alert(`You took ${this.timeElapsed} seconds. Your WPM was ${(WPM).toPrecision(4)}. You had ${this.state.mistakes} mistakes! Your accuracy was ${((this.codeLength - this.state.mistakes) * 100/this.codeLength).toPrecision(4)}`);
-          this.setState({gameStarted: false});
+          this.timeElapsed = ((this.endTime - this.startTime)/1000).toPrecision(4);
+          this.speed = ((this.codeLength / 5) / (this.timeElapsed / 60)).toPrecision(4);
+          this.accuracy = ((this.codeLength - this.state.mistakes) * 100 / this.codeLength).toPrecision(4);
+          // alert(`You took ${this.timeElapsed} seconds. Your WPM was ${(WPM).toPrecision(4)}. You had ${this.state.mistakes} mistakes! Your accuracy was ${((this.codeLength - this.state.mistakes) * 100/this.codeLength).toPrecision(4)}`);
+          this.setState({ gameStarted: false, showStats: true });
         }
         if(e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
           this.setState({pointer: this.state.pointer += 1, incorrect: false});
@@ -174,6 +197,10 @@ class MultiGame extends Component {
     }
   }
 
+  unmountModal() {
+    this.setState({ showStats: false });
+  }
+
   render() {
     let header;
     if(this.state.users.length < 2) {
@@ -211,7 +238,11 @@ class MultiGame extends Component {
               if(index === this.state.pointer) {
                 if(char === "\n") {
                   span = <span
-                    className={this.state.incorrect ? `active enter-incorrect ${opponent}` : `active enter ${opponent}`}
+                    className={
+                      this.state.incorrect ?
+                      `active enter-incorrect ${opponent}` :
+                      `active enter ${opponent}`
+                    }
                     key={index}>
                     {char}
                   </span>;
@@ -228,13 +259,25 @@ class MultiGame extends Component {
 
                     if(this.state.key === index) {
                       span = <span className={`incorrect ${opponent}`} key={index}>{char}</span>;
-                      }
+                    }
 
-                      return span;
-                    })}</code></pre>
-                  </div>;
+                    return span;
+                  })}
+                </code>
+              </pre>
+      {this.state.showStats ?
+        <StatsModal
+          mounted={this.state.showStats}
+          onTransitionEnd={this.transitionEnd}
+          speed={this.speed}
+          time={this.timeElapsed}
+          errors={this.state.mistakes}
+          accuracy={this.accuracy}
+          unmount={this.unmountModal}
+        /> : null
+      }
+    </div>;
+  }
+}
 
-                }
-              }
-
-              export default connect(null, actions)(MultiGame);
+export default connect(null, actions)(MultiGame);

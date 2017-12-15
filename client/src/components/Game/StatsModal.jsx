@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Stats extends React.Component {
+class StatsModal extends React.Component {
   constructor(props) {
     super(props);
 
@@ -95,4 +95,4 @@ class Stats extends React.Component {
   }
 }
 
-export default Stats;
+export default StatsModal;

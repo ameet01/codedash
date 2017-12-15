@@ -1,4 +1,4 @@
-import Stats from './stats';
+import StatsModal from './StatsModal';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -205,7 +205,7 @@ class SingleGame extends Component {
           return span;
         })}</code></pre>
       {this.state.showStats ?
-        <Stats
+        <StatsModal
           mounted={this.state.showStats}
           onTransitionEnd={this.transitionEnd}
           speed={this.speed}
