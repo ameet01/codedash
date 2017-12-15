@@ -23,12 +23,17 @@
 
 .stats-inner {
   position: relative;
-  padding: 20px;
+  padding: 25px;
   border-radius: 5px;
   background: #efefef;
   color: #161925;
   width: max-content;
   z-index: 4;
+}
+
+.stats-inner h1 {
+  color: #161925;
+  margin: 10px 0;
 }
 
 .stats-row {
@@ -43,9 +48,12 @@
   align-items: center;
   justify-content: center;
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   top: 10px;
   right: 10px;
   cursor: pointer;
+  border-radius: 25px;
+  border: 1px solid #666;
+  color: #666;
 }

@@ -62,26 +62,51 @@ class Lobby extends Component {
 
     let users = this.props.users.filter(user => obj[user.currentGame] === 1);
 
-    return <div className='lobby'>
-      <div className='inner-lobby'>
+    let colors = {
+      'javascript': '#fed94e',
+      'ruby': '#701516',
+      'c++': '#6866fb',
+      'java': '#e56f1f',
+      'python': '#3572a5',
+      'html': '#e44b23',
+      'css': '#563d7c'
+    };
+
+    return <div className="lobby">
+      <div className="inner-lobby">
         <h1>Lobby!</h1>
-        <div className='rooms-and-language-select'>
-          <div className='rooms-list'>
-            <ul>
-              {users.map(user => <li className='room-item'><Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>Room #{user.currentGame}</Link></li>)}
-            </ul>
+        <div className="rooms-and-language-select">
+          <div className="rooms-list">
+            {users.map(
+              user =>
+              <div className="room-item"
+                key={`${user.currentGameLang}-${user.currentGameLangNum}-${user.currentGameType}-${user.currentGame}`}>
+                <div className="room-title">{`${user.username}'`}s room</div>
+                <div className="room-info">
+                  <div
+                    className="room-language"
+                    style={{ background: colors[user.currentGameLang] }}
+                  >
+                    {user.currentGameLang}
+                  </div>
+                  <Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>
+                    <button>Join</button>
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
-          <div className='game-select'>
+          <div className="game-select">
             <ul>
               <li onClick={() => this.setState({gameType: 1})}>Singleplayer</li>
               <li onClick={() => this.setState({gameType: 2})}>Multiplayer</li>
             </ul>
           </div>
-          <div className='language-select'>
+          <div className="language-select">
             <ul>
               {languages.map((language, index) =>
                 <NavLink to={`/lobby/${language}`}
-                  activeClassName='activelanguage'
+                  activeClassName="activelanguage"
                   key={index}>
                   {language}
                 </NavLink>)}
