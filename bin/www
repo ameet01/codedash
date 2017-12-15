@@ -47,7 +47,8 @@ io.on('connection', function(socket) {
   });
 
   socket.on('cursor', function(data) {
-    socket.broadcast.emit('update opponent cursor', data.pointer);
+    socket.join(data.game);
+    socket.broadcast.to(data.game).emit('update opponent cursor', data.pointer);
   });
 });
 

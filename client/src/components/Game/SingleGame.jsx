@@ -14,7 +14,7 @@ class SingleGame extends Component {
       wrongstreak: 0,
       key: undefined,
       mistakes: 0,
-      timer: 1,
+      timer: 5,
       gameStarted: false,
       users: []
     };

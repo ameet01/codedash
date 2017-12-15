@@ -153,7 +153,7 @@ class MultiGame extends Component {
           }
         }
       }
-      socket.emit('cursor', { pointer: this.state.pointer });
+      socket.emit('cursor', { pointer: this.state.pointer, game: this.gameId });
     }
   }
 
@@ -195,7 +195,7 @@ class MultiGame extends Component {
         }
         // this.setState({pointer: this.state.pointer -= 1});
       }
-      socket.emit('cursor', { pointer: this.state.pointer });
+      socket.emit('cursor', { pointer: this.state.pointer, game: this.gameId });
     }
   }
 
