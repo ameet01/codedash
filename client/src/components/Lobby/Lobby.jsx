@@ -68,8 +68,6 @@ class Lobby extends Component {
         <div className='rooms-and-language-select'>
           <div className='rooms-list'>
             <ul>
-              <li className='room-item'>Test Room </li>
-              <li className='room-item'>Test Room </li>
               {users.map(user => <li className='room-item'><Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>Room #{user.currentGame}</Link></li>)}
             </ul>
           </div>

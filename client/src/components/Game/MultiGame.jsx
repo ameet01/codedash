@@ -45,6 +45,7 @@ class MultiGame extends Component {
 
     socket.on('new user join', (user) => this.joinUser(user));
     socket.on('update opponent cursor', (pointer) => this.setState({opponentPointer: pointer}));
+
     this.once = false;
 
     this.unmountModal = this.unmountModal.bind(this);
@@ -227,6 +228,7 @@ class MultiGame extends Component {
         return <div className='game'>
           <h1>Multiplayer Game</h1>
           {header}
+          <div className='user-list'>{this.state.users.map(user => user.username)}</div>
           <pre><code>{this.code.split('').map((char, index) => {
               let span;
               let opponent;
