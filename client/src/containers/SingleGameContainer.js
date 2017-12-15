@@ -5,40 +5,41 @@ import { bindActionCreators } from 'redux';
 import Game from '../components/Game/SingleGame';
 
 let javascript1 = `const Auth = ({component: Component, path, auth}) => (
-  <Route exact path={path} render={(props) => (\n`;
-//       !auth ? (
-//         <Component {...props} />
-//       ) : (
-//         <Redirect to='/lobby' />
-//       )
-//     )} />
-// );
-// `;
+  <Route exact path={path} render={(props) => (;
+    !auth ? (
+      <Component {...props} />
+    ) : (
+      <Redirect to='/lobby' />
+    )
+  )} />
+);
+`;
 let javascript2 = `setTimeout("document.bgColor='white'", 1000)
 setTimeout("document.bgColor='lightpink'", 1500)
 setTimeout("document.bgColor = 'pink'", 2000)
 setTimeout("document.bgColor =  'deeppink'", 2500)
 setTimeout("document.bgColor = 'red'", 3000)
 setTimeout("document.bgColor = 'tomato'", 3500)
-setTimeout("document.bgColor = 'darkred'", 4000)`;
+setTimeout("document.bgColor = 'darkred'", 4000)
+`;
 let javascript3 = `function makeSub(a,b) {
-subsent = sent.substring(a,b) ;
-return subsent;
+  subsent = sent.substring(a,b) ;
+  return subsent;
 }
 
 function newMake() {
-a = a + 3;
-b = a + siz
-makeSub(a,b);
-return subsent
+  a = a + 3;
+  b = a + siz
+  makeSub(a,b);
+  return subsent
 }
 
 
 function doIt() {
-for (var i = 1; i <= slen ; i++) {
-setTimeout("document.z.textdisplay.value = newMake()", i*300);
-setTimeout("window.status = newMake()", i*300);
-}
+  for (var i = 1; i <= slen ; i++) {
+    setTimeout("document.z.textdisplay.value = newMake()", i*300);
+    setTimeout("window.status = newMake()", i*300);
+  }
 }
 `;
 let javascript4 = `class Session extends Component {
@@ -239,7 +240,8 @@ public class ZipIt {
         ZipOutputStream zos = new ZipOutputStream(fos);
         int bytesRead;
         byte[] buffer = new byte[1024];
-        CRC32 crc = new CRC32();`;
+        CRC32 crc = new CRC32();
+`;
 let java3 = `import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -339,7 +341,8 @@ def sortByVotes():
     #print json.dumps(response,indent=2)
     for c in response:
         print "-" * 60
-        print c['command']`;
+        print c['command']
+`;
 let python2 = `class BaseCLI(object):
     def __init__(self, description):
         self.parser = argparse.ArgumentParser(
@@ -638,7 +641,8 @@ let css2 = `.snip1517 * {
   font-size: 1.6em;
   letter-spacing: 2px;
   font-weight: 700;
-}`;
+}
+`;
 let css3 = `html, body, #root, .app-container {
   display: flex;
   flex-direction: column;
@@ -662,8 +666,7 @@ h1, h2, h3, h4 {
   z-index: 2;
 }
 `;
-let css4 = `
-.serif-font {
+let css4 = `.serif-font {
   font-family: "Roboto Slab", "Times New Roman", serif;
 }
 
