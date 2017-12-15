@@ -284,7 +284,6 @@ class MultiGame extends Component {
                   })}
                 </code>
               </pre>
-      {this.state.showStats ?
         <StatsModal
           mounted={this.state.showStats}
           onTransitionEnd={this.transitionEnd}
@@ -293,8 +292,7 @@ class MultiGame extends Component {
           errors={this.state.mistakes}
           accuracy={this.accuracy}
           unmount={this.unmountModal}
-        /> : null
-      }
+        />
     </div>;
   }
 }

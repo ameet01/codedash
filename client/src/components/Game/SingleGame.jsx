@@ -199,18 +199,18 @@ class SingleGame extends Component {
             span = <span className='incorrect' key={index}>{char}</span>;
           }
           return span;
-        })}</code></pre>
-      {this.state.showStats ?
-        <StatsModal
-          mounted={this.state.showStats}
-          onTransitionEnd={this.transitionEnd}
-          speed={this.speed}
-          time={this.timeElapsed}
-          errors={this.state.mistakes}
-          accuracy={this.accuracy}
-          unmount={this.unmountModal}
-        /> : null
-      }
+        })}
+      </code>
+    </pre>
+    <StatsModal
+      mounted={this.state.showStats}
+      onTransitionEnd={this.transitionEnd}
+      speed={this.speed}
+      time={this.timeElapsed}
+      errors={this.state.mistakes}
+      accuracy={this.accuracy}
+      unmount={this.unmountModal}
+    />
     </div>;
   }
 }

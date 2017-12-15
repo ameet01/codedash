@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import Game from '../components/Game/SingleGame';
 
 let javascript1 = `const Auth = ({component: Component, path, auth}) => (
-  <Route exact path={path} render={(props) => (;
+  <Route exact path={path} render={(props) => (
     !auth ? (
       <Component {...props} />
     ) : (

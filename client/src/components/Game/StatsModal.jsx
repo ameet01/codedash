@@ -5,10 +5,11 @@ class StatsModal extends React.Component {
     super(props);
 
     this.state = {
-      open: true,
+      open: false,
       style: {
         opacity: 0
-      }
+      },
+      transition: 0
     };
 
     this.transitionEnd = this.transitionEnd.bind(this);
@@ -36,8 +37,10 @@ class StatsModal extends React.Component {
   }
 
   transitionEnd() {
-    if (!this.props.mounted) {
+    this.setState({ transition: this.state.transition + 1 });
+    if (this.state.transition === 1) {
       this.setState({ open: false });
+      this.props.unmount();
     }
   }
 
@@ -55,20 +58,19 @@ class StatsModal extends React.Component {
 
   escToClose(e) {
     if (e.key === 'Escape') {
-      this.props.unmount();
+      this.unmountStyle();
     }
   }
 
   render() {
-    if (this.props.mounted) {
+    if (this.state.open) {
       return(
-        this.state.open &&
         <div className="game-stats"
           style={this.state.style}
           onTransitionEnd={this.transitionEnd}>
           <div className="stats-inner">
             <h1>Game Statistics</h1>
-            <div className="modal-close" onClick={this.props.unmount}>x</div>
+            <div className="modal-close" onClick={this.unmountStyle}>x</div>
             <div className="stats-row">
               <span>Speed</span>
               <span>{this.props.speed} WPM</span>
@@ -86,7 +88,7 @@ class StatsModal extends React.Component {
               <span>{this.props.accuracy}%</span>
             </div>
           </div>
-          <div className="backdrop" onClick={this.props.unmount}></div>
+          <div className="backdrop" onClick={this.unmountStyle}></div>
         </div>
       );
     } else {
