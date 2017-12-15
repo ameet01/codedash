@@ -87,6 +87,10 @@ class StatsModal extends React.Component {
               <span>Accuracy</span>
               <span>{this.props.accuracy}%</span>
             </div>
+            <div className="stats-row">
+              <span>Collateral</span>
+              <span>{this.props.collateral} keystrokes</span>
+            </div>
           </div>
           <div className="backdrop" onClick={this.unmountStyle}></div>
         </div>

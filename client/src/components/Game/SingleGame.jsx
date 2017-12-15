@@ -15,6 +15,8 @@ class SingleGame extends Component {
       key: undefined,
       mistakes: 0,
       timer: 5,
+      keystrokes: 0,
+      collateral: 0,
       gameStarted: false,
       users: []
     };
@@ -87,7 +89,7 @@ class SingleGame extends Component {
           this.setState({ gameStarted: false, showStats: true });
         }
         if(e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
-          this.setState({pointer: this.state.pointer + 1, incorrect: false});
+          this.setState({pointer: this.state.pointer + 1, incorrect: false, keystrokes: this.state.keystrokes + 1});
         } else if(this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode === 13) {
           if(this.state.incorrect === true) {
           } else {
@@ -98,7 +100,7 @@ class SingleGame extends Component {
             while(this.code[num].match(/\s/g)) {
               num += 1;
             }
-            this.setState({pointer: num});
+            this.setState({pointer: num, keystrokes: this.state.keystrokes + 1});
           }
         } else if(this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode !== 13) {
           if(this.state.incorrect === false) {
@@ -115,9 +117,9 @@ class SingleGame extends Component {
 
         }else {
           if(this.state.wrongstreak === 0) {
-            this.setState({key: this.state.pointer}, this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1, mistakes: this.state.mistakes + 1}));
+            this.setState({key: this.state.pointer}, this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1, mistakes: this.state.mistakes + 1, keystrokes: this.state.keystrokes + 1}));
           } else {
-            this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1});
+            this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1, keystrokes: this.state.keystrokes + 1});
           }
         }
       }
@@ -137,13 +139,13 @@ class SingleGame extends Component {
               num -= 1;
             }
             if(string.includes("\n")) {
-              this.setState({pointer: num+1, wrongstreak: this.state.wrongstreak - 1 });
+              this.setState({pointer: num+1, wrongstreak: this.state.wrongstreak - 1, keystrokes: this.state.keystrokes + 1 });
             } else {
-              this.setState({pointer: original, wrongstreak: this.state.wrongstreak - 1});
+              this.setState({pointer: original, wrongstreak: this.state.wrongstreak - 1, keystrokes: this.state.keystrokes + 1});
             }
           }
         } else {
-          this.setState({pointer: this.state.pointer - 1, incorrect: false, key: undefined, wrongstreak: 0});
+          this.setState({pointer: this.state.pointer - 1, incorrect: false, key: undefined, wrongstreak: 0, keystrokes: this.state.keystrokes + 1});
         }
       } else if(this.state.incorrect === false && e.keyCode === 8) {
         let num = this.state.pointer - 1;
@@ -155,9 +157,9 @@ class SingleGame extends Component {
             num -= 1;
           }
           if(string.includes("\n")) {
-            this.setState({pointer: num});
+            this.setState({pointer: num, keystrokes: this.state.keystrokes + 1});
           } else {
-            this.setState({pointer: original});
+            this.setState({pointer: original, keystrokes: this.state.keystrokes + 1});
           }
         }
       }
@@ -226,6 +228,7 @@ class SingleGame extends Component {
       errors={this.state.mistakes}
       accuracy={this.accuracy}
       unmount={this.unmountModal}
+      collateral={this.state.keystrokes - this.codeLength}
     />
     </div>;
   }
