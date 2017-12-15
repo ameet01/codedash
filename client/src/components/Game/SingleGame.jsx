@@ -43,6 +43,7 @@ class SingleGame extends Component {
     this.gameId = parseInt(this.props.match.params.gameId);
 
     socket.on('new user join', (user) => this.joinUser(user));
+    this.unmountModal = this.unmountModal.bind(this);
   }
 
   joinUser(user) {
@@ -53,7 +54,7 @@ class SingleGame extends Component {
 
 
   componentDidMount() {
-    axios.put(`/api/updateuser/`, {
+    axios.put('/api/updateuser/', {
       id: this.props.auth._id, currentGame: this.gameId, currentGameType: 1, currentGameLang: this.props.match.params.language
     });
 
@@ -85,7 +86,7 @@ class SingleGame extends Component {
   }
 
   componentWillUnmount() {
-    axios.put(`/api/updateuser/`, {
+    axios.put('/api/updateuser/', {
       id: this.props.auth._id, currentGame: null, currentGameType: null, currentGameLang: null
     });
     socket.emit('lobby');
@@ -186,6 +187,10 @@ class SingleGame extends Component {
     }
   }
 
+  unmountModal() {
+    this.setState({ showStats: false });
+  }
+
   render() {
     return <div className='game'>
       <h1>Single Game</h1>
@@ -195,7 +200,10 @@ class SingleGame extends Component {
           if(index === this.state.pointer) {
             if(char === "\n") {
               span = <span
-                className={this.state.incorrect ? 'active enter-incorrect' : 'active enter'}
+                className={
+                  this.state.incorrect ?
+                  'active enter-incorrect' : 'active enter'
+                }
                 key={index}>
                 {char}
               </span>;
@@ -215,14 +223,17 @@ class SingleGame extends Component {
           }
           return span;
         })}</code></pre>
-      <Stats
-        mounted={this.state.showStats}
-        onTransitionEnd={this.transitionEnd}
-        speed={this.speed}
-        time={this.timeElapsed}
-        errors={this.state.mistakes}
-        accuracy={this.accuracy}
-      />
+      {this.state.showStats ?
+        <Stats
+          mounted={this.state.showStats}
+          onTransitionEnd={this.transitionEnd}
+          speed={this.speed}
+          time={this.timeElapsed}
+          errors={this.state.mistakes}
+          accuracy={this.accuracy}
+          unmount={this.unmountModal}
+        /> : null
+      }
     </div>;
 
   }

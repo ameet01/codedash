@@ -55,7 +55,7 @@ class Stats extends React.Component {
 
   escToClose(e) {
     if (e.key === 'Escape') {
-      this.unmountStyle();
+      this.props.unmount();
     }
   }
 
@@ -68,7 +68,7 @@ class Stats extends React.Component {
           onTransitionEnd={this.transitionEnd}>
           <div className="stats-inner">
             <h1>Game Statistics</h1>
-            <div className="close-modal" onClick={this.unmountStyle}>x</div>
+            <div className="modal-close" onClick={this.props.unmount}>x</div>
             <div className="stats-row">
               <span>Speed</span>
               <span>{this.props.speed} WPM</span>
@@ -86,7 +86,7 @@ class Stats extends React.Component {
               <span>{this.props.accuracy}%</span>
             </div>
           </div>
-          <div className="backdrop" onClick={this.unmountStyle}></div>
+          <div className="backdrop" onClick={this.props.unmount}></div>
         </div>
       );
     } else {

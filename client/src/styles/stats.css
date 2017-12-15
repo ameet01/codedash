@@ -38,7 +38,7 @@
   width: 100%;
 }
 
-.close-modal {
+.modal-close {
   display: flex;
   align-items: center;
   justify-content: center;

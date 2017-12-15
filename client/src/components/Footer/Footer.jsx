@@ -16,7 +16,8 @@ class Footer extends Component {
               About Us
             </span>
             <a href="https://www.github.com/ameet01/flexproject"
-              target="_blank">
+              target="_blank"
+              rel="noopener noreferrer">
               GitHub
             </a>
           </div>
