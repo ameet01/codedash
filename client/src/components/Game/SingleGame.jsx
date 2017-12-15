@@ -174,6 +174,22 @@ class SingleGame extends Component {
       <h1 id='timer'>Timer: {this.state.timer}</h1>
       <pre><code>{this.code.split('').map((char, index) => {
           let span;
+
+          let bolded;
+          if(this.state.wrongstreak > 0) {
+            if(this.state.pointer - this.state.wrongstreak > index) {
+              bolded = 'bolded';
+            } else {
+              bolded = undefined;
+            }
+          } else {
+            if(this.state.pointer > index) {
+               bolded = 'bolded';
+            } else {
+              bolded = undefined;
+            }
+          }
+
           if(index === this.state.pointer) {
             if(char === "\n") {
               span = <span
@@ -192,7 +208,7 @@ class SingleGame extends Component {
               }
             }
           } else {
-            span = <span className='regular' key={index}>{char}</span>;
+            span = <span className={`regular ${bolded}`} key={index}>{char}</span>;
           }
 
           if(this.state.key === index) {
