@@ -43,12 +43,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-} else {
-  app.use(express.static(path.join(__dirname, 'public')));
-}
+app.use(express.static(path.join(__dirname, 'public')));
 
+if(process.env.NODE_ENV === 'production') {
+  // Express will serve up production assets
+  app.use(express.static('client/build'));
+
+  // Express will serve up index.html if it doesn't recognize route
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 app.use('/', index);
 app.use('/users', users);

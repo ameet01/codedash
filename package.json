@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run start\" \"npm run client\""
+    "dev": "concurrently \"npm run start\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "engines": {
     "node": "8.1.1",
