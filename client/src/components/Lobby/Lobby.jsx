@@ -12,13 +12,13 @@ const languages = ['javascript', 'ruby', 'c++', 'java', 'python', 'html', 'css']
 class Lobby extends Component {
   constructor(props) {
     super(props);
-    this.state = {gameType: 1, error: undefined};
+    this.state = {gameType: 1, error: undefined, langnum: undefined};
     this.createRoom = this.createRoom.bind(this);
 
     socket.on('update room list', () => {
       setTimeout(() => {
         axios.get('/api/indexusers').then(users => this.props.receiveUsers(users.data));
-      }, 100);
+      }, 150);
     });
   }
 
@@ -29,10 +29,21 @@ class Lobby extends Component {
 
   createRoom() {
     if(this.props.match.params.language) {
-      let random = Math.floor(Math.random() * 10) + 1;
+      let gameId = 1;
+
+      let users = this.props.users;
+      let games = [];
+      for(var i = 0; i < users.length; i++) {
+        games.push(users[i].currentGame);
+      }
+      while(games.includes(gameId)) {
+        gameId = gameId + 1;
+      }
+
+      let langNum = Math.floor(Math.random() * 6);
       this.setState({error: undefined});
       socket.emit('lobby');
-      this.props.history.push(`/game/${this.props.match.params.language}/${this.state.gameType}/${random}`);
+      this.props.history.push(`/game/${this.props.match.params.language}/${langNum}/${this.state.gameType}/${gameId}`);
     } else {
       this.setState({error: "Incomplete Inputs"});
     }
@@ -59,7 +70,7 @@ class Lobby extends Component {
             <ul>
               <li className='room-item'>Test Room </li>
               <li className='room-item'>Test Room </li>
-              {users.map(user => <li className='room-item'><Link to={`/game/${user.currentGameLang}/${user.currentGameType}/${user.currentGame}`}>Room #{user.currentGame}</Link></li>)}
+              {users.map(user => <li className='room-item'><Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>Room #{user.currentGame}</Link></li>)}
             </ul>
           </div>
           <div className='game-select'>

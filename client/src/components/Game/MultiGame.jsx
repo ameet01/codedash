@@ -11,11 +11,11 @@ const socket = socketIOClient("http://127.0.0.1:5000");
 class MultiGame extends Component {
   constructor(props) {
     super(props);
-    this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0, timer: 1, gameStarted: false, users: [], opponentPointer: 0};
+    this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0, timer: 5, gameStarted: false, users: [], opponentPointer: 0};
     this.registerKeyPress = this.registerKeyPress.bind(this);
     this.backspace = this.backspace.bind(this);
     let language = this.props.languages[`${this.props.match.params.language}`];
-    this.code = language[Math.floor(Math.random()*1)];
+    this.code = language[this.props.match.params.langnum];
     let spaces = 0;
     for(var i = 1; i < this.code.length; i++) {
       if(this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== "\n") {
@@ -42,7 +42,7 @@ class MultiGame extends Component {
 
   componentDidMount() {
     axios.put(`/api/updateuser/`, {
-      id: this.props.auth._id, currentGame: this.gameId, currentGameType: 2, currentGameLang: this.props.match.params.language
+      id: this.props.auth._id, currentGame: this.gameId, currentGameType: 2, currentGameLang: this.props.match.params.language, currentGameLangNum: this.props.match.params.langnum
     });
 
     const user = this.props.auth;
@@ -74,7 +74,7 @@ class MultiGame extends Component {
 
   componentWillUnmount() {
     axios.put(`/api/updateuser/`, {
-      id: this.props.auth._id, currentGame: null, currentGameType: null, currentGameLang: null
+      id: this.props.auth._id, currentGame: null, currentGameType: null, currentGameLang: null, currentGameLangNum: null
     });
     socket.emit('lobby');
     clearInterval(this.timer);
