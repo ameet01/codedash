@@ -35,13 +35,13 @@ class MultiGame extends Component {
       }
     }
     this.codeLength = this.code.split('').filter(char => char !== " ").length + spaces;
-    this.timer;
-    this.startTime;
-    this.endTime;
-    this.timeElapsed;
-    this.speed;
-    this.accuracy;
-    this.gameId = parseInt(this.props.match.params.gameId);
+    this.timer = undefined;
+    this.startTime = undefined;
+    this.endTime = undefined;
+    this.timeElapsed = undefined;
+    this.speed = undefined;
+    this.accuracy = undefined;
+    this.gameId = parseInt(this.props.match.params.gameId, 10);
 
     socket.on('new user join', (user) => this.joinUser(user));
     socket.on('update opponent cursor', (pointer) => this.setState({opponentPointer: pointer}));
@@ -65,7 +65,6 @@ class MultiGame extends Component {
       currentGameLangNum: this.props.match.params.langnum
     });
 
-    const user = this.props.auth;
     const users = [...this.state.users, this.props.auth];
     socket.emit('game', {game: this.gameId, user: this.props.auth});
     this.setState({users: users});
@@ -119,7 +118,7 @@ class MultiGame extends Component {
           this.setState({ gameStarted: false, showStats: true });
         }
         if(e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
-          this.setState({pointer: this.state.pointer += 1, incorrect: false});
+          this.setState({pointer: this.state.pointer + 1, incorrect: false});
         } else if(this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode === 13) {
           if(this.state.incorrect === true) {
           } else {
@@ -141,15 +140,15 @@ class MultiGame extends Component {
               while(this.code[num].match(/\s/g)) {
                 num += 1;
               }
-              this.setState({pointer: num, wrongstreak: this.state.wrongstreak += 1});
+              this.setState({pointer: num, wrongstreak: this.state.wrongstreak + 1});
             }
           }
 
         } else {
           if(this.state.wrongstreak === 0) {
-            this.setState({key: this.state.pointer}, this.setState({incorrect: true, pointer: this.state.pointer += 1, wrongstreak: this.state.wrongstreak += 1, mistakes: this.state.mistakes += 1}));
+            this.setState({key: this.state.pointer}, this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1, mistakes: this.state.mistakes + 1}));
           } else {
-            this.setState({incorrect: true, pointer: this.state.pointer += 1, wrongstreak: this.state.wrongstreak += 1});
+            this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1});
           }
         }
       }
@@ -170,13 +169,13 @@ class MultiGame extends Component {
               num -= 1;
             }
             if(string.includes("\n")) {
-              this.setState({pointer: num+1, wrongstreak: this.state.wrongstreak -= 1 });
+              this.setState({pointer: num+1, wrongstreak: this.state.wrongstreak - 1 });
             } else {
-              this.setState({pointer: original, wrongstreak: this.state.wrongstreak -= 1});
+              this.setState({pointer: original, wrongstreak: this.state.wrongstreak - 1});
             }
           }
         } else {
-          this.setState({pointer: this.state.pointer -= 1, incorrect: false, key: undefined, wrongstreak: 0});
+          this.setState({pointer: this.state.pointer - 1, incorrect: false, key: undefined, wrongstreak: 0});
         }
       } else if(this.state.incorrect === false && e.keyCode === 8) {
         let num = this.state.pointer - 1;
@@ -212,7 +211,7 @@ class MultiGame extends Component {
           socket.emit('game', {game: this.gameId, user: this.props.auth});
           this.once = true;
           this.timer = setInterval(() => {
-            this.setState({timer: this.state.timer -= 1});
+            this.setState({timer: this.state.timer - 1});
             if(this.state.timer === 0) {
               this.startTime = new Date().getTime();
               clearInterval(this.timer);
