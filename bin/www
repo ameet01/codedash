@@ -45,6 +45,10 @@ io.on('connection', function(socket) {
   socket.on('lobby', function() {
     socket.broadcast.emit('update room list');
   });
+
+  socket.on('cursor', function(data) {
+    socket.broadcast.emit('update opponent cursor', data.pointer);
+  });
 });
 
 /**

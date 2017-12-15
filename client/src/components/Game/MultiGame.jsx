@@ -10,7 +10,7 @@ const socket = socketIOClient("http://127.0.0.1:5000");
 class MultiGame extends Component {
   constructor(props) {
     super(props);
-    this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0, timer: 1, gameStarted: false, users: []};
+    this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0, timer: 1, gameStarted: false, users: [], opponentPointer: 5};
     this.registerKeyPress = this.registerKeyPress.bind(this);
     this.backspace = this.backspace.bind(this);
     let language = this.props.languages[`${this.props.match.params.language}`];
@@ -29,11 +29,15 @@ class MultiGame extends Component {
     this.gameId = parseInt(this.props.match.params.gameId);
 
     socket.on('new user join', (user) => this.joinUser(user));
+    this.once = false;
   }
 
   joinUser(user) {
     const combinedUsers = [...this.state.users, user];
-    const newUsers = Array.from(new Set(combinedUsers));
+    // const newUsers = Array.from(new Set(combinedUsers));
+    const newUsers = combinedUsers.filter((elem, pos, arr) => {
+      return arr.indexOf(elem) === pos;
+    });
     this.setState({users: newUsers});
   }
 
@@ -48,26 +52,26 @@ class MultiGame extends Component {
     socket.emit('game', {game: this.gameId, user: this.props.auth});
     this.setState({users: users});
 
-    this.timer = setInterval(() => {
-      this.setState({timer: this.state.timer -= 1});
-      if(this.state.timer === 0) {
-        this.startTime = new Date().getTime();
-        clearInterval(this.timer);
-        this.setState({gameStarted: true});
-        document.getElementById('timer').innerHTML = 'GO!';
-        document.getElementById('timer').style.color = 'green';
-      }
-    }, 1000);
+    // this.timer = setInterval(() => {
+    //   this.setState({timer: this.state.timer -= 1});
+    //   if(this.state.timer === 0) {
+    //     this.startTime = new Date().getTime();
+    //     clearInterval(this.timer);
+    //     this.setState({gameStarted: true});
+    //     document.getElementById('timer').innerHTML = 'GO!';
+    //     document.getElementById('timer').style.color = 'green';
+    //   }
+    // }, 1000);
 
     document.addEventListener('keypress', this.registerKeyPress);
     document.addEventListener('keydown', this.backspace);
   }
 
   componentWillReceiveProps(nextProps) {
-    const user = nextProps.auth;
-    const users = [...this.state.users, user];
-    socket.emit('game', {game: nextProps.match.params.gameId, user: nextProps.auth});
-    this.setState({users: users});
+    // const user = nextProps.auth;
+    // const users = [...this.state.users, user];
+    // socket.emit('game', {game: nextProps.match.params.gameId, user: nextProps.auth});
+    // this.setState({users: users});
   }
 
   componentWillUnmount() {
@@ -171,32 +175,61 @@ class MultiGame extends Component {
   }
 
   render() {
+    let header;
+    if(this.state.users.length < 2) {
+      header = <div id='timer'>Awaiting players...</div>;
+    } else {
+      if(!this.once) {
+        socket.emit('game', {game: this.gameId, user: this.props.auth});
+        this.once = true;
+        this.timer = setInterval(() => {
+          this.setState({timer: this.state.timer -= 1});
+          if(this.state.timer === 0) {
+            this.startTime = new Date().getTime();
+            clearInterval(this.timer);
+            this.setState({gameStarted: true});
+            document.getElementById('timer').innerHTML = 'GO!';
+            document.getElementById('timer').style.color = 'green';
+          }
+        }, 1000);
+      }
+      header = <h1 id='timer'>Timer: {this.state.timer}</h1>;
+    }
+
     return <div className='game'>
       <h1>Multiplayer Game</h1>
-      <h1 id='timer'>Timer: {this.state.timer}</h1>
+      {header}
       <pre><code>{this.code.split('').map((char, index) => {
           let span;
+          let opponent;
+          if(index === this.state.opponentPointer) {
+            opponent = "opponentPointer";
+          } else {
+            opponent = "";
+          }
+
           if(index === this.state.pointer) {
             if(char === "\n") {
               span = <span
-                className={this.state.incorrect ? 'active enter-incorrect' : 'active enter'}
+                className={this.state.incorrect ? `active enter-incorrect ${opponent}` : `active enter ${opponent}`}
                 key={index}>
                 {char}
               </span>;
             } else {
               if(this.state.incorrect) {
-                span = <span className='wrong' key={index}>{char}</span>;
+                span = <span className={`wrong ${opponent}`} key={index}>{char}</span>;
               } else {
-                span = <span className='active' key={index}>{char}</span>;
+                span = <span className={`active ${opponent}`} key={index}>{char}</span>;
               }
             }
           } else {
-            span = <span className='regular' key={index}>{char}</span>;
+            span = <span className={`regular ${opponent}`} key={index}>{char}</span>;
           }
 
           if(this.state.key === index) {
-            span = <span className='incorrect' key={index}>{char}</span>;
+            span = <span className={`incorrect ${opponent}`} key={index}>{char}</span>;
           }
+
           return span;
         })}</code></pre>
     </div>;

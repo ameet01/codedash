@@ -92,3 +92,7 @@ code span {
 #timer {
   color: red;
 }
+
+.opponentPointer {
+  background: yellow;
+}
