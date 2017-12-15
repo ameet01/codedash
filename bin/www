@@ -50,6 +50,11 @@ io.on('connection', function(socket) {
     socket.join(data.game);
     socket.broadcast.to(data.game).emit('update opponent cursor', data.pointer);
   });
+
+  socket.on('finish', function(data) {
+    socket.join(data.game);
+    io.in(data.game).emit('add user to finish list', data.user);
+  });
 });
 
 /**

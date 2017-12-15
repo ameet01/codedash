@@ -30,6 +30,8 @@ class StatsModal extends React.Component {
 
     this.setState({ open: true });
     setTimeout(this.mountStyle, 10);
+
+
   }
 
   componentWillUnmount() {
@@ -63,12 +65,29 @@ class StatsModal extends React.Component {
   }
 
   render() {
+    let raceResult;
+
+    if(this.props.auth) {
+      if(this.props.auth.currentGameType === 2) {
+        if(this.props.order.length > 0 && this.props.currentUser) {
+          if(this.props.order[0].username === this.props.currentUser.username) {
+            raceResult = "You win! Congrats!";
+          } else {
+            raceResult = "Nice try!";
+          }
+        }
+      }
+    }
+
+
+
     if (this.state.open) {
       return(
         <div className="game-stats"
           style={this.state.style}
           onTransitionEnd={this.transitionEnd}>
           <div className="stats-inner">
+            <div className='race-result'>{raceResult}</div>
             <h1>Game Statistics</h1>
             <div className="modal-close" onClick={this.unmountStyle}>x</div>
             <div className="stats-row">
@@ -86,6 +105,10 @@ class StatsModal extends React.Component {
             <div className="stats-row">
               <span>Accuracy</span>
               <span>{this.props.accuracy}%</span>
+            </div>
+            <div className="stats-row">
+              <span>Collateral</span>
+              <span>{this.props.collateral} keystrokes</span>
             </div>
           </div>
           <div className="backdrop" onClick={this.unmountStyle}></div>

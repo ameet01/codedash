@@ -21,7 +21,9 @@ class MultiGame extends Component {
       timer: 5,
       gameStarted: false,
       users: [],
-      opponentPointer: 0
+      opponentPointer: 0,
+      keystrokes: 0,
+      order: []
     };
 
     this.registerKeyPress = this.registerKeyPress.bind(this);
@@ -45,6 +47,10 @@ class MultiGame extends Component {
 
     socket.on('new user join', (user) => this.joinUser(user));
     socket.on('update opponent cursor', (pointer) => this.setState({opponentPointer: pointer}));
+    socket.on('add user to finish list', (user) => {
+      let order = this.state.order.concat(user);
+      this.setState({order: order});
+    });
 
     this.once = false;
 
@@ -111,6 +117,7 @@ class MultiGame extends Component {
     if(this.state.gameStarted) {
       if(this.state.wrongstreak <= 5) {
         if(this.code[this.state.pointer + 1] === undefined && e.keyCode === 13) {
+          socket.emit('finish', { user: this.props.auth, game: this.gameId });
           this.endTime = new Date().getTime();
           this.timeElapsed = ((this.endTime - this.startTime)/1000).toPrecision(4);
           this.speed = ((this.codeLength / 5) / (this.timeElapsed / 60)).toPrecision(4);
@@ -119,7 +126,7 @@ class MultiGame extends Component {
           this.setState({ gameStarted: false, showStats: true });
         }
         if(e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
-          this.setState({pointer: this.state.pointer + 1, incorrect: false});
+          this.setState({pointer: this.state.pointer + 1, incorrect: false, keystrokes: this.state.keystrokes + 1});
         } else if(this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode === 13) {
           if(this.state.incorrect === true) {
           } else {
@@ -130,7 +137,7 @@ class MultiGame extends Component {
             while(this.code[num].match(/\s/g)) {
               num += 1;
             }
-            this.setState({pointer: num});
+            this.setState({pointer: num, keystrokes: this.state.keystrokes + 1});
           }
         } else if(this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode !== 13) {
           if(this.state.incorrect === false) {
@@ -141,15 +148,15 @@ class MultiGame extends Component {
               while(this.code[num].match(/\s/g)) {
                 num += 1;
               }
-              this.setState({pointer: num, wrongstreak: this.state.wrongstreak + 1});
+              this.setState({pointer: num, wrongstreak: this.state.wrongstreak + 1, keystrokes: this.state.keystrokes + 1});
             }
           }
 
         } else {
           if(this.state.wrongstreak === 0) {
-            this.setState({key: this.state.pointer}, this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1, mistakes: this.state.mistakes + 1}));
+            this.setState({key: this.state.pointer}, this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1, mistakes: this.state.mistakes + 1, keystrokes: this.state.keystrokes + 1}));
           } else {
-            this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1});
+            this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1, keystrokes: this.state.keystrokes + 1});
           }
         }
       }
@@ -170,9 +177,9 @@ class MultiGame extends Component {
               num -= 1;
             }
             if(string.includes("\n")) {
-              this.setState({pointer: num+1, wrongstreak: this.state.wrongstreak - 1 });
+              this.setState({pointer: num+1, wrongstreak: this.state.wrongstreak - 1, keystrokes: this.state.keystrokes + 1 });
             } else {
-              this.setState({pointer: original, wrongstreak: this.state.wrongstreak - 1});
+              this.setState({pointer: original, wrongstreak: this.state.wrongstreak - 1, keystrokes: this.state.keystrokes + 1});
             }
           }
         } else {
@@ -188,9 +195,9 @@ class MultiGame extends Component {
             num -= 1;
           }
           if(string.includes("\n")) {
-            this.setState({pointer: num});
+            this.setState({pointer: num, keystrokes: this.state.keystrokes + 1});
           } else {
-            this.setState({pointer: original});
+            this.setState({pointer: original, keystrokes: this.state.keystrokes + 1});
           }
         }
         // this.setState({pointer: this.state.pointer -= 1});
@@ -292,6 +299,9 @@ class MultiGame extends Component {
           errors={this.state.mistakes}
           accuracy={this.accuracy}
           unmount={this.unmountModal}
+          order={this.state.order}
+          currentUser={this.props.auth}
+          collateral={this.state.keystrokes - this.codeLength}
         />
     </div>;
   }
