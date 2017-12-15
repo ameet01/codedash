@@ -238,6 +238,22 @@ class MultiGame extends Component {
                 opponent = "";
               }
 
+              let bolded;
+              if(this.state.wrongstreak > 0) {
+                if(this.state.pointer - this.state.wrongstreak > index) {
+                  bolded = 'bolded';
+                } else {
+                  bolded = undefined;
+                }
+              } else {
+                if(this.state.pointer > index) {
+                   bolded = 'bolded';
+                } else {
+                  bolded = undefined;
+                }
+              }
+
+
               if(index === this.state.pointer) {
                 if(char === "\n") {
                   span = <span
@@ -257,7 +273,7 @@ class MultiGame extends Component {
                       }
                     }
                   } else {
-                    span = <span className={`regular ${opponent}`} key={index}>{char}</span>;
+                    span = <span className={`regular ${opponent} ${bolded}`} key={index}>{char}</span>;
                     }
 
                     if(this.state.key === index) {
