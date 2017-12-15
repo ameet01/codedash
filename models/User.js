@@ -15,7 +15,8 @@ var UserSchema = new Schema({
     totalGames: { type: Number, default: 0 },
     currentGame: { type: Number },
     currentGameType: { type: Number },
-    currentGameLang: { type: String }
+    currentGameLang: { type: String },
+    currentGameLangNum: { type: Number }
 });
 
 UserSchema.plugin(passportLocalMongoose);

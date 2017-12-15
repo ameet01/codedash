@@ -20,8 +20,8 @@ const Routes = () => {
         <AuthRoute path="/signup" component={SessionContainer} />
         <ProtectedRoute path="/lobby" component={LobbyContainer} />
         <ProtectedRoute path="/lobby/:language" component={LobbyContainer} />
-        <ProtectedRoute path="/game/:language/1/:gameId" component={SingleGameContainer} />
-        <ProtectedRoute path="/game/:language/2/:gameId" component={MultiGameContainer} />
+        <ProtectedRoute path="/game/:language/:langnum/1/:gameId" component={SingleGameContainer} />
+        <ProtectedRoute path="/game/:language/:langnum/2/:gameId" component={MultiGameContainer} />
         <Route path="/" component={Footer} />
       </div>
     </Router>

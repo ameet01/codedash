@@ -22,7 +22,7 @@ class SingleGame extends Component {
     this.registerKeyPress = this.registerKeyPress.bind(this);
     this.backspace = this.backspace.bind(this);
     let language = this.props.languages[`${this.props.match.params.language}`];
-    this.code = language[Math.floor(Math.random()*1)];
+    this.code = language[this.props.match.params.langnum];
     let spaces = 0;
     for(var i = 1; i < this.code.length; i++) {
       if(this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== "\n") {
@@ -43,10 +43,7 @@ class SingleGame extends Component {
 
   componentDidMount() {
     axios.put('/api/updateuser/', {
-      id: this.props.auth._id,
-      currentGame: this.gameId,
-      currentGameType: 1,
-      currentGameLang: this.props.match.params.language
+      id: this.props.auth._id, currentGame: this.gameId, currentGameType: 1, currentGameLang: this.props.match.params.language, currentGameLangNum: this.props.match.params.langnum
     });
 
     const user = this.props.auth;
@@ -70,7 +67,7 @@ class SingleGame extends Component {
 
   componentWillUnmount() {
     axios.put('/api/updateuser/', {
-      id: this.props.auth._id, currentGame: null, currentGameType: null, currentGameLang: null
+      id: this.props.auth._id, currentGame: null, currentGameType: null, currentGameLang: null, currentGameLangNum: null
     });
     clearInterval(this.timer);
     document.removeEventListener('keypress', this.registerKeyPress);
