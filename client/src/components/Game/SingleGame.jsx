@@ -23,7 +23,7 @@ class SingleGame extends Component {
     this.registerKeyPress = this.registerKeyPress.bind(this);
     this.backspace = this.backspace.bind(this);
     let language = this.props.languages[`${this.props.match.params.language}`];
-    this.code = language[this.props.match.params.langnum];
+    this.code = language[0];
     let spaces = 0;
     for(var i = 1; i < this.code.length; i++) {
       if(this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== "\n") {
