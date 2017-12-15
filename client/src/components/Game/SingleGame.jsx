@@ -16,7 +16,6 @@ class SingleGame extends Component {
       mistakes: 0,
       timer: 5,
       keystrokes: 0,
-      collateral: 0,
       gameStarted: false,
       users: []
     };
