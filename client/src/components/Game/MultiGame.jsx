@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import axios from 'axios';
+import uniqBy from 'lodash/uniqBy';
 
 
 import socketIOClient from "socket.io-client";
@@ -10,7 +11,7 @@ const socket = socketIOClient("http://127.0.0.1:5000");
 class MultiGame extends Component {
   constructor(props) {
     super(props);
-    this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0, timer: 1, gameStarted: false, users: [], opponentPointer: 5};
+    this.state = {pointer: 0, incorrect: false, wrongstreak: 0, key: undefined, mistakes: 0, timer: 1, gameStarted: false, users: [], opponentPointer: 0};
     this.registerKeyPress = this.registerKeyPress.bind(this);
     this.backspace = this.backspace.bind(this);
     let language = this.props.languages[`${this.props.match.params.language}`];
@@ -29,18 +30,15 @@ class MultiGame extends Component {
     this.gameId = parseInt(this.props.match.params.gameId);
 
     socket.on('new user join', (user) => this.joinUser(user));
+    socket.on('update opponent cursor', (pointer) => this.setState({opponentPointer: pointer}));
     this.once = false;
   }
 
   joinUser(user) {
     const combinedUsers = [...this.state.users, user];
-    // const newUsers = Array.from(new Set(combinedUsers));
-    const newUsers = combinedUsers.filter((elem, pos, arr) => {
-      return arr.indexOf(elem) === pos;
-    });
+    const newUsers = uniqBy(combinedUsers, 'username');
     this.setState({users: newUsers});
   }
-
 
   componentDidMount() {
     axios.put(`/api/updateuser/`, {
@@ -122,7 +120,7 @@ class MultiGame extends Component {
             }
           }
 
-        }else {
+        } else {
           if(this.state.wrongstreak === 0) {
             this.setState({key: this.state.pointer}, this.setState({incorrect: true, pointer: this.state.pointer += 1, wrongstreak: this.state.wrongstreak += 1, mistakes: this.state.mistakes += 1}));
           } else {
@@ -130,6 +128,7 @@ class MultiGame extends Component {
           }
         }
       }
+      socket.emit('cursor', { pointer: this.state.pointer });
     }
   }
 
@@ -171,6 +170,7 @@ class MultiGame extends Component {
         }
         // this.setState({pointer: this.state.pointer -= 1});
       }
+      socket.emit('cursor', { pointer: this.state.pointer });
     }
   }
 
@@ -178,63 +178,63 @@ class MultiGame extends Component {
     let header;
     if(this.state.users.length < 2) {
       header = <div id='timer'>Awaiting players...</div>;
-    } else {
-      if(!this.once) {
-        socket.emit('game', {game: this.gameId, user: this.props.auth});
-        this.once = true;
-        this.timer = setInterval(() => {
-          this.setState({timer: this.state.timer -= 1});
-          if(this.state.timer === 0) {
-            this.startTime = new Date().getTime();
-            clearInterval(this.timer);
-            this.setState({gameStarted: true});
-            document.getElementById('timer').innerHTML = 'GO!';
-            document.getElementById('timer').style.color = 'green';
-          }
-        }, 1000);
-      }
-      header = <h1 id='timer'>Timer: {this.state.timer}</h1>;
-    }
-
-    return <div className='game'>
-      <h1>Multiplayer Game</h1>
-      {header}
-      <pre><code>{this.code.split('').map((char, index) => {
-          let span;
-          let opponent;
-          if(index === this.state.opponentPointer) {
-            opponent = "opponentPointer";
-          } else {
-            opponent = "";
-          }
-
-          if(index === this.state.pointer) {
-            if(char === "\n") {
-              span = <span
-                className={this.state.incorrect ? `active enter-incorrect ${opponent}` : `active enter ${opponent}`}
-                key={index}>
-                {char}
-              </span>;
-            } else {
-              if(this.state.incorrect) {
-                span = <span className={`wrong ${opponent}`} key={index}>{char}</span>;
-              } else {
-                span = <span className={`active ${opponent}`} key={index}>{char}</span>;
-              }
+      } else {
+        if(!this.once) {
+          socket.emit('game', {game: this.gameId, user: this.props.auth});
+          this.once = true;
+          this.timer = setInterval(() => {
+            this.setState({timer: this.state.timer -= 1});
+            if(this.state.timer === 0) {
+              this.startTime = new Date().getTime();
+              clearInterval(this.timer);
+              this.setState({gameStarted: true});
+              document.getElementById('timer').innerHTML = 'GO!';
+              document.getElementById('timer').style.color = 'green';
             }
-          } else {
-            span = <span className={`regular ${opponent}`} key={index}>{char}</span>;
-          }
+          }, 1000);
+        }
+        header = <h1 id='timer'>Timer: {this.state.timer}</h1>;
+        }
 
-          if(this.state.key === index) {
-            span = <span className={`incorrect ${opponent}`} key={index}>{char}</span>;
-          }
+        return <div className='game'>
+          <h1>Multiplayer Game</h1>
+          {header}
+          <pre><code>{this.code.split('').map((char, index) => {
+              let span;
+              let opponent;
+              if(index === this.state.opponentPointer) {
+                opponent = "opponentPointer";
+              } else {
+                opponent = "";
+              }
 
-          return span;
-        })}</code></pre>
-    </div>;
+              if(index === this.state.pointer) {
+                if(char === "\n") {
+                  span = <span
+                    className={this.state.incorrect ? `active enter-incorrect ${opponent}` : `active enter ${opponent}`}
+                    key={index}>
+                    {char}
+                  </span>;
+                } else {
+                  if(this.state.incorrect) {
+                    span = <span className={`wrong ${opponent}`} key={index}>{char}</span>;
+                    } else {
+                      span = <span className={`active ${opponent}`} key={index}>{char}</span>;
+                      }
+                    }
+                  } else {
+                    span = <span className={`regular ${opponent}`} key={index}>{char}</span>;
+                    }
 
-  }
-}
+                    if(this.state.key === index) {
+                      span = <span className={`incorrect ${opponent}`} key={index}>{char}</span>;
+                      }
 
-export default connect(null, actions)(MultiGame);
+                      return span;
+                    })}</code></pre>
+                  </div>;
+
+                }
+              }
+
+              export default connect(null, actions)(MultiGame);
