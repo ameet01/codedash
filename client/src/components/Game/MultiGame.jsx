@@ -6,7 +6,7 @@ import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
 
 import socketIOClient from "socket.io-client";
-const socket = socketIOClient("http://127.0.0.1:5000");
+const socket = socketIOClient("https://flexproject.herokuapp.com/");
 
 class MultiGame extends Component {
   constructor(props) {
