@@ -5,7 +5,12 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run start\" \"npm run client\""
+    "dev": "concurrently \"npm run start\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "engines": {
+    "node": "8.1.1",
+    "npm": "5.0.3"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -17,11 +22,14 @@
     "body-parser": "^1.18.2",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.1",
+    "connect-history-api-fallback": "^1.5.0",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "^2.6.9",
     "express": "~4.15.5",
     "express-session": "^1.15.6",
     "jade": "~1.11.0",
+    "mongod": "^2.0.0",
     "mongoose": "^4.13.6",
     "morgan": "^1.9.0",
     "nodemon": "^1.12.5",
