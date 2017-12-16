@@ -74,14 +74,16 @@ class Lobby extends Component {
 
     return <div className="lobby">
       <div className="inner-lobby">
-        <h1>Lobby!</h1>
+        <h1>Lobby</h1>
         <div className="rooms-and-language-select">
           <div className="rooms-list">
             {users.map(
               user =>
               <div className="room-item"
                 key={`${user.currentGameLang}-${user.currentGameLangNum}-${user.currentGameType}-${user.currentGame}`}>
-                <div className="room-title">{`${user.username}'`}s room</div>
+                <Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>
+                  <div className="room-title">{`${user.username}'`}s room</div>
+                </Link>
                 <div className="room-info">
                   <div
                     className="room-language"
@@ -96,26 +98,31 @@ class Lobby extends Component {
               </div>
             )}
           </div>
-          <div className="game-select">
-            <ul>
-              <li onClick={() => this.setState({gameType: 1})}>Singleplayer</li>
-              <li onClick={() => this.setState({gameType: 2})}>Multiplayer</li>
-            </ul>
-          </div>
-          <div className="language-select">
-            <ul>
-              {languages.map((language, index) =>
-                <NavLink to={`/lobby/${language}`}
-                  activeClassName="activelanguage"
-                  key={index}>
-                  {language}
-                </NavLink>)}
-            </ul>
+          <div className="create-room">
+            <div className="room-options">
+              <div className="game-select">
+                <button onClick={() => this.setState({gameType: 1})}>
+                  Singleplayer
+                </button>
+                <button onClick={() => this.setState({gameType: 2})}>
+                  Multiplayer
+                </button>
+              </div>
+              <div className="language-select">
+                {languages.map((language, index) =>
+                  <NavLink to={`/lobby/${language}`}
+                    activeClassName="activelanguage"
+                    key={index}>
+                    {language}
+                  </NavLink>
+                )}
+              </div>
+            </div>
+
+            <button onClick={() => this.createRoom()}>Submit</button>
+            <p style={{color: 'red'}}>{this.state.error}</p>
           </div>
         </div>
-
-        <button onClick={() => this.createRoom()}>Submit</button>
-        <p style={{color: 'red'}}>{this.state.error}</p>
       </div>
     </div>;
   }

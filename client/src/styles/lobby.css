@@ -28,13 +28,21 @@
   justify-content: space-between;
   width: 100%;
   border-radius: 35px;
-  padding: 5px 10px;
   background: #ccc;
   margin-bottom: 10px;
 }
 
 .room-item:last-of-type {
   margin-bottom: 0;
+}
+
+.room-title {
+  margin: 0 15px;
+  transition: all 0.3s ease;
+}
+
+.room-item a:hover {
+  text-decoration: none;
 }
 
 .room-info {
@@ -44,23 +52,32 @@
 
 .room-language {
   margin-right: 20px;
-  padding: 0 10px;
+  padding: 0 15px;
   border-radius: 25px;
   color: #fff;
   text-shadow: 0 0 2px #333;
 }
 
 .room-info button {
-  padding: 0 10px;
+  padding: 0 15px;
   border: none;
   border-radius: 25px;
+}
+
+.create-room {
+  display: flex;
+  flex-direction: column;
+}
+
+.room-options {
+  display: flex;
 }
 
 .language-select {
   width: 30%;
 }
 
-.language-select ul{
+.language-select {
   display: flex;
   text-align: left;
   flex-direction: column;
