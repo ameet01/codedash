@@ -104,3 +104,32 @@ code span {
 .bolded {
  font-weight: 700;
 }
+
+
+
+.player-left-modal {
+  position: absolute;
+  width: 30%;
+  z-index: 20;
+  background: white;
+  text-align: center;
+  top: 20%;
+  font-size: 30px;
+  border-radius: 5px;
+  padding: 40px 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+.player-left-modal button {
+  padding: 5px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  background: #579E29;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}

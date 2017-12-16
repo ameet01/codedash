@@ -6,8 +6,8 @@ import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
 
 import socketIOClient from "socket.io-client";
-const socket = socketIOClient("https://flexproject.herokuapp.com/");
-//http://127.0.0.1:5000
+const socket = socketIOClient("http://127.0.0.1:5000");
+//https://flexproject.herokuapp.com/
 
 class MultiGame extends Component {
   constructor(props) {
@@ -52,6 +52,21 @@ class MultiGame extends Component {
       let order = this.state.order.concat(user);
       this.setState({order: order});
     });
+    socket.on('user leave', (user) => {
+      let u = this.state.users.slice(0);
+      u.splice(u.indexOf(user));
+      this.setState({users: u});
+    });
+    // socket.on('reset user game', () => {
+    //   console.log('reset');
+    //   axios.put('/api/updateuser/', {
+    //     id: this.props.auth._id,
+    //     currentGame: null,
+    //     currentGameType: null,
+    //     currentGameLang: null,
+    //     currentGameLangNum: null
+    //   });
+    // });
 
     this.once = false;
 
@@ -65,6 +80,16 @@ class MultiGame extends Component {
   }
 
   componentDidMount() {
+    window.onbeforeunload = (e) => {
+      axios.put('/api/updateuser/', {
+        id: this.props.auth._id,
+        currentGame: null,
+        currentGameType: null,
+        currentGameLang: null,
+        currentGameLangNum: null
+      }).then(socket.emit('lobby'));
+    };
+
     axios.put('/api/updateuser/', {
       id: this.props.auth._id,
       currentGame: this.gameId,
@@ -76,7 +101,7 @@ class MultiGame extends Component {
     const users = [...this.state.users, this.props.auth];
     socket.emit('game', {game: this.gameId, user: this.props.auth});
     this.setState({users: users});
-
+    socket.emit('lobby');
     // this.timer = setInterval(() => {
     //   this.setState({timer: this.state.timer -= 1});
     //   if(this.state.timer === 0) {
@@ -107,6 +132,7 @@ class MultiGame extends Component {
       currentGameLang: null,
       currentGameLangNum: null
     });
+    socket.emit('remove user', {game: this.gameId, user: this.props.auth});
     socket.emit('lobby');
     clearInterval(this.timer);
     document.removeEventListener('keypress', this.registerKeyPress);
@@ -214,6 +240,13 @@ class MultiGame extends Component {
   }
 
   render() {
+    let playerLeft;
+    if(this.state.gameStarted === true && this.state.users.length < 2) {
+      playerLeft = <div className='player-left-modal'>
+        Other player left the game. Please go back to Lobby.
+        <button onClick={() => this.props.history.push('/lobby')}>Lobby</button>
+      </div>;
+    }
     let header;
     if(this.state.users.length < 2) {
       header = <div id='timer'>Awaiting players...</div>;
@@ -238,6 +271,7 @@ class MultiGame extends Component {
         return <div className='game'>
           <h1>Multiplayer Game</h1>
           {header}
+          {playerLeft}
           <div className='user-list'>{this.state.users.map(user => user.username)}</div>
           <pre><code>{this.code.split('').map((char, index) => {
               let span;

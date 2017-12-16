@@ -8,7 +8,7 @@ var app = require('../app');
 var debug = require('debug')('node-passport-auth:server');
 var http = require('http');
 var socketIo = require("socket.io");
-
+var axios = require('axios');
 /**
  * Get port from environment and store in Express.
  */
@@ -43,6 +43,13 @@ io.on('connection', function(socket) {
     socket.join(data.game);
     // socket.broadcast.to(data.game).emit('load users and code');
     socket.broadcast.to(data.game).emit('new user join', data.user);
+  });
+
+  socket.on('remove user', function(data) {
+    console.log('remove');
+    socket.join(data.game);
+    // socket.broadcast.to(data.game).emit('load users and code');
+    socket.broadcast.to(data.game).emit('user leave', data.user);
   });
 
   socket.on('lobby', function() {
