@@ -6,8 +6,8 @@ import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
 
 import socketIOClient from "socket.io-client";
-const socket = socketIOClient("http://127.0.0.1:5000");
-//https://flexproject.herokuapp.com/
+const socket = socketIOClient("https://flexproject.herokuapp.com");
+// http://127.0.0.1:5000
 
 class MultiGame extends Component {
   constructor(props) {
@@ -27,10 +27,9 @@ class MultiGame extends Component {
       order: []
     };
 
-    this.registerKeyPress = this.registerKeyPress.bind(this);
-    this.backspace = this.backspace.bind(this);
     let language = this.props.languages[`${this.props.match.params.language}`];
-    this.code = language[this.props.match.params.langnum];
+    this.code = language[0];
+    // this.props.match.params.langnum
     let spaces = 0;
     for(var i = 1; i < this.code.length; i++) {
       if(this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== "\n") {
@@ -45,6 +44,11 @@ class MultiGame extends Component {
     this.speed = undefined;
     this.accuracy = undefined;
     this.gameId = parseInt(this.props.match.params.gameId, 10);
+    this.once = false;
+
+    this.unmountModal = this.unmountModal.bind(this);
+    this.registerKeyPress = this.registerKeyPress.bind(this);
+    this.backspace = this.backspace.bind(this);
 
     socket.on('new user join', (user) => this.joinUser(user));
     socket.on('update opponent cursor', (pointer) => this.setState({opponentPointer: pointer}));
@@ -57,20 +61,6 @@ class MultiGame extends Component {
       u.splice(u.indexOf(user));
       this.setState({users: u});
     });
-    // socket.on('reset user game', () => {
-    //   console.log('reset');
-    //   axios.put('/api/updateuser/', {
-    //     id: this.props.auth._id,
-    //     currentGame: null,
-    //     currentGameType: null,
-    //     currentGameLang: null,
-    //     currentGameLangNum: null
-    //   });
-    // });
-
-    this.once = false;
-
-    this.unmountModal = this.unmountModal.bind(this);
   }
 
   joinUser(user) {
@@ -96,7 +86,7 @@ class MultiGame extends Component {
       currentGameType: 2,
       currentGameLang: this.props.match.params.language,
       currentGameLangNum: this.props.match.params.langnum
-    });
+    }).then(() => this.props.fetchUser());
 
     const users = [...this.state.users, this.props.auth];
     socket.emit('game', {game: this.gameId, user: this.props.auth});
@@ -152,7 +142,7 @@ class MultiGame extends Component {
           // alert(`You took ${this.timeElapsed} seconds. Your WPM was ${(WPM).toPrecision(4)}. You had ${this.state.mistakes} mistakes! Your accuracy was ${((this.codeLength - this.state.mistakes) * 100/this.codeLength).toPrecision(4)}`);
           setTimeout(() => {
             this.setState({ gameStarted: false, showStats: true });
-          }, 100);
+          }, 200);
         }
         if(e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
           this.setState({pointer: this.state.pointer + 1, incorrect: false, keystrokes: this.state.keystrokes + 1});

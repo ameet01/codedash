@@ -62,6 +62,7 @@ io.on('connection', function(socket) {
   });
 
   socket.on('finish', function(data) {
+    console.log('finish');
     socket.join(data.game);
     io.in(data.game).emit('add user to finish list', data.user);
   });
