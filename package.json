@@ -23,6 +23,7 @@
     "classnames": "^2.2.5",
     "concurrently": "^3.5.1",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "^2.6.9",
     "express": "~4.15.5",
     "express-session": "^1.15.6",
