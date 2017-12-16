@@ -67,8 +67,11 @@ class StatsModal extends React.Component {
   render() {
     let raceResult;
 
-    if(this.props.auth) {
-      if(this.props.auth.currentGameType === 2) {
+    console.log(this.props.currentUser);
+    console.log(this.props.order);
+
+    if(this.props.currentUser) {
+      if(this.props.currentUser.currentGameType === 2) {
         if(this.props.order.length > 0 && this.props.currentUser) {
           if(this.props.order[0].username === this.props.currentUser.username) {
             raceResult = "You win! Congrats!";

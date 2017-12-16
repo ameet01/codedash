@@ -124,7 +124,9 @@ class MultiGame extends Component {
           this.speed = ((this.codeLength / 5) / (this.timeElapsed / 60)).toPrecision(4);
           this.accuracy = ((this.codeLength - this.state.mistakes) * 100 / this.codeLength).toPrecision(4);
           // alert(`You took ${this.timeElapsed} seconds. Your WPM was ${(WPM).toPrecision(4)}. You had ${this.state.mistakes} mistakes! Your accuracy was ${((this.codeLength - this.state.mistakes) * 100/this.codeLength).toPrecision(4)}`);
-          this.setState({ gameStarted: false, showStats: true });
+          setTimeout(() => {
+            this.setState({ gameStarted: false, showStats: true });
+          }, 100);
         }
         if(e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
           this.setState({pointer: this.state.pointer + 1, incorrect: false, keystrokes: this.state.keystrokes + 1});
@@ -302,7 +304,7 @@ class MultiGame extends Component {
           unmount={this.unmountModal}
           order={this.state.order}
           currentUser={this.props.auth}
-          collateral={this.state.keystrokes - this.codeLength}
+          collateral={this.state.keystrokes - this.codeLength + 1}
         />
     </div>;
   }

@@ -7,8 +7,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://flexproject:vickiesucks@ds059207.mlab.com:59207/flexproject', {useMongoClient: true})
 // mongodb://localhost/flexproject
+mongoose.connect('mongodb://flexproject:vickiesucks@ds059207.mlab.com:59207/flexproject', {useMongoClient: true})
   .then(() => console.log('connection successful'))
   .catch((err) => console.log(err));
 
@@ -23,7 +23,7 @@ const users = require('./routes/users');
 
 const app = express();
 
-app.use(history());  
+app.use(history());
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));

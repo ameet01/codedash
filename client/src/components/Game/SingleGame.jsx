@@ -227,7 +227,7 @@ class SingleGame extends Component {
       errors={this.state.mistakes}
       accuracy={this.accuracy}
       unmount={this.unmountModal}
-      collateral={this.state.keystrokes - this.codeLength}
+      collateral={this.state.keystrokes - this.codeLength + 1}
     />
     </div>;
   }
