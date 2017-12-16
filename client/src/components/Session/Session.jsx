@@ -22,6 +22,7 @@ class Session extends Component {
     document.querySelector('body').classList.remove('height100');
     document.querySelector('#root').classList.remove('height100');
     document.querySelector('.app-container').classList.remove('height100');
+    this.setState({ error: '' });
   }
 
   handleSubmit(e) {
@@ -44,6 +45,7 @@ class Session extends Component {
       <div className="session">
         <div className="inner-session">
           <h1>Sign Up</h1>
+          <div className='signup-errors'>{this.state.error}</div>
           <form method="post" onSubmit={(e) => this.handleSubmit(e)}>
             <span>Username</span>
             <input type="text"

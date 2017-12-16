@@ -59,3 +59,7 @@
   background: #406E8E;
   color: #fff;
 }
+
+.signup-errors {
+  color: red;
+}
