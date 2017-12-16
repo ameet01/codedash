@@ -15,15 +15,17 @@ userController.register = function(req, res) {
 };
 
 // Post registration
-userController.doRegister = function(req, res) {
+userController.doRegister = function(req, res, next) {
   User.register(new User({ username : req.body.username }), req.body.password, function(err, user) {
     if (err) {
       // return res.render('register', { user : user });
+      console.log('error while user register!', err);
+      return next(err);
+    } else {
+      passport.authenticate('local')(req, res, function () {
+        res.redirect('/');
+      });
     }
-
-    passport.authenticate('local')(req, res, function () {
-      res.redirect('/');
-    });
   });
 };
 

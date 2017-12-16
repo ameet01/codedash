@@ -8,13 +8,10 @@ var app = require('../app');
 var debug = require('debug')('node-passport-auth:server');
 var http = require('http');
 var socketIo = require("socket.io");
-var axios = require('axios');
+
 /**
  * Get port from environment and store in Express.
  */
-
-
-
 
 var port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
