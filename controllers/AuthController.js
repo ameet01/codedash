@@ -23,7 +23,8 @@ userController.doRegister = function(req, res, next) {
       return next(err);
     } else {
       passport.authenticate('local')(req, res, function () {
-        res.redirect('/');
+        // res.redirect('/');
+        res.send(req.user);
       });
     }
   });
