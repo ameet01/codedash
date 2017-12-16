@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import axios from 'axios';
+import { RingLoader } from 'react-spinners';
 
 class SingleGame extends Component {
   constructor(props) {
@@ -17,7 +18,8 @@ class SingleGame extends Component {
       timer: 5,
       keystrokes: 0,
       gameStarted: false,
-      users: []
+      users: [],
+      loading: true
     };
 
     this.registerKeyPress = this.registerKeyPress.bind(this);
