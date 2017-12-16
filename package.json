@@ -22,6 +22,7 @@
     "body-parser": "^1.18.2",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.1",
+    "connect-history-api-fallback": "^1.5.0",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "debug": "^2.6.9",

@@ -12,6 +12,9 @@ mongoose.connect('mongodb://flexproject:vickiesucks@ds059207.mlab.com:59207/flex
   .then(() => console.log('connection successful'))
   .catch((err) => console.log(err));
 
+const history = require('connect-history-api-fallback');
+
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -19,6 +22,8 @@ const index = require('./routes/index');
 const users = require('./routes/users');
 
 const app = express();
+
+app.use(history());  
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
