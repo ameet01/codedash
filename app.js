@@ -7,7 +7,8 @@ const bodyParser = require('body-parser');
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/flexproject', {useMongoClient: true})
+mongoose.connect('mongodb://flexproject:vickiesucks@ds059207.mlab.com:59207/flexproject', {useMongoClient: true})
+// mongodb://localhost/flexproject
   .then(() => console.log('connection successful'))
   .catch((err) => console.log(err));
 
