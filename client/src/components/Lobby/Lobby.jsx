@@ -8,7 +8,7 @@ import socketIOClient from "socket.io-client";
 const socket = socketIOClient("https://flexproject.herokuapp.com");
 // http://127.0.0.1:5000
 
-const languages = ['javascript', 'ruby', 'c++', 'java', 'python', 'html', 'css'];
+const languages = ['javascript', 'ruby', 'c++', 'java', 'python', 'html', 'css', 'non-code'];
 
 class Lobby extends Component {
   constructor(props) {
@@ -70,7 +70,8 @@ class Lobby extends Component {
       'java': '#e56f1f',
       'python': '#3572a5',
       'html': '#e44b23',
-      'css': '#563d7c'
+      'css': '#563d7c',
+      'non-code': '#3d3d3f'
     };
 
     return <div className="lobby">
