@@ -46,6 +46,7 @@ pre {
   display: flex;
   justify-content: center;
   margin: 20px auto;
+  min-width: max-content;
   width: 80%;
   height: max-content;
   border-radius: 5px;
