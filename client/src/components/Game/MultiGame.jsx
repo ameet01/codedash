@@ -8,7 +8,9 @@ import { ClipLoader } from 'react-spinners';
 
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("https://flexproject.herokuapp.com");
-// http://127.0.0.1:5000
+// http://127.0.0.1:5000");
+// ");
+//
 
 class MultiGame extends Component {
   constructor(props) {
@@ -60,7 +62,11 @@ class MultiGame extends Component {
     });
     socket.on('user leave', (user) => {
       let u = this.state.users.slice(0);
-      u.splice(u.indexOf(user));
+      if(u[0].username === user.username) {
+        u.shift();
+      } else {
+        u.pop();
+      }
       this.setState({users: u});
     });
   }
@@ -82,13 +88,6 @@ class MultiGame extends Component {
       }).then(socket.emit('lobby'));
     };
 
-    setTimeout(() => {
-      const users = [...this.state.users, this.props.auth];
-      socket.emit('game', {game: this.gameId, user: this.props.auth});
-      this.setState({users: users});
-      socket.emit('lobby');
-      this.setState({loading: false});
-    }, 1000);
 
     axios.put('/api/updateuser/', {
       id: this.props.auth._id,
@@ -97,6 +96,16 @@ class MultiGame extends Component {
       currentGameLang: this.props.match.params.language,
       currentGameLangNum: this.props.match.params.langnum
     }).then(() => this.props.fetchUser());
+
+
+    setTimeout(() => {
+      socket.emit('game', {game: this.gameId, user: this.props.auth});
+      const users = [...this.state.users, this.props.auth];
+      this.setState({users: users, loading: false});
+      socket.emit('lobby');
+    }, 1000);
+
+
 
 
     // this.timer = setInterval(() => {
@@ -122,14 +131,14 @@ class MultiGame extends Component {
   }
 
   componentWillUnmount() {
+    socket.emit('remove user', {game: this.gameId, user: this.props.auth});
     axios.put('/api/updateuser/', {
       id: this.props.auth._id,
       currentGame: null,
       currentGameType: null,
       currentGameLang: null,
       currentGameLangNum: null
-    });
-    socket.emit('remove user', {game: this.gameId, user: this.props.auth});
+    }).then(() => this.props.fetchUser());
     socket.emit('lobby');
     clearInterval(this.timer);
     document.removeEventListener('keypress', this.registerKeyPress);
