@@ -8,12 +8,16 @@ html, body, #root, .app-container {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans', Yantramanav;
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
   color: #eee;
 }
 
 h1, h2, h3, h4 {
-  font-family: Barlow, Cairo, Rajdhani, Raleway;
+  font-family: Barlow, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
 .navbar ,footer {

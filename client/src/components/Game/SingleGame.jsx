@@ -184,11 +184,29 @@ class SingleGame extends Component {
       />
     </div>;
 
+    let count = 1;
+    for(var z = 0; z < this.code.length; z++) {
+      if(this.code[z] === "\n") {
+        count += 1;
+      }
+    }
+
+    let lineNumbers = [];
+    for(var i = 1; i < count; i++) {
+      lineNumbers.push(i);
+    }
+    lineNumbers = <div className='linenumbers'>
+      {lineNumbers.map(num => {
+      return <span>{num}</span>;
+    })}</div>;
+
     if(this.state.loading) {
       codeArea = spinner;
     } else {
       codeArea = <div className='code-area'><h1 id='timer'>Timer: {this.state.timer}</h1>
-        <pre><code>{this.code.split('').map((char, index) => {
+
+        <pre>{lineNumbers}
+        <code>{this.code.split('').map((char, index) => {
               let span;
 
               let bolded;
@@ -236,6 +254,7 @@ class SingleGame extends Component {
         </pre>
     </div>;
     }
+
 
 
     return <div className='game'>

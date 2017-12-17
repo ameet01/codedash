@@ -60,35 +60,47 @@ class Lobby extends Component {
       'java': '#e56f1f',
       'python': '#3572a5',
       'html': '#e44b23',
-      'css': '#563d7c',
+      'css': '#7c549a',
       'non-code': '#3d3d3f'
     };
+
+    let rooms;
+    if (users.length > 0) {
+      rooms = users.map(
+        (user, index) =>
+        <div className="room-item"
+          key={`${user}-${index}`}>
+          <Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>
+            <div className="room-title">{`${user.username}'`}s room</div>
+          </Link>
+          <div className="room-info">
+            <div
+              className="room-language"
+              style={{ background: colors[user.currentGameLang] }}
+            >
+              {user.currentGameLang}
+            </div>
+            <Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>
+              <button>Join</button>
+            </Link>
+          </div>
+        </div>
+      );
+    } else {
+      rooms = <div className="empty-message">
+        <div className="message">
+          There are currently no open rooms.<br />Why don't you make a new game?
+        </div>
+        <div className="arrows"></div>
+      </div>;
+    }
 
     return <div className="lobby">
       <div className="inner-lobby">
         <h1>Lobby</h1>
         <div className="rooms-and-language-select">
           <div className="rooms-list">
-            {users.map(
-              (user, index) =>
-              <div className="room-item"
-                key={`${user}-${index}`}>
-                <Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>
-                  <div className="room-title">{`${user.username}'`}s room</div>
-                </Link>
-                <div className="room-info">
-                  <div
-                    className="room-language"
-                    style={{ background: colors[user.currentGameLang] }}
-                  >
-                    {user.currentGameLang}
-                  </div>
-                  <Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>
-                    <button>Join</button>
-                  </Link>
-                </div>
-              </div>
-            )}
+            {rooms}
           </div>
           <div className="create-room">
             <div className="room-options">

@@ -290,9 +290,25 @@ class MultiGame extends Component {
             header = <h1 id='timer'>Timer: {this.state.timer}</h1>;
             }
 
+        let count = 1;
+        for(var z = 0; z < this.code.length; z++) {
+          if(this.code[z] === "\n") {
+            count += 1;
+          }
+        }
+
+        let lineNumbers = [];
+        for(var i = 1; i < count; i++) {
+          lineNumbers.push(i);
+        }
+        lineNumbers = <div className='linenumbers'>
+          {lineNumbers.map(num => {
+          return <span>{num}</span>;
+        })}</div>;
+
         codeArea = <div className='code-area'>
           <div className='user-list'>{this.state.users.map(user => user.username)}</div>
-          <pre><code>{this.code.split('').map((char, index) => {
+          <pre>{lineNumbers}<code>{this.code.split('').map((char, index) => {
               let span;
               let opponent;
               if(index === this.state.opponentPointer) {
@@ -350,11 +366,19 @@ class MultiGame extends Component {
             </div>;
           }
 
+        let warning;
+        console.log(this.state.order);
+        console.log(this.props.auth);
+        if(this.state.order.length > 0 && (this.state.order[0].username !== this.props.auth.username)) {
+          warning = <div className='warning'>You lost the game, but keep trying!</div>;
+        }
+
         return <div className='game'>
           <h1>Multiplayer Game</h1>
           {header}
           {playerLeft}
           {codeArea}
+          {warning}
         <StatsModal
           mounted={this.state.showStats}
           onTransitionEnd={this.transitionEnd}
