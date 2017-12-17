@@ -24,12 +24,12 @@ class MultiGame extends Component {
       mistakes: 0,
       timer: 5,
       gameStarted: false,
+      gameEnded: false,
       users: [],
       opponentPointer: 0,
       keystrokes: 0,
       order: [],
       loading: true,
-      gameEnded: false
     };
 
     let language = this.props.languages[`${this.props.match.params.language}`];
@@ -262,7 +262,7 @@ class MultiGame extends Component {
       />
     </div>;
 
-    if(this.state.gameEnded === false && this.state.gameStarted === true && this.state.users.length < 2) {
+    if(this.state.gameStarted === true && this.state.users.length < 2) {
       playerLeft = <div className='player-left-modal'>
         Other player has disconnected from the game. Please go back to Lobby.
         <button onClick={() => this.props.history.push('/lobby')}>Lobby</button>
@@ -273,7 +273,7 @@ class MultiGame extends Component {
       codeArea = spinner;
     } else {
 
-        if(this.state.users.length < 2) {
+        if(this.state.users.length < 2 && this.state.gameEnded === false && this.state.gameStarted === false && this.state.timer === 5) {
           header = <div id='timer'>Awaiting players...</div>;
           } else {
             if(!this.once) {
@@ -370,8 +370,6 @@ class MultiGame extends Component {
           }
 
         let warning;
-        console.log(this.state.order);
-        console.log(this.props.auth);
         if(this.state.order.length > 0 && (this.state.order[0].username !== this.props.auth.username)) {
           warning = <div className='warning'>You lost the game, but keep trying!</div>;
         }
