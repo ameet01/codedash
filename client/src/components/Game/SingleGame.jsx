@@ -81,7 +81,7 @@ class SingleGame extends Component {
     e.preventDefault();
     if(this.state.gameStarted) {
       if(this.state.wrongstreak <= 5) {
-        if(this.code[this.state.pointer + 1] === undefined && e.keyCode === 13) {
+        if(this.code[this.state.pointer + 1] === undefined && e.keyCode === 13 && this.state.incorrect === false) {
           this.endTime = new Date().getTime();
           this.timeElapsed = ((this.endTime - this.startTime)/1000).toPrecision(4);
           this.speed = ((this.codeLength / 5) / (this.timeElapsed / 60)).toPrecision(4);
