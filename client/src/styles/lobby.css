@@ -86,6 +86,7 @@
 .create-room {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .room-options {
