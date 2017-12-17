@@ -28,7 +28,8 @@ class MultiGame extends Component {
       opponentPointer: 0,
       keystrokes: 0,
       order: [],
-      loading: true
+      loading: true,
+      gameEnded: false
     };
 
     let language = this.props.languages[`${this.props.match.params.language}`];
@@ -131,7 +132,9 @@ class MultiGame extends Component {
   }
 
   componentWillUnmount() {
-    socket.emit('remove user', {game: this.gameId, user: this.props.auth});
+    if(this.state.gameEnded === false) {
+      socket.emit('remove user', {game: this.gameId, user: this.props.auth});
+    }
     axios.put('/api/updateuser/', {
       id: this.props.auth._id,
       currentGame: null,
@@ -157,7 +160,7 @@ class MultiGame extends Component {
           this.accuracy = ((this.codeLength - this.state.mistakes) * 100 / this.codeLength).toPrecision(4);
           // alert(`You took ${this.timeElapsed} seconds. Your WPM was ${(WPM).toPrecision(4)}. You had ${this.state.mistakes} mistakes! Your accuracy was ${((this.codeLength - this.state.mistakes) * 100/this.codeLength).toPrecision(4)}`);
           setTimeout(() => {
-            this.setState({ gameStarted: false, showStats: true });
+            this.setState({ gameStarted: false, showStats: true, gameEnded: true });
           }, 200);
         }
         if(e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
@@ -259,9 +262,9 @@ class MultiGame extends Component {
       />
     </div>;
 
-    if(this.state.gameStarted === true && this.state.users.length < 2) {
+    if(this.state.gameEnded === false && this.state.gameStarted === true && this.state.users.length < 2) {
       playerLeft = <div className='player-left-modal'>
-        Other player left the game. Please go back to Lobby.
+        Other player has disconnected from the game. Please go back to Lobby.
         <button onClick={() => this.props.history.push('/lobby')}>Lobby</button>
       </div>;
     }

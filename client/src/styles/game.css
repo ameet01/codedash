@@ -163,9 +163,10 @@ code span {
   flex-direction: column;
   color: gray;
   position: absolute;
-  left: 1.1%;
+  left: 1%;
   top: 31px;
   font-family: Inconsolata, monospace;
   font-size: 16px;
   font-weight: bold;
+  text-align: right;
 }
