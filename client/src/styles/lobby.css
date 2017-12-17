@@ -87,6 +87,9 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  padding: 20px;
+  border-radius: 5px;
+  background: #2b3240;
 }
 
 .room-options {
@@ -94,32 +97,65 @@
 }
 
 .language-select {
-  width: 30%;
-}
-
-.language-select {
   display: flex;
   text-align: left;
   flex-direction: column;
-  list-style: none;
+  flex: 1;
+  margin-right: 10px;
+  width: 30%;
 }
 
-.activelanguage {
-  background: green;
-  color: white;
+.create-room p {
+  margin: 0;
+}
+
+.create-room button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 5px;
+  background: #00b39f;
+  color: #fff;
+}
+
+.create {
+  margin-top: 10px;
+}
+
+.language-select button {
+  margin-bottom: 10px;
+  padding: 0 15px;
+  border-radius: 10px;
+  background: #454c5d;
+  color: #fff;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.language-select a:hover {
+  text-decoration: none;
+}
+
+.activelanguage button {
+  background: #f67628;
+  opacity: 1;
 }
 
 .game-select {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 5%;
+  order: 2;
   width: 45%;
 }
 
 .game-select button {
   width: 100%;
   cursor: pointer;
+  margin-bottom: 10px;
+  background: #5e6576;
+  transition: all 0.3s ease;
 }
 
 .empty-message {

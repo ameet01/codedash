@@ -15,6 +15,8 @@ class Lobby extends Component {
     super(props);
     this.state = {gameType: 1, error: undefined, langnum: undefined};
     this.createRoom = this.createRoom.bind(this);
+    this.setSolo = this.setSolo.bind(this);
+    this.setMulti = this.setMulti.bind(this);
 
     socket.on('update room list', () => {
       setTimeout(() => {
@@ -38,6 +40,20 @@ class Lobby extends Component {
     } else {
       this.setState({error: "Incomplete Inputs"});
     }
+  }
+
+  setSolo(e) {
+    e.preventDefault();
+    this.setState({ gameType: 1 });
+    document.querySelector('.solo').style.background = '#5574a0';
+    document.querySelector('.multi').style.background = '#5e6576';
+  }
+
+  setMulti(e) {
+    e.preventDefault();
+    this.setState({ gameType: 2 });
+    document.querySelector('.multi').style.background = '#5574a0';
+    document.querySelector('.solo').style.background = '#5e6576';
   }
 
   render() {
@@ -105,10 +121,10 @@ class Lobby extends Component {
           <div className="create-room">
             <div className="room-options">
               <div className="game-select">
-                <button onClick={() => this.setState({gameType: 1})}>
-                  Singleplayer
+                <button className="solo" onClick={this.setSolo}>
+                  Solo
                 </button>
-                <button onClick={() => this.setState({gameType: 2})}>
+                <button className="multi" onClick={this.setMulti}>
                   Multiplayer
                 </button>
               </div>
@@ -117,14 +133,17 @@ class Lobby extends Component {
                   <NavLink to={`/lobby/${language}`}
                     activeClassName="activelanguage"
                     key={index}>
-                    {language}
+                    <button>{language}</button>
                   </NavLink>
                 )}
               </div>
             </div>
 
-            <button onClick={() => this.createRoom()}>Submit</button>
-            <p style={{color: 'red'}}>{this.state.error}</p>
+            <button className="create"
+              onClick={() => this.createRoom()}>
+              Create Room
+            </button>
+            <p style={{color: '#f01b32'}}>{this.state.error}</p>
           </div>
         </div>
       </div>
