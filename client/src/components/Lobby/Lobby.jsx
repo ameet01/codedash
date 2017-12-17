@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("https://flexproject.herokuapp.com");
-// http://127.0.0.1:5000
+// http://127.0.0.1:5000");
 
 const languages = ['javascript', 'ruby', 'c++', 'java', 'python', 'html', 'css', 'non-code'];
 
@@ -30,17 +30,7 @@ class Lobby extends Component {
 
   createRoom() {
     if(this.props.match.params.language) {
-      let gameId = 1;
-
-      let users = this.props.users;
-      let games = [];
-      for(var i = 0; i < users.length; i++) {
-        games.push(users[i].currentGame);
-      }
-      while(games.includes(gameId)) {
-        gameId = gameId + 1;
-      }
-
+      let gameId = Math.floor(Math.random() * 1000);
       let langNum = Math.floor(Math.random() * 6);
       this.setState({error: undefined});
       socket.emit('lobby');
@@ -80,9 +70,9 @@ class Lobby extends Component {
         <div className="rooms-and-language-select">
           <div className="rooms-list">
             {users.map(
-              user =>
+              (user, index) =>
               <div className="room-item"
-                key={`${user.currentGameLang}-${user.currentGameLangNum}-${user.currentGameType}-${user.currentGame}`}>
+                key={`${user.currentGameLang}{index}`}>
                 <Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>
                   <div className="room-title">{`${user.username}'`}s room</div>
                 </Link>
@@ -131,3 +121,6 @@ class Lobby extends Component {
 }
 
 export default connect(null, actions)(Lobby);
+
+
+//user.currentGameLang}-${user.currentGameLangNum}-${user.currentGameType}-${user.currentGame
