@@ -281,14 +281,14 @@ class MultiGame extends Component {
             if (this.state.timer === 0) {
               this.startTime = new Date().getTime();
               clearInterval(this.timer);
-              this.setState({gameStarted: true});
+              this.setState({ gameStarted: true });
               document.getElementById('timer').innerHTML = 'GO!';
               document.getElementById('timer').style.color = '#00b39f';
             }
           }, 1000);
         }
         header = <div id="timer">Timer: {this.state.timer}</div>;
-        }
+      }
 
       let count = 1;
       for(var z = 0; z < this.code.length; z++) {
@@ -319,18 +319,23 @@ class MultiGame extends Component {
             {this.state.users.map((user, idx) => {
               let progress = 0;
               if (idx === 0) {
-                progress = (this.state.pointer / this.code.length * 100).toString();
+                progress = ((this.state.pointer + 1 )/ this.code.length * 100).toString();
               } else {
-                progress = (this.state.opponentPointer / this.code.length * 100).toString();
+                progress = ((this.state.opponentPointer + 1) / this.code.length * 100).toString();
               }
 
               let progressBar;
-              if (this.state.gameStarted) {
+              if (this.state.gameStarted || this.state.gameEnded) {
                 progressBar = <div className="progress-bar">
                   <div
                     className={`player${idx}`}
                     style={{ width: progress + '%' }}>
                   </div>
+                </div>;
+              } else {
+                progressBar = <div
+                  className="progress-bar"
+                  style={{ border: 'none', height: '0', margin: '0' }}>
                 </div>;
               }
 

@@ -31,7 +31,7 @@
   display: block;
   z-index: 2;
   position: absolute;
-  content: "<==";
+  content: '<==';
   left: 8px;
   padding: 0 5px;
   color: white;
@@ -129,7 +129,7 @@ code span {
 .progress-bar {
   margin: 10px 0;
   width: 100%;
-  min-height: 10px;
+  /*min-height: 10px;*/
   border: 1px solid #2b3240;
   border-radius: 5px;
   transition: all 0.3s ease-in-out;
