@@ -290,9 +290,25 @@ class MultiGame extends Component {
             header = <h1 id='timer'>Timer: {this.state.timer}</h1>;
             }
 
+        let count = 1;
+        for(var z = 0; z < this.code.length; z++) {
+          if(this.code[z] === "\n") {
+            count += 1;
+          }
+        }
+
+        let lineNumbers = [];
+        for(var i = 1; i < count; i++) {
+          lineNumbers.push(i);
+        }
+        lineNumbers = <div className='linenumbers'>
+          {lineNumbers.map(num => {
+          return <span>{num}</span>;
+        })}</div>;
+
         codeArea = <div className='code-area'>
           <div className='user-list'>{this.state.users.map(user => user.username)}</div>
-          <pre><code>{this.code.split('').map((char, index) => {
+          <pre>{lineNumbers}<code>{this.code.split('').map((char, index) => {
               let span;
               let opponent;
               if(index === this.state.opponentPointer) {

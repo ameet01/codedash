@@ -51,6 +51,7 @@ pre {
   background: #E0E0E0;
   white-space: pre-wrap;
   overflow-wrap: break-word;
+  position: relative;
 }
 
 code {
@@ -58,10 +59,13 @@ code {
   font-size: 16px;
   margin: 30px 50px;
   width: 100%;
+  border-left: 1px solid gray;
+  padding-left: 8px;
 }
 
 code span {
   position: relative;
+  height: min-content;
 }
 
 .enter:before, .enter-incorrect:before {
@@ -152,4 +156,15 @@ code span {
 
 .warning {
   color: red;
+}
+
+.linenumbers {
+  display: flex;
+  flex-direction: column;
+  color: gray;
+  position: absolute;
+  left: 1.1%;
+  top: 31.5px;
+  font-family: Inconsolata, monospace;
+  font-size: 16px;
 }
