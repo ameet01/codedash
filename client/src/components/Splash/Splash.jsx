@@ -24,9 +24,9 @@ class Splash extends Component {
   }
 
   demoLogin() {
-    let randomNumber = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+    let randomNumber = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
     axios.post('/api/login', {
-      username: `demo${randomNumber}`, password: "password"
+      username: `player${randomNumber}`, password: "password"
     })
     .then(() => this.props.history.push('/lobby'))
     .then(() => this.props.fetchUser());

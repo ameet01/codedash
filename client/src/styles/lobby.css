@@ -137,10 +137,17 @@
   text-decoration: none;
 }
 
-.activelanguage button {
+/* .activelanguage button {
+  background: #f67628;
+  opacity: 1;
+} */
+
+button.activeLanguage {
   background: #f67628;
   opacity: 1;
 }
+
+
 
 .game-select {
   display: flex;

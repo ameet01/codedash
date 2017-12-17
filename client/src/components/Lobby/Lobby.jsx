@@ -13,10 +13,11 @@ const languages = ['javascript', 'ruby', 'c++', 'java', 'python', 'html', 'css',
 class Lobby extends Component {
   constructor(props) {
     super(props);
-    this.state = {gameType: 1, error: undefined, langnum: undefined};
+    this.state = {gameType: 1, error: undefined, langnum: undefined, index: 0};
     this.createRoom = this.createRoom.bind(this);
     this.setSolo = this.setSolo.bind(this);
     this.setMulti = this.setMulti.bind(this);
+    this.selectLanguage = this.selectLanguage.bind(this);
 
     socket.on('update room list', () => {
       setTimeout(() => {
@@ -31,12 +32,12 @@ class Lobby extends Component {
   }
 
   createRoom() {
-    if (this.props.match.params.language) {
+    if (this.state.index >= 0 && this.state.index <= 7 && this.state.gameType) {
       let gameId = Math.floor(Math.random() * 1000);
       let langNum = Math.floor(Math.random() * 6);
       this.setState({error: undefined});
       socket.emit('lobby');
-      this.props.history.push(`/game/${this.props.match.params.language}/${langNum}/${this.state.gameType}/${gameId}`);
+      this.props.history.push(`/game/${languages[this.state.index]}/${langNum}/${this.state.gameType}/${gameId}`);
     } else {
       this.setState({error: "Incomplete Inputs"});
     }
@@ -54,6 +55,11 @@ class Lobby extends Component {
     this.setState({ gameType: 2 });
     document.querySelector('.multi').style.background = '#5574a0';
     document.querySelector('.solo').style.background = '#5e6576';
+  }
+
+  selectLanguage(e) {
+    e.preventDefault();
+    this.setState({ index: parseInt(e.currentTarget.value) });
   }
 
   render() {
@@ -129,13 +135,16 @@ class Lobby extends Component {
                 </button>
               </div>
               <div className="language-select">
-                {languages.map((language, index) =>
-                  <NavLink to={`/lobby/${language}`}
-                    activeClassName="activelanguage"
-                    key={index}>
-                    <button>{language}</button>
-                  </NavLink>
-                )}
+                {languages.map((language, index) => {
+                  let active;
+                  console.log(index, this.state.index);
+                  if(index === this.state.index) {
+                    active = 'activeLanguage';
+                  } else {
+                    active = "";
+                  }
+                  return <button className={`${active}`} value={index} onClick={(e) => this.selectLanguage(e)} >{language}</button>
+                })}
               </div>
             </div>
 
@@ -155,3 +164,11 @@ export default connect(null, actions)(Lobby);
 
 
 //user.currentGameLang}-${user.currentGameLangNum}-${user.currentGameType}-${user.currentGame
+
+
+// <NavLink to={`/lobby`}
+//   activeClassName="activelanguage"
+//   key={index}>
+//   <button>{language}</button>
+// </NavLink>
+//

@@ -63,10 +63,12 @@ class MultiGame extends Component {
     });
     socket.on('user leave', (user) => {
       let u = this.state.users.slice(0);
-      if (u[0].username === user.username) {
-        u.shift();
-      } else {
-        u.pop();
+      if(u.length > 0) {
+        if (u[0].username === user.username) {
+          u.shift();
+        } else {
+          u.pop();
+        }
       }
       this.setState({users: u});
     });
