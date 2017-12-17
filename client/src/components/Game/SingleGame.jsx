@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import axios from 'axios';
+import { ClipLoader } from 'react-spinners';
 
 class SingleGame extends Component {
   constructor(props) {
@@ -17,7 +18,8 @@ class SingleGame extends Component {
       timer: 5,
       keystrokes: 0,
       gameStarted: false,
-      users: []
+      users: [],
+      loading: true
     };
 
     this.registerKeyPress = this.registerKeyPress.bind(this);
@@ -47,22 +49,23 @@ class SingleGame extends Component {
       id: this.props.auth._id, currentGame: this.gameId, currentGameType: 1, currentGameLang: this.props.match.params.language, currentGameLangNum: this.props.match.params.langnum
     });
 
-    const users = [...this.state.users, this.props.auth];
-    this.setState({users: users});
+    setTimeout(() => {
+      const users = [...this.state.users, this.props.auth];
+      this.setState({users: users, loading: false});
 
-    this.timer = setInterval(() => {
-      this.setState({timer: this.state.timer - 1});
-      if(this.state.timer === 0) {
-        this.startTime = new Date().getTime();
-        clearInterval(this.timer);
-        this.setState({gameStarted: true});
-        document.getElementById('timer').innerHTML = 'GO!';
-        document.getElementById('timer').style.color = 'green';
-      }
+      this.timer = setInterval(() => {
+        this.setState({timer: this.state.timer - 1});
+        if(this.state.timer === 0) {
+          this.startTime = new Date().getTime();
+          clearInterval(this.timer);
+          this.setState({gameStarted: true});
+          document.getElementById('timer').innerHTML = 'GO!';
+          document.getElementById('timer').style.color = 'green';
+        }
+      }, 1000);
+      document.addEventListener('keypress', this.registerKeyPress);
+      document.addEventListener('keydown', this.backspace);
     }, 1000);
-
-    document.addEventListener('keypress', this.registerKeyPress);
-    document.addEventListener('keydown', this.backspace);
   }
 
   componentWillUnmount() {
@@ -170,55 +173,74 @@ class SingleGame extends Component {
   }
 
   render() {
+    let spinner;
+    let codeArea;
+
+    spinner = <div className='sweet-loading'>
+      <ClipLoader
+        color={'#2d9ee0'}
+        loading={this.state.loading}
+        size={45}
+      />
+    </div>;
+
+    if(this.state.loading) {
+      codeArea = spinner;
+    } else {
+      codeArea = <div className='code-area'><h1 id='timer'>Timer: {this.state.timer}</h1>
+        <pre><code>{this.code.split('').map((char, index) => {
+              let span;
+
+              let bolded;
+              if(this.state.wrongstreak > 0) {
+                if(this.state.pointer - this.state.wrongstreak > index) {
+                  bolded = 'bolded';
+                } else {
+                  bolded = undefined;
+                }
+              } else {
+                if(this.state.pointer > index) {
+                   bolded = 'bolded';
+                } else {
+                  bolded = undefined;
+                }
+              }
+
+              if(index === this.state.pointer) {
+                if(char === "\n") {
+                  span = <span
+                    className={
+                      this.state.incorrect ?
+                      'active enter-incorrect' : 'active enter'
+                    }
+                    key={index}>
+                    {char}
+                  </span>;
+                } else {
+                  if(this.state.incorrect) {
+                    span = <span className='wrong' key={index}>{char}</span>;
+                  } else {
+                    span = <span className='active' key={index}>{char}</span>;
+                  }
+                }
+              } else {
+                span = <span className={`regular ${bolded}`} key={index}>{char}</span>;
+              }
+
+              if(this.state.key === index) {
+                span = <span className='incorrect' key={index}>{char}</span>;
+              }
+              return span;
+            })}
+          </code>
+        </pre>
+    </div>;
+    }
+
+
     return <div className='game'>
       <h1>Single Game</h1>
-      <h1 id='timer'>Timer: {this.state.timer}</h1>
-      <pre><code>{this.code.split('').map((char, index) => {
-          let span;
-
-          let bolded;
-          if(this.state.wrongstreak > 0) {
-            if(this.state.pointer - this.state.wrongstreak > index) {
-              bolded = 'bolded';
-            } else {
-              bolded = undefined;
-            }
-          } else {
-            if(this.state.pointer > index) {
-               bolded = 'bolded';
-            } else {
-              bolded = undefined;
-            }
-          }
-
-          if(index === this.state.pointer) {
-            if(char === "\n") {
-              span = <span
-                className={
-                  this.state.incorrect ?
-                  'active enter-incorrect' : 'active enter'
-                }
-                key={index}>
-                {char}
-              </span>;
-            } else {
-              if(this.state.incorrect) {
-                span = <span className='wrong' key={index}>{char}</span>;
-              } else {
-                span = <span className='active' key={index}>{char}</span>;
-              }
-            }
-          } else {
-            span = <span className={`regular ${bolded}`} key={index}>{char}</span>;
-          }
-
-          if(this.state.key === index) {
-            span = <span className='incorrect' key={index}>{char}</span>;
-          }
-          return span;
-        })}
-      </code>
-    </pre>
+      {codeArea}
     <StatsModal
       mounted={this.state.showStats}
       onTransitionEnd={this.transitionEnd}
