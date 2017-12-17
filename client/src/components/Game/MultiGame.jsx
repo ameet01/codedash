@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
+import { ClipLoader } from 'react-spinners';
 
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("https://flexproject.herokuapp.com");
@@ -24,7 +25,8 @@ class MultiGame extends Component {
       users: [],
       opponentPointer: 0,
       keystrokes: 0,
-      order: []
+      order: [],
+      loading: true
     };
 
     let language = this.props.languages[`${this.props.match.params.language}`];
@@ -80,6 +82,14 @@ class MultiGame extends Component {
       }).then(socket.emit('lobby'));
     };
 
+    setTimeout(() => {
+      const users = [...this.state.users, this.props.auth];
+      socket.emit('game', {game: this.gameId, user: this.props.auth});
+      this.setState({users: users});
+      socket.emit('lobby');
+      this.setState({loading: false});
+    }, 1000);
+
     axios.put('/api/updateuser/', {
       id: this.props.auth._id,
       currentGame: this.gameId,
@@ -88,10 +98,7 @@ class MultiGame extends Component {
       currentGameLangNum: this.props.match.params.langnum
     }).then(() => this.props.fetchUser());
 
-    const users = [...this.state.users, this.props.auth];
-    socket.emit('game', {game: this.gameId, user: this.props.auth});
-    this.setState({users: users});
-    socket.emit('lobby');
+
     // this.timer = setInterval(() => {
     //   this.setState({timer: this.state.timer -= 1});
     //   if(this.state.timer === 0) {
@@ -231,37 +238,50 @@ class MultiGame extends Component {
 
   render() {
     let playerLeft;
+    let spinner;
+    let codeArea;
+    let header;
+
+    spinner = <div className='sweet-loading'>
+      <ClipLoader
+        color={'#2d9ee0'}
+        loading={this.state.loading}
+        size={45}
+      />
+    </div>;
+
     if(this.state.gameStarted === true && this.state.users.length < 2) {
       playerLeft = <div className='player-left-modal'>
         Other player left the game. Please go back to Lobby.
         <button onClick={() => this.props.history.push('/lobby')}>Lobby</button>
       </div>;
     }
-    let header;
-    if(this.state.users.length < 2) {
-      header = <div id='timer'>Awaiting players...</div>;
-      } else {
-        if(!this.once) {
-          socket.emit('game', {game: this.gameId, user: this.props.auth});
-          this.once = true;
-          this.timer = setInterval(() => {
-            this.setState({timer: this.state.timer - 1});
-            if(this.state.timer === 0) {
-              this.startTime = new Date().getTime();
-              clearInterval(this.timer);
-              this.setState({gameStarted: true});
-              document.getElementById('timer').innerHTML = 'GO!';
-              document.getElementById('timer').style.color = 'green';
-            }
-          }, 1000);
-        }
-        header = <h1 id='timer'>Timer: {this.state.timer}</h1>;
-        }
 
-        return <div className='game'>
-          <h1>Multiplayer Game</h1>
-          {header}
-          {playerLeft}
+    if(this.state.loading) {
+      codeArea = spinner;
+    } else {
+
+        if(this.state.users.length < 2) {
+          header = <div id='timer'>Awaiting players...</div>;
+          } else {
+            if(!this.once) {
+              socket.emit('game', {game: this.gameId, user: this.props.auth});
+              this.once = true;
+              this.timer = setInterval(() => {
+                this.setState({timer: this.state.timer - 1});
+                if(this.state.timer === 0) {
+                  this.startTime = new Date().getTime();
+                  clearInterval(this.timer);
+                  this.setState({gameStarted: true});
+                  document.getElementById('timer').innerHTML = 'GO!';
+                  document.getElementById('timer').style.color = 'green';
+                }
+              }, 1000);
+            }
+            header = <h1 id='timer'>Timer: {this.state.timer}</h1>;
+            }
+
+        codeArea = <div className='code-area'>
           <div className='user-list'>{this.state.users.map(user => user.username)}</div>
           <pre><code>{this.code.split('').map((char, index) => {
               let span;
@@ -318,6 +338,15 @@ class MultiGame extends Component {
                   })}
                 </code>
               </pre>
+            </div>;
+          }
+
+
+        return <div className='game'>
+          <h1>Multiplayer Game</h1>
+          {header}
+          {playerLeft}
+          {codeArea}
         <StatsModal
           mounted={this.state.showStats}
           onTransitionEnd={this.transitionEnd}

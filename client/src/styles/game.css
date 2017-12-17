@@ -99,6 +99,7 @@ code span {
 
 .user-list {
   color: white;
+  text-align: center;
 }
 
 .bolded {
@@ -132,4 +133,13 @@ code span {
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: all 0.3s ease;
+}
+
+.code-area {
+  width: 100%;
+}
+
+.sweet-loading {
+  position: absolute;
+  top: 25%;
 }
