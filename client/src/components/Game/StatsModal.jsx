@@ -80,7 +80,8 @@ class StatsModal extends React.Component {
       }
     }
 
-
+    let messages = ['Awesome!', 'Nice try!', "Good work!"];
+    let random = Math.floor(Math.random() * 3);
 
     if (this.state.open) {
       return(

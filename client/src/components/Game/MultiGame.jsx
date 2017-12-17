@@ -149,7 +149,7 @@ class MultiGame extends Component {
     e.preventDefault();
     if(this.state.gameStarted) {
       if(this.state.wrongstreak <= 5) {
-        if(this.code[this.state.pointer + 1] === undefined && e.keyCode === 13) {
+        if(this.code[this.state.pointer + 1] === undefined && e.keyCode === 13 && this.state.incorrect === false) {
           socket.emit('finish', { user: this.props.auth, game: this.gameId });
           this.endTime = new Date().getTime();
           this.timeElapsed = ((this.endTime - this.startTime)/1000).toPrecision(4);
