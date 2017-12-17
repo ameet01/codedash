@@ -149,3 +149,7 @@ code span {
   position: absolute;
   top: 25%;
 }
+
+.warning {
+  color: red;
+}

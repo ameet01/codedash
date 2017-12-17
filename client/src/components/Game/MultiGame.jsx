@@ -350,11 +350,19 @@ class MultiGame extends Component {
             </div>;
           }
 
+        let warning;
+        console.log(this.state.order);
+        console.log(this.props.auth);
+        if(this.state.order.length > 0 && (this.state.order[0].username !== this.props.auth.username)) {
+          warning = <div className='warning'>You lost the game, but keep trying!</div>;
+        }
+
         return <div className='game'>
           <h1>Multiplayer Game</h1>
           {header}
           {playerLeft}
           {codeArea}
+          {warning}
         <StatsModal
           mounted={this.state.showStats}
           onTransitionEnd={this.transitionEnd}
