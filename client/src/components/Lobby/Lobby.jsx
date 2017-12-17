@@ -29,7 +29,7 @@ class Lobby extends Component {
   }
 
   createRoom() {
-    if(this.props.match.params.language) {
+    if (this.props.match.params.language) {
       let gameId = Math.floor(Math.random() * 1000);
       let langNum = Math.floor(Math.random() * 6);
       this.setState({error: undefined});
@@ -44,7 +44,7 @@ class Lobby extends Component {
     let obj = {};
 
     this.props.users.forEach(user => {
-      if(!obj[user.currentGame] && user.currentGameType === 2 && user.username !== this.props.auth.username) {
+      if (!obj[user.currentGame] && user.currentGameType === 2 && user.username !== this.props.auth.username) {
         obj[user.currentGame] = 1;
       } else {
         obj[user.currentGame] += 1;
@@ -96,7 +96,7 @@ class Lobby extends Component {
     }
 
     return <div className="lobby">
-      <div className="inner-lobby">
+      <div className="lobby-inner">
         <h1>Lobby</h1>
         <div className="rooms-and-language-select">
           <div className="rooms-list">

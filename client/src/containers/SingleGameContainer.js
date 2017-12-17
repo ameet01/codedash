@@ -553,7 +553,7 @@ let cplusplus5 = `void StackLinkedList::destroyList()
 
 void disp(NODE *N)
 {
-    if( N == NULL )
+    if ( N == NULL )
     {
         cout << "Stack is Empty!!!" << endl;
     }

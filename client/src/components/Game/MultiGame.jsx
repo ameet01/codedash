@@ -37,7 +37,7 @@ class MultiGame extends Component {
     // this.props.match.params.langnum
     let spaces = 0;
     for(var i = 1; i < this.code.length; i++) {
-      if(this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== "\n") {
+      if (this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== '\n') {
         spaces += 1;
       }
     }
@@ -63,7 +63,7 @@ class MultiGame extends Component {
     });
     socket.on('user leave', (user) => {
       let u = this.state.users.slice(0);
-      if(u[0].username === user.username) {
+      if (u[0].username === user.username) {
         u.shift();
       } else {
         u.pop();
@@ -89,7 +89,6 @@ class MultiGame extends Component {
       }).then(socket.emit('lobby'));
     };
 
-
     axios.put('/api/updateuser/', {
       id: this.props.auth._id,
       currentGame: this.gameId,
@@ -98,7 +97,6 @@ class MultiGame extends Component {
       currentGameLangNum: this.props.match.params.langnum
     }).then(() => this.props.fetchUser());
 
-
     setTimeout(() => {
       socket.emit('game', {game: this.gameId, user: this.props.auth});
       const users = [...this.state.users, this.props.auth];
@@ -106,12 +104,9 @@ class MultiGame extends Component {
       socket.emit('lobby');
     }, 1000);
 
-
-
-
     // this.timer = setInterval(() => {
     //   this.setState({timer: this.state.timer -= 1});
-    //   if(this.state.timer === 0) {
+    //   if (this.state.timer === 0) {
     //     this.startTime = new Date().getTime();
     //     clearInterval(this.timer);
     //     this.setState({gameStarted: true});
@@ -132,7 +127,7 @@ class MultiGame extends Component {
   }
 
   componentWillUnmount() {
-    if(this.state.gameEnded === false) {
+    if (this.state.gameEnded === false) {
       socket.emit('remove user', {game: this.gameId, user: this.props.auth});
     }
     axios.put('/api/updateuser/', {
@@ -150,9 +145,9 @@ class MultiGame extends Component {
 
   registerKeyPress(e) {
     e.preventDefault();
-    if(this.state.gameStarted) {
-      if(this.state.wrongstreak <= 5) {
-        if(this.code[this.state.pointer + 1] === undefined && e.keyCode === 13 && this.state.incorrect === false) {
+    if (this.state.gameStarted) {
+      if (this.state.wrongstreak <= 5) {
+        if (this.code[this.state.pointer + 1] === undefined && e.keyCode === 13 && this.state.incorrect === false) {
           socket.emit('finish', { user: this.props.auth, game: this.gameId });
           this.endTime = new Date().getTime();
           this.timeElapsed = ((this.endTime - this.startTime)/1000).toPrecision(4);
@@ -163,26 +158,26 @@ class MultiGame extends Component {
             this.setState({ gameStarted: false, showStats: true, gameEnded: true });
           }, 200);
         }
-        if(e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
+        if (e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
           this.setState({pointer: this.state.pointer + 1, incorrect: false, keystrokes: this.state.keystrokes + 1});
-        } else if(this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode === 13) {
-          if(this.state.incorrect === true) {
+        } else if (this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode === 13) {
+          if (this.state.incorrect === true) {
           } else {
             this.setState({incorrect: false});
           }
           let num = this.state.pointer + 1;
-          if(this.code[num]) {
+          if (this.code[num]) {
             while(this.code[num].match(/\s/g)) {
               num += 1;
             }
             this.setState({pointer: num, keystrokes: this.state.keystrokes + 1});
           }
-        } else if(this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode !== 13) {
-          if(this.state.incorrect === false) {
+        } else if (this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode !== 13) {
+          if (this.state.incorrect === false) {
             this.setState({incorrect: true});
           } else {
             let num = this.state.pointer + 1;
-            if(this.code[num]) {
+            if (this.code[num]) {
               while(this.code[num].match(/\s/g)) {
                 num += 1;
               }
@@ -191,7 +186,7 @@ class MultiGame extends Component {
           }
 
         } else {
-          if(this.state.wrongstreak === 0) {
+          if (this.state.wrongstreak === 0) {
             this.setState({key: this.state.pointer}, this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1, mistakes: this.state.mistakes + 1, keystrokes: this.state.keystrokes + 1}));
           } else {
             this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1, keystrokes: this.state.keystrokes + 1});
@@ -203,18 +198,18 @@ class MultiGame extends Component {
   }
 
   backspace(e) {
-    if(this.state.gameStarted) {
-      if(this.state.incorrect === true && e.keyCode === 8) {
-        if(this.state.wrongstreak > 1) {
+    if (this.state.gameStarted) {
+      if (this.state.incorrect === true && e.keyCode === 8) {
+        if (this.state.wrongstreak > 1) {
           let num = this.state.pointer - 1;
           let original = num;
-          if(this.code[num]) {
-            let string = "";
+          if (this.code[num]) {
+            let string = '';
             while(this.code[num].match(/\s/g)) {
               string+=this.code[num];
               num -= 1;
             }
-            if(string.includes("\n")) {
+            if (string.includes('\n')) {
               this.setState({pointer: num+1, wrongstreak: this.state.wrongstreak - 1, keystrokes: this.state.keystrokes + 1 });
             } else {
               this.setState({pointer: original, wrongstreak: this.state.wrongstreak - 1, keystrokes: this.state.keystrokes + 1});
@@ -223,16 +218,16 @@ class MultiGame extends Component {
         } else {
           this.setState({pointer: this.state.pointer - 1, incorrect: false, key: undefined, wrongstreak: 0});
         }
-      } else if(this.state.incorrect === false && e.keyCode === 8) {
+      } else if (this.state.incorrect === false && e.keyCode === 8) {
         let num = this.state.pointer - 1;
         let original = num;
-        if(this.code[num]) {
-          let string = "";
+        if (this.code[num]) {
+          let string = '';
           while(this.code[num].match(/\s/g)) {
             string+=this.code[num];
             num -= 1;
           }
-          if(string.includes("\n")) {
+          if (string.includes('\n')) {
             this.setState({pointer: num, keystrokes: this.state.keystrokes + 1});
           } else {
             this.setState({pointer: original, keystrokes: this.state.keystrokes + 1});
@@ -254,7 +249,7 @@ class MultiGame extends Component {
     let codeArea;
     let header;
 
-    spinner = <div className='sweet-loading'>
+    spinner = <div className="sweet-loading">
       <ClipLoader
         color={'#2d9ee0'}
         loading={this.state.loading}
@@ -262,119 +257,151 @@ class MultiGame extends Component {
       />
     </div>;
 
-    if(this.state.gameStarted === true && this.state.users.length < 2) {
-      playerLeft = <div className='player-left-modal'>
-        Other player has disconnected from the game. Please go back to Lobby.
+    if (this.state.gameStarted === true && this.state.users.length < 2) {
+      playerLeft = <div className="player-left-modal">
+        <span>Your opponent has disconnected from the game.</span>
+        <span>Please return to the lobby.</span>
         <button onClick={() => this.props.history.push('/lobby')}>Lobby</button>
       </div>;
     }
 
-    if(this.state.loading) {
+    if (this.state.loading) {
       codeArea = spinner;
     } else {
-
-        if(this.state.users.length < 2 && this.state.gameEnded === false && this.state.gameStarted === false && this.state.timer === 5) {
-          header = <div id='timer'>Awaiting players...</div>;
-          } else {
-            if(!this.once) {
-              socket.emit('game', {game: this.gameId, user: this.props.auth});
-              this.once = true;
-              this.timer = setInterval(() => {
-                this.setState({timer: this.state.timer - 1});
-                if(this.state.timer === 0) {
-                  this.startTime = new Date().getTime();
-                  clearInterval(this.timer);
-                  this.setState({gameStarted: true});
-                  document.getElementById('timer').innerHTML = 'GO!';
-                  document.getElementById('timer').style.color = 'green';
-                }
-              }, 1000);
+      if (this.state.users.length < 2 && this.state.gameEnded === false && this.state.gameStarted === false && this.state.timer === 5) {
+        header = <div id="timer">Waiting for opponent...</div>;
+      } else {
+        if (!this.once) {
+          socket.emit('game', {game: this.gameId, user: this.props.auth});
+          this.once = true;
+          this.timer = setInterval(() => {
+            this.setState({timer: this.state.timer - 1});
+            if (this.state.timer === 0) {
+              this.startTime = new Date().getTime();
+              clearInterval(this.timer);
+              this.setState({gameStarted: true});
+              document.getElementById('timer').innerHTML = 'GO!';
+              document.getElementById('timer').style.color = '#00b39f';
             }
-            header = <h1 id='timer'>Timer: {this.state.timer}</h1>;
-            }
-
-        let count = 1;
-        for(var z = 0; z < this.code.length; z++) {
-          if(this.code[z] === "\n") {
-            count += 1;
-          }
+          }, 1000);
+        }
+        header = <div id="timer">Timer: {this.state.timer}</div>;
         }
 
-        let lineNumbers = [];
-        for(var i = 1; i < count; i++) {
-          lineNumbers.push(i);
+      let count = 1;
+      for(var z = 0; z < this.code.length; z++) {
+        if (this.code[z] === '\n') {
+          count += 1;
         }
-        lineNumbers = <div className='linenumbers'>
-          {lineNumbers.map(num => {
-          return <span>{num}</span>;
-        })}</div>;
+      }
 
-        codeArea = <div className='code-area'>
-          <div className='user-list'>{this.state.users.map(user => user.username)}</div>
-          <pre>{lineNumbers}<code>{this.code.split('').map((char, index) => {
+      let lineNumbers = [];
+      for(var i = 1; i < count; i++) {
+        lineNumbers.push(i);
+      }
+      lineNumbers = <div className="linenumbers">
+        {lineNumbers.map(num => {
+        return <span>{num}</span>;
+      })}</div>;
+
+      codeArea = <div className="code-area">
+        <div className="user-list">
+          <div className="users-inner">
+            <h3>Players</h3>
+            {this.state.users.map((user, idx) => {
+              let progress = 0;
+              if (idx === 0) {
+                progress = (this.state.pointer / this.code.length * 100).toString();
+              } else {
+                progress = (this.state.opponentPointer / this.code.length * 100).toString();
+              }
+
+              let progressBar;
+              if (this.state.gameStarted) {
+                progressBar = <div className="progress-bar">
+                  <div
+                    className={`player${idx}`}
+                    style={{ width: progress + '%' }}>
+                  </div>
+                </div>;
+              }
+
+              return(
+                <div className="user-item">
+                  <span>{user.username}</span>
+                  {progressBar}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <pre>
+          {lineNumbers}
+          <code>
+            {this.code.split('').map((char, index) => {
               let span;
               let opponent;
-              if(index === this.state.opponentPointer) {
-                opponent = "opponentPointer";
+              if (index === this.state.opponentPointer) {
+                opponent = ' opponentPointer';
               } else {
-                opponent = "";
+                opponent = '';
               }
 
               let bolded;
-              if(this.state.wrongstreak > 0) {
-                if(this.state.pointer - this.state.wrongstreak > index) {
-                  bolded = 'bolded';
+              if (this.state.wrongstreak > 0) {
+                if (this.state.pointer - this.state.wrongstreak > index) {
+                  bolded = ' bolded';
                 } else {
-                  bolded = undefined;
+                  bolded = '';
                 }
               } else {
-                if(this.state.pointer > index) {
-                   bolded = 'bolded';
+                if (this.state.pointer > index) {
+                   bolded = ' bolded';
                 } else {
-                  bolded = undefined;
+                  bolded = '';
                 }
               }
 
-
-              if(index === this.state.pointer) {
-                if(char === "\n") {
+              if (index === this.state.pointer) {
+                if (char === '\n') {
                   span = <span
                     className={
                       this.state.incorrect ?
-                      `active enter-incorrect ${opponent}` :
-                      `active enter ${opponent}`
+                      `active enter-incorrect${opponent}` :
+                      `active enter${opponent}`
                     }
                     key={index}>
                     {char}
                   </span>;
                 } else {
-                  if(this.state.incorrect) {
-                    span = <span className={`wrong ${opponent}`} key={index}>{char}</span>;
+                  if (this.state.incorrect) {
+                    span = <span className={`wrong${opponent}`} key={index}>{char}</span>;
                     } else {
-                      span = <span className={`active ${opponent}`} key={index}>{char}</span>;
+                      span = <span className={`active${opponent}`} key={index}>{char}</span>;
                       }
                     }
                   } else {
-                    span = <span className={`regular ${opponent} ${bolded}`} key={index}>{char}</span>;
-                    }
+                    span = <span className={`regular${opponent}${bolded}`} key={index}>{char}</span>;
+                  }
 
-                    if(this.state.key === index) {
-                      span = <span className={`incorrect ${opponent}`} key={index}>{char}</span>;
-                    }
+                  if (this.state.key === index) {
+                    span = <span className={`incorrect${opponent}`} key={index}>{char}</span>;
+                  }
 
-                    return span;
-                  })}
-                </code>
-              </pre>
-            </div>;
-          }
+                  return span;
+                }
+              )}
+            </code>
+          </pre>
+        </div>;
+      }
 
         let warning;
-        if(this.state.order.length > 0 && (this.state.order[0].username !== this.props.auth.username)) {
-          warning = <div className='warning'>You lost the game, but keep trying!</div>;
+        if (this.state.order.length > 0 && (this.state.order[0].username !== this.props.auth.username)) {
+          warning = <div className="warning">You lost the game, but keep trying!</div>;
         }
 
-        return <div className='game'>
+        return <div className="game">
           <h1>Multiplayer Game</h1>
           {header}
           {playerLeft}

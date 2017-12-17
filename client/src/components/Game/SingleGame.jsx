@@ -28,7 +28,7 @@ class SingleGame extends Component {
     this.code = language[0];
     let spaces = 0;
     for(var i = 1; i < this.code.length; i++) {
-      if(this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== "\n") {
+      if (this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== '\n') {
         spaces += 1;
       }
     }
@@ -55,12 +55,12 @@ class SingleGame extends Component {
 
       this.timer = setInterval(() => {
         this.setState({timer: this.state.timer - 1});
-        if(this.state.timer === 0) {
+        if (this.state.timer === 0) {
           this.startTime = new Date().getTime();
           clearInterval(this.timer);
           this.setState({gameStarted: true});
           document.getElementById('timer').innerHTML = 'GO!';
-          document.getElementById('timer').style.color = 'green';
+          document.getElementById('timer').style.color = '#00b39f';
         }
       }, 1000);
       document.addEventListener('keypress', this.registerKeyPress);
@@ -79,9 +79,9 @@ class SingleGame extends Component {
 
   registerKeyPress(e) {
     e.preventDefault();
-    if(this.state.gameStarted) {
-      if(this.state.wrongstreak <= 5) {
-        if(this.code[this.state.pointer + 1] === undefined && e.keyCode === 13 && this.state.incorrect === false) {
+    if (this.state.gameStarted) {
+      if (this.state.wrongstreak <= 5) {
+        if (this.code[this.state.pointer + 1] === undefined && e.keyCode === 13 && this.state.incorrect === false) {
           this.endTime = new Date().getTime();
           this.timeElapsed = ((this.endTime - this.startTime)/1000).toPrecision(4);
           this.speed = ((this.codeLength / 5) / (this.timeElapsed / 60)).toPrecision(4);
@@ -90,26 +90,26 @@ class SingleGame extends Component {
 
           this.setState({ gameStarted: false, showStats: true });
         }
-        if(e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
+        if (e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
           this.setState({pointer: this.state.pointer + 1, incorrect: false, keystrokes: this.state.keystrokes + 1});
-        } else if(this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode === 13) {
-          if(this.state.incorrect === true) {
+        } else if (this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode === 13) {
+          if (this.state.incorrect === true) {
           } else {
             this.setState({incorrect: false});
           }
           let num = this.state.pointer + 1;
-          if(this.code[num]) {
+          if (this.code[num]) {
             while(this.code[num].match(/\s/g)) {
               num += 1;
             }
             this.setState({pointer: num, keystrokes: this.state.keystrokes + 1});
           }
-        } else if(this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode !== 13) {
-          if(this.state.incorrect === false) {
+        } else if (this.code[this.state.pointer].charCodeAt(0) === 10 && e.keyCode !== 13) {
+          if (this.state.incorrect === false) {
             this.setState({incorrect: true});
           } else {
             let num = this.state.pointer + 1;
-            if(this.code[num]) {
+            if (this.code[num]) {
               while(this.code[num].match(/\s/g)) {
                 num += 1;
               }
@@ -118,7 +118,7 @@ class SingleGame extends Component {
           }
 
         }else {
-          if(this.state.wrongstreak === 0) {
+          if (this.state.wrongstreak === 0) {
             this.setState({key: this.state.pointer}, this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1, mistakes: this.state.mistakes + 1, keystrokes: this.state.keystrokes + 1}));
           } else {
             this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1, keystrokes: this.state.keystrokes + 1});
@@ -129,18 +129,18 @@ class SingleGame extends Component {
   }
 
   backspace(e) {
-    if(this.state.gameStarted) {
-      if(this.state.incorrect === true && e.keyCode === 8) {
-        if(this.state.wrongstreak > 1) {
+    if (this.state.gameStarted) {
+      if (this.state.incorrect === true && e.keyCode === 8) {
+        if (this.state.wrongstreak > 1) {
           let num = this.state.pointer - 1;
           let original = num;
-          if(this.code[num]) {
-            let string = "";
+          if (this.code[num]) {
+            let string = '';
             while(this.code[num].match(/\s/g)) {
               string+=this.code[num];
               num -= 1;
             }
-            if(string.includes("\n")) {
+            if (string.includes('\n')) {
               this.setState({pointer: num+1, wrongstreak: this.state.wrongstreak - 1, keystrokes: this.state.keystrokes + 1 });
             } else {
               this.setState({pointer: original, wrongstreak: this.state.wrongstreak - 1, keystrokes: this.state.keystrokes + 1});
@@ -149,16 +149,16 @@ class SingleGame extends Component {
         } else {
           this.setState({pointer: this.state.pointer - 1, incorrect: false, key: undefined, wrongstreak: 0, keystrokes: this.state.keystrokes + 1});
         }
-      } else if(this.state.incorrect === false && e.keyCode === 8) {
+      } else if (this.state.incorrect === false && e.keyCode === 8) {
         let num = this.state.pointer - 1;
         let original = num;
-        if(this.code[num]) {
-          let string = "";
+        if (this.code[num]) {
+          let string = '';
           while(this.code[num].match(/\s/g)) {
             string+=this.code[num];
             num -= 1;
           }
-          if(string.includes("\n")) {
+          if (string.includes('\n')) {
             this.setState({pointer: num, keystrokes: this.state.keystrokes + 1});
           } else {
             this.setState({pointer: original, keystrokes: this.state.keystrokes + 1});
@@ -176,7 +176,7 @@ class SingleGame extends Component {
     let spinner;
     let codeArea;
 
-    spinner = <div className='sweet-loading'>
+    spinner = <div className="sweet-loading">
       <ClipLoader
         color={'#2d9ee0'}
         loading={this.state.loading}
@@ -186,7 +186,7 @@ class SingleGame extends Component {
 
     let count = 1;
     for(var z = 0; z < this.code.length; z++) {
-      if(this.code[z] === "\n") {
+      if (this.code[z] === '\n') {
         count += 1;
       }
     }
@@ -195,37 +195,37 @@ class SingleGame extends Component {
     for(var i = 1; i < count; i++) {
       lineNumbers.push(i);
     }
-    lineNumbers = <div className='linenumbers'>
+    lineNumbers = <div className="linenumbers">
       {lineNumbers.map(num => {
       return <span>{num}</span>;
     })}</div>;
 
-    if(this.state.loading) {
+    if (this.state.loading) {
       codeArea = spinner;
     } else {
-      codeArea = <div className='code-area'><h1 id='timer'>Timer: {this.state.timer}</h1>
+      codeArea = <div className="code-area">
 
         <pre>{lineNumbers}
         <code>{this.code.split('').map((char, index) => {
               let span;
 
               let bolded;
-              if(this.state.wrongstreak > 0) {
-                if(this.state.pointer - this.state.wrongstreak > index) {
-                  bolded = 'bolded';
+              if (this.state.wrongstreak > 0) {
+                if (this.state.pointer - this.state.wrongstreak > index) {
+                  bolded = ' bolded';
                 } else {
-                  bolded = undefined;
+                  bolded = '';
                 }
               } else {
-                if(this.state.pointer > index) {
-                   bolded = 'bolded';
+                if (this.state.pointer > index) {
+                   bolded = ' bolded';
                 } else {
-                  bolded = undefined;
+                  bolded = '';
                 }
               }
 
-              if(index === this.state.pointer) {
-                if(char === "\n") {
+              if (index === this.state.pointer) {
+                if (char === '\n') {
                   span = <span
                     className={
                       this.state.incorrect ?
@@ -235,18 +235,18 @@ class SingleGame extends Component {
                     {char}
                   </span>;
                 } else {
-                  if(this.state.incorrect) {
-                    span = <span className='wrong' key={index}>{char}</span>;
+                  if (this.state.incorrect) {
+                    span = <span className="wrong" key={index}>{char}</span>;
                   } else {
-                    span = <span className='active' key={index}>{char}</span>;
+                    span = <span className="active" key={index}>{char}</span>;
                   }
                 }
               } else {
-                span = <span className={`regular ${bolded}`} key={index}>{char}</span>;
+                span = <span className={`regular${bolded}`} key={index}>{char}</span>;
               }
 
-              if(this.state.key === index) {
-                span = <span className='incorrect' key={index}>{char}</span>;
+              if (this.state.key === index) {
+                span = <span className="incorrect" key={index}>{char}</span>;
               }
               return span;
             })}
@@ -255,21 +255,25 @@ class SingleGame extends Component {
     </div>;
     }
 
+    let timer;
+    if (!this.state.loading) {
+      timer = <div id="timer">Timer: {this.state.timer}</div>;
+    }
 
-
-    return <div className='game'>
+    return <div className="game">
       <h1>Single Game</h1>
+      {timer}
       {codeArea}
-    <StatsModal
-      mounted={this.state.showStats}
-      onTransitionEnd={this.transitionEnd}
-      speed={this.speed}
-      time={this.timeElapsed}
-      errors={this.state.mistakes}
-      accuracy={this.accuracy}
-      unmount={this.unmountModal}
-      collateral={this.state.keystrokes - this.codeLength + 1}
-    />
+      <StatsModal
+        mounted={this.state.showStats}
+        onTransitionEnd={this.transitionEnd}
+        speed={this.speed}
+        time={this.timeElapsed}
+        errors={this.state.mistakes}
+        accuracy={this.accuracy}
+        unmount={this.unmountModal}
+        collateral={this.state.keystrokes - this.codeLength + 1}
+      />
     </div>;
   }
 }

@@ -8,7 +8,7 @@ class Footer extends Component {
       <footer>
         <div className="footer-inner">
           <div className="copyright">
-            © 2017 CodeTyper
+            © 2017 CodeDash
           </div>
           <div className="footer-links">
             <span onClick={() => this.props.history.push('/about')}>
