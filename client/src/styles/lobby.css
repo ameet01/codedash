@@ -1,12 +1,12 @@
 .lobby {
   width: 100%;
   min-height: 400px;
-  background: lightgray;
+  background: #191d29;
 }
 
 .inner-lobby {
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
   padding: 20px 0;
   text-align: center;
 }
@@ -18,8 +18,11 @@
 .rooms-list {
   display: flex;
   flex-direction: column;
-  align-content: space-between;
-  width: 70%;
+  width: 65%;
+  margin-right: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #2b3240;
 }
 
 .room-item {
@@ -28,21 +31,28 @@
   justify-content: space-between;
   width: 100%;
   border-radius: 35px;
-  background: #ccc;
-  margin-bottom: 10px;
+  background: #454c5d;
+  margin-bottom: 20px;
+  opacity: 0.85;
+  transition: all 0.3s ease;
+}
+
+.room-item:hover {
+  opacity: 1;
 }
 
 .room-item:last-of-type {
   margin-bottom: 0;
 }
 
+.room-item a:hover {
+  text-decoration: none;
+}
+
 .room-title {
   margin: 0 15px;
   transition: all 0.3s ease;
-}
-
-.room-item a:hover {
-  text-decoration: none;
+  color: #fff;
 }
 
 .room-info {
@@ -62,6 +72,15 @@
   padding: 0 15px;
   border: none;
   border-radius: 25px;
+  background: #00b39f;
+  color: #fff;
+  transition: all 0.3s ease;
+  opacity: 0.85;
+}
+
+.room-info button:hover {
+  opacity: 1;
+  cursor: pointer;
 }
 
 .create-room {

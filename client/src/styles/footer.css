@@ -1,7 +1,7 @@
 footer {
   width: 100%;
   padding: 15px 0;
-  background: #161925;
+  background: #12161f;
   color: #dfdfdf;
 }
 
@@ -9,7 +9,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
 }
 
