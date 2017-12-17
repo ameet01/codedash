@@ -59,7 +59,7 @@ class StatsModal extends React.Component {
   }
 
   escToClose(e) {
-    if (e.key === 'Escape') {
+    if (e.key === 'Escape' || e.key === 'Enter') {
       this.unmountStyle();
     }
   }

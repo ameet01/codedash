@@ -111,8 +111,6 @@ code span {
  color: #fff;
 }
 
-
-
 .player-left-modal {
   position: absolute;
   width: 30%;
@@ -142,6 +140,14 @@ code span {
 
 .code-area {
   width: 100%;
+  animation-duration: 0.75s;
+  animation-name: fadein;
+}
+
+@keyframes fadein
+{
+  from   {opacity:0; }
+  to   {opacity:1;}
 }
 
 .sweet-loading {
