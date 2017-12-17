@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Game from '../components/Game/MultiGame';
-
 let javascript1 = `const Auth = ({component: Component, path, auth}) => (\n`
 //   <Route exact path={path} render={(props) => (
 //     !auth ? (
@@ -14,13 +13,25 @@ let javascript1 = `const Auth = ({component: Component, path, auth}) => (\n`
 //   )} />
 // );
 ;
-let javascript2 = `setTimeout("document.bgColor='white'", 1000);
-setTimeout("document.bgColor='lightpink'", 1500);
-setTimeout("document.bgColor = 'pink'", 2000);
-setTimeout("document.bgColor = 'deeppink'", 2500);
-setTimeout("document.bgColor = 'red'", 3000);
-setTimeout("document.bgColor = 'tomato'", 3500);
-setTimeout("document.bgColor = 'darkred'", 4000);
+let javascript2 = `function binarySearch(array, value, key) {
+    key = !key ? id : typeof key === 'string' ? get(key) : key;
+    value = key(value);
+    var middle = Math.floor(array.length / 2);
+    var left = 0;
+    var right = array.length;
+    while (right >= left) {
+      var middleValue = key(array[middle]);
+      if (middleValue === value) {
+        return middle;
+      } else if (middleValue > value) {
+        right = middle - 1;
+      } else {
+        left = middle + 1;
+      }
+      middle = Math.floor((left + right) / 2);
+    }
+    return -1;
+  }
 `;
 let javascript3 = `function makeSub(a, b) {
   subsent = sent.substring(a, b);
@@ -62,101 +73,131 @@ let javascript4 = `class Session extends Component {
     .catch(error => { this.setState({error: 'Invalid Credentials'}); });
   }
 `;
-let javascript5 = `export const EXPRESS_TEST_START = "EXPRESS_TEST_START";
-export const expressTestStart = () => {
-  return { type: EXPRESS_TEST_START };
-};
+let javascript5 = `exports.Hashtable.prototype.hashCode = function (val) {
+    var i;
+    var hashCode = 0;
+    var character;
 
-export const EXPRESS_TEST_RESULTS = "EXPRESS_TEST_RESULTS";
-export const expressTestResults = (data) => {
-  return { type: EXPRESS_TEST_RESULTS, data };
-};
+    // If value to be hashed is already an integer, return it.
+    if (val.length === 0 || val.length === undefined) {
+      return val;
+    }
 
-export const EXPRESS_TEST_ERROR = "EXPRESS_TEST_ERROR";
-export const expressTestError = (data) => {
-  return { type: EXPRESS_TEST_ERROR, data };
-};
+    for (i = 0; i < val.length; i += 1) {
+      character = val.charCodeAt(i);
+      /*jshint -W016 */
+      hashCode = ((hashCode << 5) - hashCode) + character;
+      hashCode = hashCode & hashCode;
+      /*jshint -W016 */
+    }
+
+    return hashCode;
+  };
 `;
-let javascript6 = `const Routes = () => {
-  return (
-    <Router>
-      <div className="app-container">
-        <Route path="/" component={NavBarContainer} />
-        <Route exact path="/" component={SplashContainer} />
-        <Route exact path="/signup" component={SessionContainer} />
-        <Route exact path="/lobby" component={LobbyContainer} />
-        <Route exact path="/lobby/:language" component={LobbyContainer} />
-        <Route exact path="/game" component={GameContainer} />
-        <Route exact path="/game/:language" component={GameContainer} />
-        <Route path="/" component={Footer} />
-      </div>
-    </Router>
-  );
-};
+let javascript6 = `exports.LinkedList.prototype.remove = function (data) {
+    if (this.first === null) {
+      return false;
+    }
+    var temp = this.first;
+    var next;
+    var prev;
+    while (temp) {
+      if (temp.data === data) {
+        next = temp.next;
+        prev = temp.prev;
+        if (next) {
+          next.prev = prev;
+        }
+        if (prev) {
+          prev.next = next;
+        }
+        if (temp === this.first) {
+          this.first = next;
+        }
+        if (temp === this.last) {
+          this.last = prev;
+        }
+        return true;
+      }
+      temp = temp.next;
+    }
+    return false;
+  };
 `;
 
-let ruby1 = `key.each { | k, v |
-    if ct == 8 then
-      print ": "
-      ct = 0
+let ruby1 = `def push(key, value=key)
+  raise ArgumentError, "Heap keys must not be nil." unless key
+  node = Node.new(key, value)
+  # Add new node to the left of the @next node
+  if @next
+    node.right = @next
+    node.left = @next.left
+    node.left.right = node
+    @next.left = node
+    if @compare_fn[key, @next.key]
+      @next = node
+    end
+  else
+    @next = node
+  end
+  @size += 1
+
+  arr = []
+  w = @next.right
+  until w == @next do
+    arr << w.value
+    w = w.right
+end
+`;
+let ruby2 = `def self.shell_sort(container)
+  increment = container.size/2
+  while increment > 0 do
+    (increment..container.size-1).each do |i|
+      temp = container[i]
+      j = i
+      while j >= increment && container[j - increment] > temp do
+        container[j] = container[j-increment]
+        j -= increment
+      end
+      container[j] = temp
+    end
+    increment = (increment == 2 ? 1 : (increment / 2.2).round)
+  end
+  container
+end
+`;
+let ruby3 = `def self.mergesort(container)
+  return container if container.size <= 1
+  mid   = container.size / 2
+  left  = container[0...mid]
+  right = container[mid...container.size]
+  merge(mergesort(left), mergesort(right))
+end
+
+def self.merge(left, right)
+  sorted = []
+  until left.empty? or right.empty?
+    left.first <= right.first ? sorted << left.shift : sorted << right.shift
+  end
+  sorted + left + right
+end
+`;
+let ruby4 = `def self.binary_search(container, item)
+  return nil if item.nil?
+  low = 0
+  high = container.size - 1
+  while low <= high
+    mid = (low + high) / 2
+    val = container[mid]
+    if val > item
+      high = mid - 1
+    elsif val < item
+      low = mid + 1
     else
-      print ", "
+      return val
     end
-    ct = ct + 1
-    print "#{v} => #{k}"
-}
-print "!!"
-`;
-let ruby2 = `class List
-  class Node
-    include Follower
-
-    def initialize(d, n = nil)
-      @val = d
-      @next = n
-    end
-    attr_reader :next, :val
-    attr_writer :next
   end
-
-  include Printer
-
-  def initialize(first)
-    @head = Node.new(first)
-  end
-`;
-let ruby3 = `for i in (1..4)
-  print i, " "
-end
-print ": "
-
-for i in (1...4)
-  print i," "
-end
-print ", "
-
-items = [ 'Mark', 12, 'goobers', 18.45 ]
-for it in items
-  print it, " "
-end
-print " - "
-
-for i in (0...items.length)
-    print items[0..i].join(" "), ": "
-end
-`;
-let ruby4 = `class Fred
-  def initialize(v)
-    @val = v
-  end
-
-  def set(v)
-    @val = v
-  end
-
-  def get
-    return @val
-  end
+  nil
 end
 `;
 let ruby5 = `class TwoLabs < TkFrame
@@ -194,6 +235,15 @@ let ruby6 = `capitals = {
 }
 capitals[:westbengal] = 'Kolkata'
 capitals[:karnataka] = 'Bengaluru'
+
+def kmp_search(substring)
+  Algorithms::Search.kmp_search(self, substring)
+end
+
+begin
+  require 'CString'
+rescue LoadError
+end
 `;
 
 let java1 = `public class OracleJdbcTest {
@@ -449,24 +499,17 @@ let python6 = `def scite_run():
   sys.argv = [script_file]
 `;
 
-let cplusplus1 = `void heapify(int a[], int i, int n){
-  int l = 2*i+1;
-  int r = 2*i+2;
-  int largest = i;
-  if (l < n && a[l] > a[i]) largest = l;
-  if (r < n && a[r] > a[l]) largest = r;
-  if (largest != i){
-    int tmp = a[i]; a[i] = a[largest]; a[largest] = tmp;
-    heapify(a, largest, n);
-  }
-}
+let cplusplus1 = `int main() {
+	const char *s = "Hello World";
+	cout << " INPUT: " << endl;
+	cout << s << endl << endl;
 
-void heapsort(int a[], int n){
-  for (int i = n/2-1; i>=0; i--) heapify(a, i, n);
-  for (int i = n-1; i>0; i--){
-    int tmp = a[0]; a[0] = a[i]; a[i] = tmp;
-    heapify(a, 0, i);
-}
+	string base=alg::CBase64::encodeBase64((unsigned char *) s, strlen(s));
+	cout << " encodeBase64: " << endl;
+	cout << base << endl << endl;
+
+	cout << " decodeBase64: " << endl;
+	cout << alg::CBase64::decodeBase64(base) << endl;
 }
 `;
 let cplusplus2 = `void merge(int a[], int temp[], int left, int mid, int right){
@@ -832,45 +875,56 @@ sequence of events that end in Harry meeting a giant man named Hagrid. Hagrid ex
 to him: When he was a baby, the Dark wizard, Lord Voldemort, attacked and killed his parents in an attempt
 to kill Harry; but the only mark on Harry was a mysterious lightning-bolt scar on his forehead.
 `;
-let noncode2 = `In Harry Potter and the Sorcerer's Stone, Harry, an orphan, lives with the Dursleys, his horrible aunt and uncle,
-and their abominable son, Dudley.
-
-One day just before his eleventh birthday, an owl tries to deliver a mysterious letter—the first of a
-sequence of events that end in Harry meeting a giant man named Hagrid. Hagrid explains Harry's history
-to him: When he was a baby, the Dark wizard, Lord Voldemort, attacked and killed his parents in an attempt
-to kill Harry; but the only mark on Harry was a mysterious lightning-bolt scar on his forehead.
+let noncode2 = `Rubik's Cube is a mechanical puzzle invented in 1974. Originally called the
+"Magic Cube" by its inventor, this puzzle was renamed "Rubik's Cube". It is
+said to be the world's best-selling toy, with over 300,000,000 Rubik's
+Cubes and imitations sold worldwide. The puzzle consists of the twenty-six
+unique miniature cubes on the surface. In a typical Cube, each face is
+covered by nine stickers of one of six solid colours. When the puzzle is
+solved, each face of the Cube is a solid colour. A normal (3x3x3) Rubik's
+Cube can have forty-three trillion different positions (permutations). Many
+speedcubing competitions have been held to determine who can solve the
+Rubik's Cube in the shortest time.
 `;
-let noncode3 = `In Harry Potter and the Sorcerer's Stone, Harry, an orphan, lives with the Dursleys, his horrible aunt and uncle,
-and their abominable son, Dudley.
-
-One day just before his eleventh birthday, an owl tries to deliver a mysterious letter—the first of a
-sequence of events that end in Harry meeting a giant man named Hagrid. Hagrid explains Harry's history
-to him: When he was a baby, the Dark wizard, Lord Voldemort, attacked and killed his parents in an attempt
-to kill Harry; but the only mark on Harry was a mysterious lightning-bolt scar on his forehead.
+let noncode3 = `A tornado is a violently rotating column of air that is in contact with
+both the surface of the earth and a cumulonimbus cloud or, in rare cases,
+the base of a cumulus cloud. They are often referred to as twisters or
+cyclones. Tornadoes come in many shapes and sizes, but they are typically
+in the form of a visible condensation funnel, whose narrow end touches the
+earth and is often encircled by a cloud of debris and dust. Most tornadoes
+have wind speeds less than 110 miles per hour (177 km/h), are about 250
+feet (76 m) across, and travel a few miles (several kilometers) before
+dissipating. The most extreme tornadoes can attain wind speeds of more
+than 300 miles per hour (483 km/h).
 `;
-let noncode4 = `In Harry Potter and the Sorcerer's Stone, Harry, an orphan, lives with the Dursleys, his horrible aunt and uncle,
-and their abominable son, Dudley.
-
-One day just before his eleventh birthday, an owl tries to deliver a mysterious letter—the first of a
-sequence of events that end in Harry meeting a giant man named Hagrid. Hagrid explains Harry's history
-to him: When he was a baby, the Dark wizard, Lord Voldemort, attacked and killed his parents in an attempt
-to kill Harry; but the only mark on Harry was a mysterious lightning-bolt scar on his forehead.
+let noncode4 = `Independence Day, commonly known as the Fourth of July, is a federal
+holiday in the United States commemorating the adoption of the Declaration
+of Independence on July 4, 1776, declaring independence from the Kingdom
+of Great Britain. As a federal holiday, all non-essential federal
+institutions (like the postal service and federal courts) are closed on
+that day. Independence Day is commonly associated with fireworks, parades,
+barbecues, carnivals, fairs, picnics, concerts, baseball games, family
+reunions, political speeches and ceremonies, and various other public and
+private events celebrating the history, government, and traditions of the
+United States. Independence Day is the national day of the United States.
 `;
-let noncode5 = `In Harry Potter and the Sorcerer's Stone, Harry, an orphan, lives with the Dursleys, his horrible aunt and uncle,
-and their abominable son, Dudley.
-
-One day just before his eleventh birthday, an owl tries to deliver a mysterious letter—the first of a
-sequence of events that end in Harry meeting a giant man named Hagrid. Hagrid explains Harry's history
-to him: When he was a baby, the Dark wizard, Lord Voldemort, attacked and killed his parents in an attempt
-to kill Harry; but the only mark on Harry was a mysterious lightning-bolt scar on his forehead.
+let noncode5 = `Sudoku is a logic-based number placement puzzle. The goal is to fill a
+9x9 grid so that each column, each row, and each of the nine 3x3 boxes
+(also called blocks or regions) contains the digits from 1 to 9 only one
+time each. The puzzle setter provides a partially completed grid. The
+modern puzzle was invented by an American architect, Howard Garns, in 1979
+and published by Dell Magazines under the name "Number Place". It became
+popular in Japan in 1986, after it was published by Nikoli and given the
+name Sudoku, meaning single number. The numerals in Sudoku puzzles are used
+for convenience; arithmetic relationships between numerals are irrelevant.
+Any set of distinct symbols will do, such as letters, shapes, or colours.
 `;
-let noncode6 = `In Harry Potter and the Sorcerer's Stone, Harry, an orphan, lives with the Dursleys, his horrible aunt and uncle,
-and their abominable son, Dudley.
-
-One day just before his eleventh birthday, an owl tries to deliver a mysterious letter—the first of a
-sequence of events that end in Harry meeting a giant man named Hagrid. Hagrid explains Harry's history
-to him: When he was a baby, the Dark wizard, Lord Voldemort, attacked and killed his parents in an attempt
-to kill Harry; but the only mark on Harry was a mysterious lightning-bolt scar on his forehead.
+let noncode6 = `The first photosynthetic organisms probably evolved about 3,500 million years ago, early in the evolutionary
+history of life, when all forms of life on Earth were microorganisms and the atmosphere had much more carbon dioxide. They most
+likely used hydrogen or hydrogen sulfide as sources of electrons, rather than water. Cyanobacteria appeared later, around 3,000 million
+years ago, and drastically changed the Earth when they began to oxygenate the atmosphere, beginning about 2,400 million years ago. This
+new atmosphere allowed the evolution of complex life such as protists. Eventually, one of these protists formed a symbiotic relationship
+with a cyanobacterium, producing the ancestor of many plants and algae.
 `;
 
 const LANGUAGES = {
