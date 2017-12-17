@@ -296,13 +296,19 @@ class MultiGame extends Component {
       }
 
       let lineNumbers = [];
-      for(var i = 1; i < count; i++) {
-        lineNumbers.push(i);
+      let codeStyle;
+      if (this.props.match.params.language === 'non-code') {
+        lineNumbers = null;
+        codeStyle = { padding: '20px' };
+      } else {
+        for(var i = 1; i < count; i++) {
+          lineNumbers.push(i);
+        }
+        lineNumbers = <div className="linenumbers">
+          {lineNumbers.map(num => <span>{num}</span>)}
+        </div>;
+        codeStyle = null;
       }
-      lineNumbers = <div className="linenumbers">
-        {lineNumbers.map(num => {
-        return <span>{num}</span>;
-      })}</div>;
 
       codeArea = <div className="code-area">
         <div className="user-list">
@@ -337,7 +343,7 @@ class MultiGame extends Component {
         </div>
         <pre>
           {lineNumbers}
-          <code>
+          <code style={codeStyle}>
             {this.code.split('').map((char, index) => {
               let span;
               let opponent;

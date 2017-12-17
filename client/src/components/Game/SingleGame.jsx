@@ -192,13 +192,19 @@ class SingleGame extends Component {
     }
 
     let lineNumbers = [];
-    for(var i = 1; i < count; i++) {
-      lineNumbers.push(i);
+    let codeStyle;
+    if (this.props.match.params.language === 'non-code') {
+      lineNumbers = null;
+      codeStyle = { padding: '20px' };
+    } else {
+      for(var i = 1; i < count; i++) {
+        lineNumbers.push(i);
+      }
+      lineNumbers = <div className="linenumbers">
+        {lineNumbers.map(num => <span>{num}</span>)}
+      </div>;
+      codeStyle = null;
     }
-    lineNumbers = <div className="linenumbers">
-      {lineNumbers.map(num => {
-      return <span>{num}</span>;
-    })}</div>;
 
     if (this.state.loading) {
       codeArea = spinner;
@@ -206,7 +212,7 @@ class SingleGame extends Component {
       codeArea = <div className="code-area">
 
         <pre>{lineNumbers}
-        <code>{this.code.split('').map((char, index) => {
+        <code style={codeStyle}>{this.code.split('').map((char, index) => {
               let span;
 
               let bolded;
