@@ -117,6 +117,12 @@
   border-radius: 5px;
   background: #00b39f;
   color: #fff;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.create-room button:hover {
+  opacity: 1;
 }
 
 .create {
@@ -129,8 +135,7 @@
   border-radius: 10px;
   background: #454c5d;
   color: #fff;
-  opacity: 0.9;
-  transition: all 0.3s ease;
+  opacity: 0.8;
 }
 
 .language-select a:hover {
@@ -155,7 +160,11 @@
   cursor: pointer;
   margin-bottom: 10px;
   background: #5e6576;
-  transition: all 0.3s ease;
+}
+
+button.active-game {
+  background: #5574a0;
+  opacity: 1;
 }
 
 .empty-message {

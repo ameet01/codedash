@@ -28,6 +28,8 @@ class Lobby extends Component {
   componentDidMount() {
     axios.get('/api/indexusers')
       .then(users => this.props.receiveUsers(users.data));
+
+    document.querySelector('.solo').classList.add('active-game');
   }
 
   createRoom() {
@@ -45,15 +47,15 @@ class Lobby extends Component {
   setSolo(e) {
     e.preventDefault();
     this.setState({ gameType: 1 });
-    document.querySelector('.solo').style.background = '#5574a0';
-    document.querySelector('.multi').style.background = '#5e6576';
+    document.querySelector('.solo').classList.add('active-game');
+    document.querySelector('.multi').classList.remove('active-game');
   }
 
   setMulti(e) {
     e.preventDefault();
     this.setState({ gameType: 2 });
-    document.querySelector('.multi').style.background = '#5574a0';
-    document.querySelector('.solo').style.background = '#5e6576';
+    document.querySelector('.multi').classList.add('active-game');
+    document.querySelector('.solo').classList.remove('active-game');
   }
 
   render() {
