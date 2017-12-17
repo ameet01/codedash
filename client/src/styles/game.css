@@ -74,7 +74,7 @@ code span {
 }
 
 .enter:before, .enter-incorrect:before {
-  content: "enter";
+  content: 'enter';
   position: absolute;
   display: block;
   height: 17px;
@@ -189,6 +189,7 @@ code span {
 .code-area {
   display: flex;
   width: 90%;
+  max-width: 1600px;
   animation-duration: 0.75s;
   animation-name: fadein;
 }
