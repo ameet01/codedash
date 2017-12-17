@@ -1,6 +1,6 @@
 .lobby {
   width: 100%;
-  min-height: 400px;
+  min-height: calc(100vh - 125px);
   background: #191d29;
 }
 

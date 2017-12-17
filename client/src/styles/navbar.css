@@ -22,6 +22,7 @@
   position: relative;
   margin: 0 auto;
   width: 90%;
+  height: 50px;
 }
 
 .inside-navbar input {
