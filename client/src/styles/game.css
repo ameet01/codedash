@@ -164,7 +164,8 @@ code span {
   color: gray;
   position: absolute;
   left: 1.1%;
-  top: 31.5px;
+  top: 31px;
   font-family: Inconsolata, monospace;
   font-size: 16px;
+  font-weight: bold;
 }
