@@ -834,7 +834,7 @@ let html6 = `<button class="snip1582">Submit</button>
 let noncode1 = `In Harry Potter and the Sorcerer's Stone, Harry, an orphan, lives with the Dursleys, his horrible aunt and uncle,
 and their abominable son, Dudley.
 
-One day just before his eleventh birthday, an owl tries to deliver a mysterious letter—the first of a
+One day just before his eleventh birthday, an owl tries to deliver a mysterious letter, the first of a
 sequence of events that end in Harry meeting a giant man named Hagrid. Hagrid explains Harry's history
 to him: When he was a baby, the Dark wizard, Lord Voldemort, attacked and killed his parents in an attempt
 to kill Harry; but the only mark on Harry was a mysterious lightning-bolt scar on his forehead.
