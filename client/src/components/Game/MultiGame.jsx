@@ -350,7 +350,6 @@ class MultiGame extends Component {
             </div>;
           }
 
-
         return <div className='game'>
           <h1>Multiplayer Game</h1>
           {header}
