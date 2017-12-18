@@ -293,3 +293,7 @@ code span {
   z-index: 10;
   margin-left: 40px;
 }
+
+#pre {
+  overflow: hidden;
+}

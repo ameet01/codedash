@@ -175,6 +175,7 @@ class SingleGame extends Component {
   render() {
     let spinner;
     let codeArea;
+    let highlight;
 
     spinner = <div className="sweet-loading">
       <ClipLoader
@@ -216,6 +217,8 @@ class SingleGame extends Component {
     if (this.state.loading) {
       codeArea = spinner;
     } else {
+      highlight = <div className='code-area'><Highlight lang={`${this.props.match.params.language}`} value={`${this.code}`} /></div>;
+        
       codeArea = <div className="code-area">
 
         <pre id='pre' className={`${change}`}>
@@ -277,7 +280,7 @@ class SingleGame extends Component {
               return <div className="game">
                 <h1>Single Game</h1>
                 {timer}
-                <div className='code-area'><Highlight lang={`${this.props.match.params.language}`} value={`${this.code}`} /></div>
+                {highlight}
                 {codeArea}
                 <StatsModal
                   mounted={this.state.showStats}

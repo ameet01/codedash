@@ -236,7 +236,7 @@ class MultiGame extends Component {
     let spinner;
     let codeArea;
     let header;
-
+    let highlight;
 
 
     spinner = <div className="sweet-loading">
@@ -307,6 +307,8 @@ class MultiGame extends Component {
         change = "";
       }
 
+      highlight = <div className='code-area'><Highlight lang={`${this.props.match.params.language}`} value={`${this.code}`} /></div>;
+
       codeArea = <div className="code-area">
         <pre id='pre' className={`${change}`}>
           {lineNumbers}
@@ -367,16 +369,12 @@ class MultiGame extends Component {
             </code>
           </pre>
         </div>;
-
-
       }
 
         let warning;
         if (this.state.order.length > 0 && (this.state.order[0].username !== this.props.auth.username)) {
           warning = <div className="warning">You lost the game, but keep trying!</div>;
         }
-
-
 
         return <div className="game">
           <div className="game-header">
@@ -418,7 +416,7 @@ class MultiGame extends Component {
               </div>
             </div>
           </div>
-          <div className='code-area'><Highlight lang={`${this.props.match.params.language}`} value={`${this.code}`} /></div>
+          {highlight}
           {codeArea}
           {warning}
         <StatsModal
