@@ -6,10 +6,12 @@ import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
 import { ClipLoader } from 'react-spinners';
 
+
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("https://flexproject.herokuapp.com");
 // http://127.0.0.1:5000");
 
+let Highlight = require('react-syntax-highlight');
 
 class MultiGame extends Component {
   constructor(props) {
@@ -306,7 +308,7 @@ class MultiGame extends Component {
       }
 
       codeArea = <div className="code-area">
-        <pre className={`${change}`}>
+        <pre id='pre' className={`${change}`}>
           {lineNumbers}
           <code style={codeStyle}>
             {this.code.split('').map((char, index) => {
@@ -416,7 +418,7 @@ class MultiGame extends Component {
               </div>
             </div>
           </div>
-
+          <div className='code-area'><Highlight lang={'ruby'} value={`${this.code}`} /></div>
           {codeArea}
           {warning}
         <StatsModal

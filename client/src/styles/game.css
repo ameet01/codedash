@@ -10,6 +10,7 @@
 .active {
   background: #00b39f !important;
   color: white;
+  z-index:40;
 }
 
 .regular {
@@ -19,12 +20,14 @@
 .incorrect {
   background: #f01b32 !important;
   color: white;
+  z-index:40;
 }
 
 .wrong {
   background: #de727e;
   position: relative;
   color: white;
+  z-index:40;
 }
 
 .wrong:before {
@@ -39,6 +42,7 @@
   font-size: 12px;
   top: 0;
   height: 17px;
+  z-index:40;
 }
 
 
@@ -60,10 +64,10 @@ code {
   font-family: Inconsolata, monospace;
   font-size: 16px;
   margin: 10px;
-  padding: 20px;
-  padding-left: 50px;
+  /* padding: 20px;
+  padding-left: 50px; */
+  padding: 0.5em;
   flex: 1;
-  border-radius: 5px;
   background: #454c5d;
   color: #a5b6c5;
 }
@@ -106,6 +110,7 @@ code span {
 
 .opponentPointer {
   background: #5574a0;
+  z-index: 40;
 }
 
 .game-inner {
@@ -203,7 +208,7 @@ code span {
   width: 35%;
   border-radius: 5px;
   background: white;
-  z-index: 20;
+  z-index: 100;
   left: 35%;
 }
 
@@ -233,6 +238,15 @@ code span {
   max-width: 1600px;
   animation-duration: 0.75s;
   animation-name: fadein;
+  position:absolute;
+  top: 180px;
+}
+
+.code {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #F0F0F0;
 }
 
 @keyframes fadein
@@ -258,18 +272,24 @@ code span {
   display: flex;
   flex-direction: column;
   padding-right: 10px;
-  position: absolute;
-  left: 20px;
-  top: 30px;
+  position: relative;
+  left: 10px;
+  top: 20px;
   width: 30px;
   font-family: Inconsolata, monospace;
   font-size: 16px;
   font-weight: bold;
   text-align: right;
-  color: hsla(220, 20%, 20%, 0.8);
-  border-right: 1px solid hsla(220, 20%, 20%, 0.8);
+  color: white;
+  border-right: white;
+  z-index: 10;
 }
 
 .changeMinWidth {
   min-width: 80%;
+}
+
+.hljs {
+  z-index: 10;
+  margin-left: 40px;
 }

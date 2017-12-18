@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
+let Highlight = require('react-syntax-highlight');
 
 class SingleGame extends Component {
   constructor(props) {
@@ -217,9 +218,9 @@ class SingleGame extends Component {
     } else {
       codeArea = <div className="code-area">
 
-        <pre className={`${change}`}>
+        <pre id='pre' className={`${change}`}>
           {lineNumbers}
-          <code style={codeStyle}>{this.code.split('').map((char, index) => {
+          <code className='code' style={codeStyle}>{this.code.split('').map((char, index) => {
               let span;
 
               let bolded;
@@ -276,6 +277,7 @@ class SingleGame extends Component {
               return <div className="game">
                 <h1>Single Game</h1>
                 {timer}
+                <div className='code-area'><Highlight lang={`${this.props.match.params.language}`} value={`${this.code}`} /></div>
                 {codeArea}
                 <StatsModal
                   mounted={this.state.showStats}
