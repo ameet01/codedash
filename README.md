@@ -16,8 +16,9 @@ Users can choose from several different languages, challenge a friend by creatin
 
 ## Technical Challenges
 
-The biggest challenge for us was applying the logic in order to create a smooth typing user interface for the player. There cannot be any frustration and everything needed to flow extremely well - hitting errors, being able to go backward, and being able to hit enter and go to the next line. By using React lifecycle methods coupled with strong logic and state variables, we were able to create a fluid user experience.
--The next biggest challenge for us was multiplayer. Integrating Socket.io however made our lives as developers much easier, and we were able to add some neat features:
+- The biggest challenge for us was applying the logic in order to create a smooth typing user interface for the player. There cannot be any frustration and everything needed to flow extremely well - hitting errors, being able to go backward, and being able to hit enter and go to the next line. By using React lifecycle methods coupled with strong logic and state variables, we were able to create a fluid user experience.
+
+- The next biggest challenge for us was multiplayer. Integrating Socket.io however made our lives as developers much easier, and we were able to add some neat features:
   * Real-time movement of your opponent's cursor as they're typing
   * Rooms on the lobby page showing up in real-time as they're created
 
