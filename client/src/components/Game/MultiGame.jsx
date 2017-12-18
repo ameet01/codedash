@@ -324,25 +324,15 @@ class MultiGame extends Component {
                 progress = ((this.state.opponentPointer + 1) / this.code.length * 100).toString();
               }
 
-              let progressBar;
-              if (this.state.gameStarted || this.state.gameEnded) {
-                progressBar = <div className="progress-bar">
-                  <div
-                    className={`player${idx}`}
-                    style={{ width: progress + '%' }}>
-                  </div>
-                </div>;
-              } else {
-                progressBar = <div
-                  className="progress-bar"
-                  style={{ border: 'none', height: '0', margin: '0' }}>
-                </div>;
-              }
-
               return(
                 <div className="user-item">
                   <span>{user.username}</span>
-                  {progressBar}
+                  <div className="progress-bar">
+                    <div
+                      className={`player${idx}`}
+                      style={{ width: progress + '%' }}>
+                    </div>
+                  </div>
                 </div>
               );
             })}
