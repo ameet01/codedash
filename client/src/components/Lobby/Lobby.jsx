@@ -92,7 +92,9 @@ class Lobby extends Component {
     if (users.length > 0) {
       rooms = users.map(
         (user, index) =>
-        <Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>
+        <Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}
+          key={`link-${index}`}
+        >
           <div className="room-item"
             key={`${user}-${index}`}>
               <div className="room-title">{`${user.username}'`}s room</div>
