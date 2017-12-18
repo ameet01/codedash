@@ -249,7 +249,7 @@ class MultiGame extends Component {
     if (this.state.loading) {
       codeArea = spinner;
     } else {
-      if (this.state.users.length < 2 && this.state.gameEnded === false && this.state.gameStarted === false && this.state.timer === 5) {
+      if (this.state.users.length < 2 && this.state.gameEnded === false && this.state.gameStarted === false && this.state.timer === 10) {
         header = <div id="timer">Waiting for opponent...</div>;
       } else {
         if (!this.once) {
