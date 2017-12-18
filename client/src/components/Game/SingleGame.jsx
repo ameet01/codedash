@@ -283,10 +283,17 @@ class SingleGame extends Component {
       </div>;
     }
 
+    let lang;
+    if(this.props.match.params.language === 'non-code') {
+      lang = 'Markdown';
+    } else {
+      lang = this.props.match.params.language;
+    }
+
     highlight =
       <div className="code-area bottom">
         <Highlight
-          lang={`${this.props.match.params.language}`}
+          lang={`${lang}`}
           value={`${this.code}`}
         />
         {codeArea}
