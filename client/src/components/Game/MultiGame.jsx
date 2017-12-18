@@ -418,7 +418,7 @@ class MultiGame extends Component {
               </div>
             </div>
           </div>
-          <div className='code-area'><Highlight lang={'ruby'} value={`${this.code}`} /></div>
+          <div className='code-area'><Highlight lang={`${this.props.match.params.language}`} value={`${this.code}`} /></div>
           {codeArea}
           {warning}
         <StatsModal
