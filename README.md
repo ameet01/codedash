@@ -26,6 +26,8 @@ Users can choose from several different languages, challenge a friend by creatin
 
 ### Update Component Cursor During Game
 
+<img src='https://github.com/ameet01/codedash/blob/master/docs/cursor.gif' />
+
 To implement this feature, I used Socket.io to open a subscription in our backend, which will receive the pointer of the current user and send it to the other user.
 
 - I first send the current cursor pointer to my backend from the frontend on every keypress:
@@ -44,8 +46,6 @@ socket.on('cursor', function(data) {
 ```javascript
 socket.on('update opponent cursor', (pointer) => this.setState({opponentPointer: pointer}));
 ```
-
-
 
 ### Future plans
 
