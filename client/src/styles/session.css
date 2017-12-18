@@ -8,6 +8,16 @@
   background: -webkit-linear-gradient(to right, #43cea2, #185a9d);
   background: linear-gradient(to right, #43cea2, #185a9d);
   font-size: 18px;
+  animation: clearUp 1.5s ease;
+}
+
+@keyframes clearUp {
+  from {
+    filter: blur(40px);
+  }
+  to {
+    filter: blur(0);
+  }
 }
 
 .inner-session {

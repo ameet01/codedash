@@ -88,6 +88,11 @@
   transform: translateY(-1px);
 }
 
+.tagline button:active {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  transform: translateY(1px);
+}
+
 .splash-buttons {
   display: flex;
   justify-content: space-between;
