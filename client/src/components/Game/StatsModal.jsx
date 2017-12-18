@@ -30,8 +30,6 @@ class StatsModal extends React.Component {
 
     this.setState({ open: true });
     setTimeout(this.mountStyle, 10);
-
-
   }
 
   componentWillUnmount() {

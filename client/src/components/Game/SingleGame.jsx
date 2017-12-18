@@ -86,8 +86,6 @@ class SingleGame extends Component {
           this.timeElapsed = ((this.endTime - this.startTime)/1000).toPrecision(4);
           this.speed = ((this.codeLength / 5) / (this.timeElapsed / 60)).toPrecision(4);
           this.accuracy = ((this.codeLength - this.state.mistakes) * 100 / this.codeLength).toPrecision(4);
-          // alert(`You took ${this.timeElapsed} seconds. Your speed was ${this.speed} WPM. You had ${this.state.mistakes} mistakes! Your accuracy was ${this.accuracy}%.`);
-
           this.setState({ gameStarted: false, showStats: true });
         }
         if (e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
@@ -117,7 +115,7 @@ class SingleGame extends Component {
             }
           }
 
-        }else {
+        } else {
           if (this.state.wrongstreak === 0) {
             this.setState({key: this.state.pointer}, this.setState({incorrect: true, pointer: this.state.pointer + 1, wrongstreak: this.state.wrongstreak + 1, mistakes: this.state.mistakes + 1, keystrokes: this.state.keystrokes + 1}));
           } else {
@@ -181,7 +179,7 @@ class SingleGame extends Component {
         color={'#2d9ee0'}
         loading={this.state.loading}
         size={45}
-      />
+        />
     </div>;
 
     let count = 1;
@@ -211,8 +209,9 @@ class SingleGame extends Component {
     } else {
       codeArea = <div className="code-area">
 
-        <pre>{lineNumbers}
-        <code style={codeStyle}>{this.code.split('').map((char, index) => {
+        <pre>
+          {lineNumbers}
+          <code style={codeStyle}>{this.code.split('').map((char, index) => {
               let span;
 
               let bolded;
@@ -224,7 +223,7 @@ class SingleGame extends Component {
                 }
               } else {
                 if (this.state.pointer > index) {
-                   bolded = ' bolded';
+                  bolded = ' bolded';
                 } else {
                   bolded = '';
                 }
@@ -243,45 +242,45 @@ class SingleGame extends Component {
                 } else {
                   if (this.state.incorrect) {
                     span = <span className="wrong" key={index}>{char}</span>;
+                    } else {
+                      span = <span className="active" key={index}>{char}</span>;
+                      }
+                    }
                   } else {
-                    span = <span className="active" key={index}>{char}</span>;
-                  }
-                }
-              } else {
-                span = <span className={`regular${bolded}`} key={index}>{char}</span>;
+                    span = <span className={`regular${bolded}`} key={index}>{char}</span>;
+                    }
+
+                    if (this.state.key === index) {
+                      span = <span className="incorrect" key={index}>{char}</span>;
+                      }
+                      return span;
+                    })}
+                  </code>
+                </pre>
+              </div>;
+            }
+
+            let timer;
+            if (!this.state.loading) {
+              timer = <div id="timer">Timer: {this.state.timer}</div>;
               }
 
-              if (this.state.key === index) {
-                span = <span className="incorrect" key={index}>{char}</span>;
-              }
-              return span;
-            })}
-          </code>
-        </pre>
-    </div>;
-    }
+              return <div className="game">
+                <h1>Single Game</h1>
+                {timer}
+                {codeArea}
+                <StatsModal
+                  mounted={this.state.showStats}
+                  onTransitionEnd={this.transitionEnd}
+                  speed={this.speed}
+                  time={this.timeElapsed}
+                  errors={this.state.mistakes}
+                  accuracy={this.accuracy}
+                  unmount={this.unmountModal}
+                  collateral={this.state.keystrokes - this.codeLength + 1}
+                  />
+              </div>;
+            }
+          }
 
-    let timer;
-    if (!this.state.loading) {
-      timer = <div id="timer">Timer: {this.state.timer}</div>;
-    }
-
-    return <div className="game">
-      <h1>Single Game</h1>
-      {timer}
-      {codeArea}
-      <StatsModal
-        mounted={this.state.showStats}
-        onTransitionEnd={this.transitionEnd}
-        speed={this.speed}
-        time={this.timeElapsed}
-        errors={this.state.mistakes}
-        accuracy={this.accuracy}
-        unmount={this.unmountModal}
-        collateral={this.state.keystrokes - this.codeLength + 1}
-      />
-    </div>;
-  }
-}
-
-export default connect(null, actions)(SingleGame);
+          export default connect(null, actions)(SingleGame);

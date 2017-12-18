@@ -9,8 +9,7 @@ import { ClipLoader } from 'react-spinners';
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("https://flexproject.herokuapp.com");
 // http://127.0.0.1:5000");
-// ");
-//
+
 
 class MultiGame extends Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class MultiGame extends Component {
       wrongstreak: 0,
       key: undefined,
       mistakes: 0,
-      timer: 5,
+      timer: 10,
       gameStarted: false,
       gameEnded: false,
       users: [],
@@ -33,8 +32,7 @@ class MultiGame extends Component {
     };
 
     let language = this.props.languages[`${this.props.match.params.language}`];
-    this.code = language[0];
-    // this.props.match.params.langnum
+    this.code = language[this.props.match.params.langnum];
     let spaces = 0;
     for(var i = 1; i < this.code.length; i++) {
       if (this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== '\n') {
@@ -106,26 +104,8 @@ class MultiGame extends Component {
       socket.emit('lobby');
     }, 1000);
 
-    // this.timer = setInterval(() => {
-    //   this.setState({timer: this.state.timer -= 1});
-    //   if (this.state.timer === 0) {
-    //     this.startTime = new Date().getTime();
-    //     clearInterval(this.timer);
-    //     this.setState({gameStarted: true});
-    //     document.getElementById('timer').innerHTML = 'GO!';
-    //     document.getElementById('timer').style.color = 'green';
-    //   }
-    // }, 1000);
-
     document.addEventListener('keypress', this.registerKeyPress);
     document.addEventListener('keydown', this.backspace);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // const user = nextProps.auth;
-    // const users = [...this.state.users, user];
-    // socket.emit('game', {game: nextProps.match.params.gameId, user: nextProps.auth});
-    // this.setState({users: users});
   }
 
   componentWillUnmount() {
@@ -155,7 +135,6 @@ class MultiGame extends Component {
           this.timeElapsed = ((this.endTime - this.startTime)/1000).toPrecision(4);
           this.speed = ((this.codeLength / 5) / (this.timeElapsed / 60)).toPrecision(4);
           this.accuracy = ((this.codeLength - this.state.mistakes) * 100 / this.codeLength).toPrecision(4);
-          // alert(`You took ${this.timeElapsed} seconds. Your WPM was ${(WPM).toPrecision(4)}. You had ${this.state.mistakes} mistakes! Your accuracy was ${((this.codeLength - this.state.mistakes) * 100/this.codeLength).toPrecision(4)}`);
           setTimeout(() => {
             this.setState({ gameStarted: false, showStats: true, gameEnded: true });
           }, 200);
