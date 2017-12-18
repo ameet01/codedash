@@ -237,13 +237,15 @@ class SingleGame extends Component {
               let bolded;
               if (this.state.wrongstreak > 0) {
                 if (this.state.pointer - this.state.wrongstreak > index) {
-                  bolded = ' bolded';
+                  bolded = this.props.match.params.language === 'non-code' ?
+                    ' bolded noncode' : ' bolded';
                 } else {
                   bolded = '';
                 }
               } else {
                 if (this.state.pointer > index) {
-                  bolded = ' bolded';
+                  bolded = this.props.match.params.language === 'non-code' ?
+                    ' bolded noncode' : ' bolded';
                 } else {
                   bolded = '';
                 }
