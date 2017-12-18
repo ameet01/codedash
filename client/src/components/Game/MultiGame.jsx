@@ -76,7 +76,11 @@ class MultiGame extends Component {
   joinUser(user) {
     const combinedUsers = [...this.state.users, user];
     const newUsers = uniqBy(combinedUsers, 'username');
-    this.setState({users: newUsers});
+    this.setState({users: newUsers}, () => {
+      if(this.state.users.length > 1 && this.state.roomFull === false) {
+        this.setState({roomFull: true});
+      }
+    });
   }
 
   componentDidMount() {
@@ -231,9 +235,7 @@ class MultiGame extends Component {
     let codeArea;
     let header;
 
-    if(this.state.users.length > 1 && this.state.roomFull === false) {
-      this.setState({roomFull: true});
-    }
+
 
     spinner = <div className="sweet-loading">
       <ClipLoader
