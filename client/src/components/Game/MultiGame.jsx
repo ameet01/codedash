@@ -313,31 +313,6 @@ class MultiGame extends Component {
       }
 
       codeArea = <div className="code-area">
-        <div className="user-list">
-          <div className="users-inner">
-            <h3>Players</h3>
-            {this.state.users.map((user, idx) => {
-              let progress = 0;
-              if (idx === 0) {
-                progress = ((this.state.pointer + 1 )/ this.code.length * 100).toString();
-              } else {
-                progress = ((this.state.opponentPointer + 1) / this.code.length * 100).toString();
-              }
-
-              return(
-                <div className="user-item">
-                  <span>{user.username}</span>
-                  <div className="progress-bar">
-                    <div
-                      className={`player${idx}`}
-                      style={{ width: progress + '%' }}>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
         <pre>
           {lineNumbers}
           <code style={codeStyle}>
@@ -405,9 +380,46 @@ class MultiGame extends Component {
         }
 
         return <div className="game">
-          <h1>Multiplayer Game</h1>
-          {header}
-          {playerLeft}
+          <div className="game-header">
+            <div className="game-inner">
+              <div className="game-title">
+                <h1>Multiplayer Game</h1>
+                {header}
+                {playerLeft}
+              </div>
+
+              <div className="user-list">
+                <div className="users-inner">
+                  <h3>Players</h3>
+                  {this.state.users.map((user, idx) => {
+                    let progress = 0;
+                    let percentage = 0;
+                    if (idx === 0) {
+                      progress = ((this.state.pointer + 1)/ this.code.length * 100).toString();
+                      percentage = (this.state.pointer / (this.code.length - 1) * 100).toPrecision(3) + '%';
+                    } else {
+                      progress = ((this.state.opponentPointer + 1) / this.code.length * 100).toString();
+                      percentage = (this.state.opponentPointer / (this.code.length - 1) * 100).toPrecision(3) + '%';
+                    }
+
+                    return(
+                      <div className="user-item">
+                        <div className="progress-bar">
+                          <span>{user.username}</span>
+                          <span>{percentage}</span>
+                          <div
+                            className={`player${idx}`}
+                            style={{ width: progress + '%' }}>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+
           {codeArea}
           {warning}
         <StatsModal

@@ -108,11 +108,35 @@ code span {
   background: #5574a0;
 }
 
+.game-inner {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.game-header {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}
+
+.game-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.game-title h1 {
+  text-align: left;
+}
+
 .user-list {
-  order: 2;
-  margin: 20px 0;
-  margin-left: 40px;
-  width: 25%;
+  display: flex;
+  /*align-items: center;*/
+  justify-content: center;
+  /*margin: 20px auto;*/
+  width: 30%;
   color: #a5b6c5;
   transition: all 0.3s ease-in-out;
 }
@@ -122,22 +146,40 @@ code span {
   color: hsla(220, 20%, 90%, 1);
 }
 
+.users-inner {
+  width: 100%;
+}
+
 .users-inner, .user-item {
   transition: all 0.3s ease-in-out;
 }
 
 .progress-bar {
-  margin: 10px 0;
+  position: relative;
+  margin-top: 10px;
   width: 100%;
-  /*min-height: 10px;*/
   border: 1px solid #2b3240;
-  border-radius: 5px;
+  border-radius: 25px;
   transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.progress-bar span {
+  position: absolute;
+  top: 0;
+  padding: 0 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  z-index: 2;
+}
+
+.progress-bar span:last-of-type {
+  right: 0;
 }
 
 .player0, .player1 {
-  height: 10px;
-  border-radius: 5px;
+  height: 18px;
+  border-radius: 10px;
   transition: all 0.3s ease-in-out;
 }
 
