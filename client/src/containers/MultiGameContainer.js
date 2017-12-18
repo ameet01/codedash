@@ -75,26 +75,30 @@ let javascript4 = `class Session extends Component {
     .catch(error => { this.setState({error: 'Invalid Credentials'}); });
   }
 `;
-let javascript5 = `exports.Hashtable.prototype.hashCode = function (val) {
-    var i;
-    var hashCode = 0;
-    var character;
+let javascript5 = `function Node(data) {
+  this.data = data;
+  this.previous = null;
+  this.next = null;
+}
 
-    // If value to be hashed is already an integer, return it.
-    if (val.length === 0 || val.length === undefined) {
-      return val;
-    }
+function DoublyLinkedList() {
+  this.head = null;
+  this.tail = null;
+  this.numberOfValues = 0;
+}
 
-    for (i = 0; i < val.length; i += 1) {
-      character = val.charCodeAt(i);
-      /*jshint -W016 */
-      hashCode = ((hashCode << 5) - hashCode) + character;
-      hashCode = hashCode & hashCode;
-      /*jshint -W016 */
-    }
-
-    return hashCode;
-  };
+DoublyLinkedList.prototype.add = function (data) {
+  var node = new Node(data);
+  if(!this.head) {
+    this.head = node;
+    this.tail = node;
+  } else {
+    node.previous = this.tail;
+    this.tail.next = node;
+    this.tail = node;
+  }
+  this.numberOfValues++;
+};
 `;
 let javascript6 = `exports.LinkedList.prototype.remove = function (data) {
     if (this.first === null) {
