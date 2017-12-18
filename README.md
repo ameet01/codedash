@@ -1,4 +1,4 @@
-<img src='https://github.com/ameet01/star-wars-shooter/blob/master/docs/header.png' />
+<img src='https://github.com/ameet01/codedash/blob/master/docs/header.png' />
 
 By: Ameet Vadhia, Vickie Chen
 
