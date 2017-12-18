@@ -133,9 +133,8 @@ code span {
 
 .user-list {
   display: flex;
-  /*align-items: center;*/
   justify-content: center;
-  /*margin: 20px auto;*/
+  margin-top: 5px;
   width: 30%;
   color: #a5b6c5;
   transition: all 0.3s ease-in-out;

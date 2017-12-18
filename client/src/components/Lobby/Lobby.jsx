@@ -127,6 +127,7 @@ class Lobby extends Component {
             {rooms}
           </div>
           <div className="create-room">
+            <h3>New Game</h3>
             <div className="room-options">
               <div className="game-select">
                 <button className="solo" onClick={this.setSolo}>
