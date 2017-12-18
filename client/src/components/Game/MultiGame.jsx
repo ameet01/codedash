@@ -37,7 +37,7 @@ class MultiGame extends Component {
     let language = this.props.languages[`${this.props.match.params.language}`];
     this.code = language[this.props.match.params.langnum];
     let spaces = 0;
-    for(var i = 1; i < this.code.length; i++) {
+    for(let i = 1; i < this.code.length; i++) {
       if (this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== '\n') {
         spaces += 1;
       }
@@ -238,7 +238,6 @@ class MultiGame extends Component {
     let header;
     let highlight;
 
-
     spinner = <div className="sweet-loading">
       <ClipLoader
         color={'#2d9ee0'}
@@ -256,7 +255,23 @@ class MultiGame extends Component {
     }
 
     if (this.state.loading) {
-      codeArea = spinner;
+      return(
+        <div className="game">
+          <div className="game-header">
+            <div className="game-inner">
+              <div className="game-title">
+                <h1>Multiplayer Game</h1>
+                {header}
+                {playerLeft}
+              </div>
+              <div className="user-list">
+                <div className="users-inner"></div>
+              </div>
+            </div>
+          </div>
+          {spinner}
+        </div>
+      );
     } else {
       if (this.state.users.length < 2 && this.state.gameEnded === false && this.state.gameStarted === false && this.state.timer === 10) {
         header = <div id="timer">Waiting for opponent...</div>;
@@ -279,7 +294,7 @@ class MultiGame extends Component {
       }
 
       let count = 1;
-      for(var z = 0; z < this.code.length; z++) {
+      for(let z = 0; z < this.code.length; z++) {
         if (this.code[z] === '\n') {
           count += 1;
         }
@@ -291,28 +306,35 @@ class MultiGame extends Component {
         lineNumbers = null;
         codeStyle = { padding: '20px' };
       } else {
-        for(var i = 1; i < count; i++) {
+        for(let i = 1; i < count; i++) {
           lineNumbers.push(i);
         }
         lineNumbers = <div className="linenumbers">
           {lineNumbers.map((num, index) => <span key={index}>{num}</span>)}
         </div>;
-        codeStyle = null;
+        codeStyle = {};
       }
+
+      let codeOpacity;
+      if (this.state.gameStarted || this.state.gameEnded) {
+        codeOpacity = { opacity: '1' };
+      } else {
+        codeOpacity = { opacity: '0' };
+      }
+
+      Object.assign(codeStyle, codeOpacity);
 
       let change;
       if(this.props.match.params.language === 'non-code') {
         change = 'changeMinWidth';
       } else {
-        change = "";
+        change = '';
       }
 
-      highlight = <div className='code-area'><Highlight lang={`${this.props.match.params.language}`} value={`${this.code}`} /></div>;
-
-      codeArea = <div className="code-area">
-        <pre id='pre' className={`${change}`}>
+      codeArea = <div className="code-area top">
+        <pre id="pre" className={`${change}`}>
           {lineNumbers}
-          <code style={codeStyle}>
+          <code className="code" style={codeStyle}>
             {this.code.split('').map((char, index) => {
               let span;
               let opponent;
@@ -371,66 +393,74 @@ class MultiGame extends Component {
         </div>;
       }
 
-        let warning;
-        if (this.state.order.length > 0 && (this.state.order[0].username !== this.props.auth.username)) {
-          warning = <div className="warning">You lost the game, but keep trying!</div>;
-        }
+      highlight =
+        <div className="code-area bottom">
+          <Highlight
+            lang={`${this.props.match.params.language}`}
+            value={`${this.code}`}
+          />
+          {codeArea}
+        </div>;
 
-        return <div className="game">
-          <div className="game-header">
-            <div className="game-inner">
-              <div className="game-title">
-                <h1>Multiplayer Game</h1>
-                {header}
-                {playerLeft}
-              </div>
+      let warning;
+      if (this.state.order.length > 0 && (this.state.order[0].username !== this.props.auth.username)) {
+        warning = <div className="warning">You lost the game, but keep trying!</div>;
+      }
 
-              <div className="user-list">
-                <div className="users-inner">
-                  <h3>Players</h3>
-                  {this.state.users.map((user, idx) => {
-                    let progress = 0;
-                    let percentage = 0;
-                    if (idx === 0) {
-                      progress = ((this.state.pointer + 1)/ this.code.length * 100).toString();
-                      percentage = (this.state.pointer / (this.code.length - 1) * 100).toPrecision(3) + '%';
-                    } else {
-                      progress = ((this.state.opponentPointer + 1) / this.code.length * 100).toString();
-                      percentage = (this.state.opponentPointer / (this.code.length - 1) * 100).toPrecision(3) + '%';
-                    }
+      return <div className="game">
+        <div className="game-header">
+          <div className="game-inner">
+            <div className="game-title">
+              <h1>Multiplayer Game</h1>
+              {header}
+              {playerLeft}
+            </div>
 
-                    return(
-                      <div key={idx} className="user-item">
-                        <div className="progress-bar">
-                          <span>{user.username}</span>
-                          <span>{percentage}</span>
-                          <div
-                            className={`player${idx}`}
-                            style={{ width: progress + '%' }}>
-                          </div>
+            <div className="user-list">
+              <div className="users-inner">
+                <h3>Players</h3>
+                {this.state.users.map((user, idx) => {
+                  let progress = 0;
+                  let percentage = 0;
+                  if (idx === 0) {
+                    progress = ((this.state.pointer + 1)/ this.code.length * 100).toString();
+                    percentage = (this.state.pointer / (this.code.length - 1) * 100).toPrecision(3) + '%';
+                  } else {
+                    progress = ((this.state.opponentPointer + 1) / this.code.length * 100).toString();
+                    percentage = (this.state.opponentPointer / (this.code.length - 1) * 100).toPrecision(3) + '%';
+                  }
+
+                  return(
+                    <div key={idx} className="user-item">
+                      <div className="progress-bar">
+                        <span>{user.username}</span>
+                        <span>{percentage}</span>
+                        <div
+                          className={`player${idx}`}
+                          style={{ width: progress + '%' }}>
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
-          {highlight}
-          {codeArea}
-          {warning}
-        <StatsModal
-          mounted={this.state.showStats}
-          onTransitionEnd={this.transitionEnd}
-          speed={this.speed}
-          time={this.timeElapsed}
-          errors={this.state.mistakes}
-          accuracy={this.accuracy}
-          unmount={this.unmountModal}
-          order={this.state.order}
-          currentUser={this.props.auth}
-          collateral={this.state.keystrokes - this.codeLength + 1}
-        />
+        </div>
+        {highlight}
+        {warning}
+      <StatsModal
+        mounted={this.state.showStats}
+        onTransitionEnd={this.transitionEnd}
+        speed={this.speed}
+        time={this.timeElapsed}
+        errors={this.state.mistakes}
+        accuracy={this.accuracy}
+        unmount={this.unmountModal}
+        order={this.state.order}
+        currentUser={this.props.auth}
+        collateral={this.state.keystrokes - this.codeLength + 1}
+      />
     </div>;
   }
 }

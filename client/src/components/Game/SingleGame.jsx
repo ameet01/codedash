@@ -26,7 +26,7 @@ class SingleGame extends Component {
     let language = this.props.languages[`${this.props.match.params.language}`];
     this.code = language[this.props.match.params.langnum];
     let spaces = 0;
-    for(var i = 1; i < this.code.length; i++) {
+    for(let i = 1; i < this.code.length; i++) {
       if (this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== '\n') {
         spaces += 1;
       }
@@ -186,7 +186,7 @@ class SingleGame extends Component {
     </div>;
 
     let count = 1;
-    for(var z = 0; z < this.code.length; z++) {
+    for(let z = 0; z < this.code.length; z++) {
       if (this.code[z] === '\n') {
         count += 1;
       }
@@ -198,34 +198,45 @@ class SingleGame extends Component {
       lineNumbers = null;
       codeStyle = { padding: '20px' };
     } else {
-      for(var i = 1; i < count; i++) {
+      for(let i = 1; i < count; i++) {
         lineNumbers.push(i);
       }
       lineNumbers = <div className="linenumbers">
         {lineNumbers.map((num, idx) => <span key={idx}>{num}</span>)}
       </div>;
-      codeStyle = null;
+      codeStyle = {};
     }
+
+    let codeOpacity;
+    if (this.state.gameStarted || this.state.gameEnded) {
+      codeOpacity = { opacity: '1' };
+    } else {
+      codeOpacity = { opacity: '0' };
+    }
+
+    Object.assign(codeStyle, codeOpacity);
 
     let change;
     if(this.props.match.params.language === 'non-code') {
       change = 'changeMinWidth';
     } else {
-      change = "";
+      change = '';
     }
 
     if (this.state.loading) {
-      codeArea = spinner;
+      return (
+        <div className="game">
+          <h1>Single Game</h1>
+          {spinner}
+        </div>
+      );
     } else {
-      highlight = <div className='code-area'><Highlight lang={`${this.props.match.params.language}`} value={`${this.code}`} /></div>;
-        
-      codeArea = <div className="code-area">
-
-        <pre id='pre' className={`${change}`}>
+      codeArea = <div className="code-area top">
+        <pre id="pre" className={`${change}`}>
           {lineNumbers}
-          <code className='code' style={codeStyle}>{this.code.split('').map((char, index) => {
+          <code className="code" style={codeStyle}>
+            {this.code.split('').map((char, index) => {
               let span;
-
               let bolded;
               if (this.state.wrongstreak > 0) {
                 if (this.state.pointer - this.state.wrongstreak > index) {
@@ -267,33 +278,41 @@ class SingleGame extends Component {
                       }
                       return span;
                     })}
-                  </code>
-                </pre>
-              </div>;
-            }
+          </code>
+        </pre>
+      </div>;
+    }
 
-            let timer;
-            if (!this.state.loading) {
-              timer = <div id="timer">Timer: {this.state.timer}</div>;
-              }
+    highlight =
+      <div className="code-area bottom">
+        <Highlight
+          lang={`${this.props.match.params.language}`}
+          value={`${this.code}`}
+        />
+        {codeArea}
+      </div>;
 
-              return <div className="game">
-                <h1>Single Game</h1>
-                {timer}
-                {highlight}
-                {codeArea}
-                <StatsModal
-                  mounted={this.state.showStats}
-                  onTransitionEnd={this.transitionEnd}
-                  speed={this.speed}
-                  time={this.timeElapsed}
-                  errors={this.state.mistakes}
-                  accuracy={this.accuracy}
-                  unmount={this.unmountModal}
-                  collateral={this.state.keystrokes - this.codeLength + 1}
-                  />
-              </div>;
-            }
-          }
+    let timer;
+    if (!this.state.loading) {
+      timer = <div id="timer">Timer: {this.state.timer}</div>;
+    }
 
-          export default connect(null, actions)(SingleGame);
+    return <div className="game">
+      <h1>Single Game</h1>
+      {timer}
+      {highlight}
+      <StatsModal
+        mounted={this.state.showStats}
+        onTransitionEnd={this.transitionEnd}
+        speed={this.speed}
+        time={this.timeElapsed}
+        errors={this.state.mistakes}
+        accuracy={this.accuracy}
+        unmount={this.unmountModal}
+        collateral={this.state.keystrokes - this.codeLength + 1}
+        />
+    </div>;
+  }
+}
+
+export default connect(null, actions)(SingleGame);

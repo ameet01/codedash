@@ -7,10 +7,16 @@
   background: #191d29;
 }
 
+.opponentPointer {
+  background: #5574a0;
+  color: #a5b6c5 !important;
+  z-index: 2;
+}
+
 .active {
   background: #00b39f !important;
-  color: white;
-  z-index:40;
+  color: #fff !important;
+  z-index: 2;
 }
 
 .regular {
@@ -19,15 +25,15 @@
 
 .incorrect {
   background: #f01b32 !important;
-  color: white;
-  z-index:40;
+  color: #fff;
+  z-index: 2;
 }
 
 .wrong {
   background: #de727e;
   position: relative;
-  color: white;
-  z-index:40;
+  color: #fff;
+  z-index: 2;
 }
 
 .wrong:before {
@@ -37,12 +43,12 @@
   content: '<==';
   left: 8px;
   padding: 0 5px;
-  color: white;
+  color: #fff;
   background: #f01b32;
   font-size: 12px;
   top: 0;
   height: 17px;
-  z-index:40;
+  z-index: 2;
 }
 
 
@@ -55,7 +61,7 @@ pre {
   height: max-content;
   border-radius: 5px;
   background: #2b3240;
-  white-space: pre-wrap;
+  #fff-space: pre-wrap;
   overflow-wrap: break-word;
   position: relative;
 }
@@ -86,7 +92,7 @@ code span {
   right: -40px;
   padding: 0 5px;
   font-size: 12px;
-  color: white;
+  color: #fff;
 }
 
 .enter, .enter:before {
@@ -98,7 +104,7 @@ code span {
 }
 
 .game h1 {
-  color: white;
+  color: #fff;
   text-align: center;
 }
 
@@ -106,11 +112,6 @@ code span {
   font-size: 26px;
   font-weight: bold;
   color: #f01b32;
-}
-
-.opponentPointer {
-  background: #5574a0;
-  z-index: 40;
 }
 
 .game-inner {
@@ -196,7 +197,7 @@ code span {
 
 .bolded {
  /*font-weight: 700;*/
- color: #fff;
+ color: transparent;
 }
 
 .player-left-modal {
@@ -207,7 +208,7 @@ code span {
   top: 35%;
   width: 35%;
   border-radius: 5px;
-  background: white;
+  background: #fff;
   z-index: 100;
   left: 35%;
 }
@@ -233,20 +234,40 @@ code span {
 }
 
 .code-area {
-  display: flex;
-  width: 80%;
+  /*display: flex;*/
+  /*width: 80%;*/
   max-width: 1600px;
   animation-duration: 0.75s;
   animation-name: fadein;
-  position:absolute;
-  top: 180px;
+  /*position: absolute;*/
+  /*top: 180px;*/
+}
+
+.top {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.bottom {
+  width: 80%;
+  position: relative;
 }
 
 .code {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: #292C34;
+  background: transparent;
+  color: hsla(0, 0%, 0%, 0.3);
+  transition: all 0.3s ease;
+}
+
+#pre {
+  overflow: hidden;
+  background: transparent;
 }
 
 @keyframes fadein
@@ -280,8 +301,7 @@ code span {
   font-size: 16px;
   font-weight: bold;
   text-align: right;
-  color: white;
-  border-right: white;
+  color: #a5b6c5;
   z-index: 10;
 }
 
@@ -290,10 +310,8 @@ code span {
 }
 
 .hljs {
-  z-index: 10;
+  /*z-index: 10;*/
   margin-left: 40px;
-}
-
-#pre {
-  overflow: hidden;
+  border-radius: 5px;
+  background: #222833;
 }
