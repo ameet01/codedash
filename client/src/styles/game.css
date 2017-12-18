@@ -199,11 +199,12 @@ code span {
   flex-direction: column;
   padding: 40px;
   position: absolute;
-  top: 20%;
+  top: 35%;
   width: 35%;
   border-radius: 5px;
   background: white;
   z-index: 20;
+  left: 35%;
 }
 
 .player-left-modal span {

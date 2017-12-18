@@ -29,6 +29,7 @@ class MultiGame extends Component {
       keystrokes: 0,
       order: [],
       loading: true,
+      roomFull: false
     };
 
     let language = this.props.languages[`${this.props.match.params.language}`];
@@ -230,6 +231,10 @@ class MultiGame extends Component {
     let codeArea;
     let header;
 
+    if(this.state.users.length > 1 && this.state.roomFull === false) {
+      this.setState({roomFull: true});
+    }
+
     spinner = <div className="sweet-loading">
       <ClipLoader
         color={'#2d9ee0'}
@@ -238,7 +243,7 @@ class MultiGame extends Component {
       />
     </div>;
 
-    if (this.state.gameStarted === true && this.state.users.length < 2) {
+    if (this.state.gameEnded === false && this.state.users.length < 2 && this.state.roomFull) {
       playerLeft = <div className="player-left-modal">
         <span>Your opponent has disconnected from the game.</span>
         <span>Please return to the lobby.</span>
