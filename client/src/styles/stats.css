@@ -71,7 +71,7 @@
   width: 100%;
   border: none;
   border-radius: 5px;
-  background: #00b39f;
+  background: #454c5d;
   color: #fff;
   text-transform: uppercase;
   transition: all 0.3s ease;
@@ -79,4 +79,12 @@
 
 .game-stats button:first-of-type {
   margin-top: 20px;
+  background: #00b39f;
+}
+
+.race-result {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #f67628;
 }
