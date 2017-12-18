@@ -163,14 +163,3 @@ class Lobby extends Component {
 }
 
 export default connect(null, actions)(Lobby);
-
-
-//user.currentGameLang}-${user.currentGameLangNum}-${user.currentGameType}-${user.currentGame
-
-
-// <NavLink to={`/lobby`}
-//   activeClassName="activelanguage"
-//   key={index}>
-//   <button>{language}</button>
-// </NavLink>
-//
