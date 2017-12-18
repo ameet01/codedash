@@ -4,7 +4,9 @@
   justify-content: center;
   flex: 1;
   width: 100%;
-  background: #efefef;
+  background: #43cea2;
+  background: -webkit-linear-gradient(to right, #43cea2, #185a9d);
+  background: linear-gradient(to right, #43cea2, #185a9d);
   font-size: 18px;
 }
 
@@ -36,27 +38,31 @@
   padding: 5px 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
+  background: rgba(255, 255, 255, 0.8);
   transition: all 0.3s ease;
 }
 
 .session input:focus {
+  background: rgba(255, 255, 255, 1);
   border-color: #406E8E;
 }
 
 .session button {
   margin: 20px auto;
+  padding: 2px;
   width: 100%;
   background: transparent;
-  border: 2px solid #406E8E;
+  border: 2px solid rgba(255, 255, 255, 0.8);
   border-radius: 3px;
   font-size: 16px;
   text-transform: uppercase;
-  color: #406E8E;
+  color: rgba(255, 255, 255, 0.8);
   transition: all 0.3s ease;
 }
 
 .session button:hover {
-  background: #406E8E;
+  background: #23395b;
+  border-color: #23395b;
   color: #fff;
 }
 
