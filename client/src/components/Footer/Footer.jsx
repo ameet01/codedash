@@ -14,7 +14,7 @@ class Footer extends Component {
             <span onClick={() => this.props.history.push('/about')}>
               About Us
             </span>
-            <a href="https://www.github.com/ameet01/flexproject"
+            <a href="https://www.github.com/ameet01/codedash"
               target="_blank"
               rel="noopener noreferrer">
               GitHub
