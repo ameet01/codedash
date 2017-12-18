@@ -14,11 +14,11 @@ import './styles/stats.css';
 
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
-import { createLogger } from 'redux-logger';
+// import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/rootReducer';
 
-const middleware = applyMiddleware(thunk, createLogger());
+const middleware = applyMiddleware(thunk);
 export const store = createStore(rootReducer, middleware);
 
 ReactDOM.render(

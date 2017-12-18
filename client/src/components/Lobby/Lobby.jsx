@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import {NavLink, Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import socketIOClient from "socket.io-client";
@@ -61,7 +61,7 @@ class Lobby extends Component {
 
   selectLanguage(e) {
     e.preventDefault();
-    this.setState({ index: parseInt(e.currentTarget.value) });
+    this.setState({ index: parseInt(e.currentTarget.value, 10) });
   }
 
   render() {
@@ -144,7 +144,7 @@ class Lobby extends Component {
                   } else {
                     active = "";
                   }
-                  return <button className={`${active}`} value={index} onClick={(e) => this.selectLanguage(e)} >{language}</button>
+                  return <button key={index} className={`${active}`} value={index} onClick={(e) => this.selectLanguage(e)} >{language}</button>
                 })}
               </div>
             </div>
