@@ -64,6 +64,7 @@ pre {
   white-space: pre-wrap;
   overflow-wrap: break-word;
   position: relative;
+  transition: all 0.3s ease;
 }
 
 code {
@@ -72,7 +73,7 @@ code {
   margin: 10px;
   /* padding: 20px;
   padding-left: 50px; */
-  padding: 0.5em;
+  padding: 10px;
   flex: 1;
   background: #454c5d;
   color: #a5b6c5;
@@ -259,7 +260,7 @@ code span {
 .code {
   display: block;
   overflow-x: auto;
-  padding: 0.5em;
+  padding: 10px;
   background: transparent;
   color: hsla(0, 0%, 0%, 0.3);
   transition: all 0.3s ease;
@@ -302,7 +303,7 @@ code span {
   font-weight: bold;
   text-align: right;
   color: #a5b6c5;
-  z-index: 10;
+  z-index: 2;
 }
 
 .changeMinWidth {
@@ -312,6 +313,11 @@ code span {
 .hljs {
   /*z-index: 10;*/
   margin-left: 40px;
+  padding: 10px;
   border-radius: 5px;
   background: #222833;
+}
+
+.non-code {
+  margin-left: 10px;
 }

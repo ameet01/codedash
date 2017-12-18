@@ -304,7 +304,11 @@ class MultiGame extends Component {
       let codeStyle;
       if (this.props.match.params.language === 'non-code') {
         lineNumbers = null;
-        codeStyle = { padding: '20px' };
+        codeStyle = { padding: '10px' };
+        let pres = document.querySelectorAll('pre');
+        for (let i = 0; i < pres.length; i++) {
+          pres[i].classList.add('changeMinWidth');
+        }
       } else {
         for(let i = 1; i < count; i++) {
           lineNumbers.push(i);
@@ -324,15 +328,8 @@ class MultiGame extends Component {
 
       Object.assign(codeStyle, codeOpacity);
 
-      let change;
-      if(this.props.match.params.language === 'non-code') {
-        change = 'changeMinWidth';
-      } else {
-        change = '';
-      }
-
       codeArea = <div className="code-area top">
-        <pre id="pre" className={`${change}`}>
+        <pre id="pre">
           {lineNumbers}
           <code className="code" style={codeStyle}>
             {this.code.split('').map((char, index) => {
