@@ -106,26 +106,8 @@ class MultiGame extends Component {
       socket.emit('lobby');
     }, 1000);
 
-    // this.timer = setInterval(() => {
-    //   this.setState({timer: this.state.timer -= 1});
-    //   if (this.state.timer === 0) {
-    //     this.startTime = new Date().getTime();
-    //     clearInterval(this.timer);
-    //     this.setState({gameStarted: true});
-    //     document.getElementById('timer').innerHTML = 'GO!';
-    //     document.getElementById('timer').style.color = 'green';
-    //   }
-    // }, 1000);
-
     document.addEventListener('keypress', this.registerKeyPress);
     document.addEventListener('keydown', this.backspace);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // const user = nextProps.auth;
-    // const users = [...this.state.users, user];
-    // socket.emit('game', {game: nextProps.match.params.gameId, user: nextProps.auth});
-    // this.setState({users: users});
   }
 
   componentWillUnmount() {
@@ -307,7 +289,7 @@ class MultiGame extends Component {
           lineNumbers.push(i);
         }
         lineNumbers = <div className="linenumbers">
-          {lineNumbers.map(num => <span>{num}</span>)}
+          {lineNumbers.map((num, idx) => <span key={idx}>{num}</span>)}
         </div>;
         codeStyle = null;
       }
@@ -325,7 +307,7 @@ class MultiGame extends Component {
               }
 
               return(
-                <div className="user-item">
+                <div key={idx} className="user-item">
                   <span>{user.username}</span>
                   <div className="progress-bar">
                     <div
