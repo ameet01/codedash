@@ -139,7 +139,6 @@ class Lobby extends Component {
               <div className="language-select">
                 {languages.map((language, index) => {
                   let active;
-                  console.log(index, this.state.index);
                   if(index === this.state.index) {
                     active = 'activeLanguage';
                   } else {

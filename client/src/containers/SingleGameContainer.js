@@ -14,13 +14,25 @@ let javascript1 = `const Auth = ({component: Component, path, auth}) => (\n`
 //   )} />
 // );
 ;
-let javascript2 = `setTimeout("document.bgColor='white'", 1000);
-setTimeout("document.bgColor='lightpink'", 1500);
-setTimeout("document.bgColor = 'pink'", 2000);
-setTimeout("document.bgColor = 'deeppink'", 2500);
-setTimeout("document.bgColor = 'red'", 3000);
-setTimeout("document.bgColor = 'tomato'", 3500);
-setTimeout("document.bgColor = 'darkred'", 4000);
+let javascript2 = `function binarySearch(array, value, key) {
+    key = !key ? id : typeof key === 'string' ? get(key) : key;
+    value = key(value);
+    var middle = Math.floor(array.length / 2);
+    var left = 0;
+    var right = array.length;
+    while (right >= left) {
+      var middleValue = key(array[middle]);
+      if (middleValue === value) {
+        return middle;
+      } else if (middleValue > value) {
+        right = middle - 1;
+      } else {
+        left = middle + 1;
+      }
+      middle = Math.floor((left + right) / 2);
+    }
+    return -1;
+  }
 `;
 let javascript3 = `function makeSub(a, b) {
   subsent = sent.substring(a, b);
@@ -62,101 +74,131 @@ let javascript4 = `class Session extends Component {
     .catch(error => { this.setState({error: 'Invalid Credentials'}); });
   }
 `;
-let javascript5 = `export const EXPRESS_TEST_START = "EXPRESS_TEST_START";
-export const expressTestStart = () => {
-  return { type: EXPRESS_TEST_START };
-};
+let javascript5 = `exports.Hashtable.prototype.hashCode = function (val) {
+    var i;
+    var hashCode = 0;
+    var character;
 
-export const EXPRESS_TEST_RESULTS = "EXPRESS_TEST_RESULTS";
-export const expressTestResults = (data) => {
-  return { type: EXPRESS_TEST_RESULTS, data };
-};
+    // If value to be hashed is already an integer, return it.
+    if (val.length === 0 || val.length === undefined) {
+      return val;
+    }
 
-export const EXPRESS_TEST_ERROR = "EXPRESS_TEST_ERROR";
-export const expressTestError = (data) => {
-  return { type: EXPRESS_TEST_ERROR, data };
-};
+    for (i = 0; i < val.length; i += 1) {
+      character = val.charCodeAt(i);
+      /*jshint -W016 */
+      hashCode = ((hashCode << 5) - hashCode) + character;
+      hashCode = hashCode & hashCode;
+      /*jshint -W016 */
+    }
+
+    return hashCode;
+  };
 `;
-let javascript6 = `const Routes = () => {
-  return (
-    <Router>
-      <div className="app-container">
-        <Route path="/" component={NavBarContainer} />
-        <Route exact path="/" component={SplashContainer} />
-        <Route exact path="/signup" component={SessionContainer} />
-        <Route exact path="/lobby" component={LobbyContainer} />
-        <Route exact path="/lobby/:language" component={LobbyContainer} />
-        <Route exact path="/game" component={GameContainer} />
-        <Route exact path="/game/:language" component={GameContainer} />
-        <Route path="/" component={Footer} />
-      </div>
-    </Router>
-  );
-};
+let javascript6 = `exports.LinkedList.prototype.remove = function (data) {
+    if (this.first === null) {
+      return false;
+    }
+    var temp = this.first;
+    var next;
+    var prev;
+    while (temp) {
+      if (temp.data === data) {
+        next = temp.next;
+        prev = temp.prev;
+        if (next) {
+          next.prev = prev;
+        }
+        if (prev) {
+          prev.next = next;
+        }
+        if (temp === this.first) {
+          this.first = next;
+        }
+        if (temp === this.last) {
+          this.last = prev;
+        }
+        return true;
+      }
+      temp = temp.next;
+    }
+    return false;
+  };
 `;
 
-let ruby1 = `key.each { | k, v |
-    if ct == 8 then
-      print ": "
-      ct = 0
+let ruby1 = `def push(key, value=key)
+  raise ArgumentError, "Heap keys must not be nil." unless key
+  node = Node.new(key, value)
+  # Add new node to the left of the @next node
+  if @next
+    node.right = @next
+    node.left = @next.left
+    node.left.right = node
+    @next.left = node
+    if @compare_fn[key, @next.key]
+      @next = node
+    end
+  else
+    @next = node
+  end
+  @size += 1
+
+  arr = []
+  w = @next.right
+  until w == @next do
+    arr << w.value
+    w = w.right
+end
+`;
+let ruby2 = `def self.shell_sort(container)
+  increment = container.size/2
+  while increment > 0 do
+    (increment..container.size-1).each do |i|
+      temp = container[i]
+      j = i
+      while j >= increment && container[j - increment] > temp do
+        container[j] = container[j-increment]
+        j -= increment
+      end
+      container[j] = temp
+    end
+    increment = (increment == 2 ? 1 : (increment / 2.2).round)
+  end
+  container
+end
+`;
+let ruby3 = `def self.mergesort(container)
+  return container if container.size <= 1
+  mid   = container.size / 2
+  left  = container[0...mid]
+  right = container[mid...container.size]
+  merge(mergesort(left), mergesort(right))
+end
+
+def self.merge(left, right)
+  sorted = []
+  until left.empty? or right.empty?
+    left.first <= right.first ? sorted << left.shift : sorted << right.shift
+  end
+  sorted + left + right
+end
+`;
+let ruby4 = `def self.binary_search(container, item)
+  return nil if item.nil?
+  low = 0
+  high = container.size - 1
+  while low <= high
+    mid = (low + high) / 2
+    val = container[mid]
+    if val > item
+      high = mid - 1
+    elsif val < item
+      low = mid + 1
     else
-      print ", "
+      return val
     end
-    ct = ct + 1
-    print "#{v} => #{k}"
-}
-print "!!"
-`;
-let ruby2 = `class List
-  class Node
-    include Follower
-
-    def initialize(d, n = nil)
-      @val = d
-      @next = n
-    end
-    attr_reader :next, :val
-    attr_writer :next
   end
-
-  include Printer
-
-  def initialize(first)
-    @head = Node.new(first)
-  end
-`;
-let ruby3 = `for i in (1..4)
-  print i, " "
-end
-print ": "
-
-for i in (1...4)
-  print i," "
-end
-print ", "
-
-items = [ 'Mark', 12, 'goobers', 18.45 ]
-for it in items
-  print it, " "
-end
-print " - "
-
-for i in (0...items.length)
-    print items[0..i].join(" "), ": "
-end
-`;
-let ruby4 = `class Fred
-  def initialize(v)
-    @val = v
-  end
-
-  def set(v)
-    @val = v
-  end
-
-  def get
-    return @val
-  end
+  nil
 end
 `;
 let ruby5 = `class TwoLabs < TkFrame
@@ -194,6 +236,15 @@ let ruby6 = `capitals = {
 }
 capitals[:westbengal] = 'Kolkata'
 capitals[:karnataka] = 'Bengaluru'
+
+def kmp_search(substring)
+  Algorithms::Search.kmp_search(self, substring)
+end
+
+begin
+  require 'CString'
+rescue LoadError
+end
 `;
 
 let java1 = `public class OracleJdbcTest {
@@ -449,24 +500,17 @@ let python6 = `def scite_run():
   sys.argv = [script_file]
 `;
 
-let cplusplus1 = `void heapify(int a[], int i, int n){
-  int l = 2*i+1;
-  int r = 2*i+2;
-  int largest = i;
-  if (l < n && a[l] > a[i]) largest = l;
-  if (r < n && a[r] > a[l]) largest = r;
-  if (largest != i){
-    int tmp = a[i]; a[i] = a[largest]; a[largest] = tmp;
-    heapify(a, largest, n);
-  }
-}
+let cplusplus1 = `int main() {
+	const char *s = "Hello World";
+	cout << " INPUT: " << endl;
+	cout << s << endl << endl;
 
-void heapsort(int a[], int n){
-  for (int i = n/2-1; i>=0; i--) heapify(a, i, n);
-  for (int i = n-1; i>0; i--){
-    int tmp = a[0]; a[0] = a[i]; a[i] = tmp;
-    heapify(a, 0, i);
-}
+	string base=alg::CBase64::encodeBase64((unsigned char *) s, strlen(s));
+	cout << " encodeBase64: " << endl;
+	cout << base << endl << endl;
+
+	cout << " decodeBase64: " << endl;
+	cout << alg::CBase64::decodeBase64(base) << endl;
 }
 `;
 let cplusplus2 = `void merge(int a[], int temp[], int left, int mid, int right){
