@@ -288,7 +288,14 @@ code span {
 
 .warning {
   margin-bottom: 10px;
-  color: #f01b32;
+  padding: 5px 20px;
+  opacity: 0.9;
+  border-radius: 20px;
+  background: #f01b32;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
   animation: fadein 0.5s ease;
 }
 
