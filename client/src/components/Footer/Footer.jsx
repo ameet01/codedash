@@ -11,9 +11,6 @@ class Footer extends Component {
             © 2017 CodeDash
           </div>
           <div className="footer-links">
-            <span onClick={() => this.props.history.push('/about')}>
-              About Us
-            </span>
             <a href="https://www.github.com/ameet01/codedash"
               target="_blank"
               rel="noopener noreferrer">
