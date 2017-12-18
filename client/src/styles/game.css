@@ -61,7 +61,7 @@ pre {
   height: max-content;
   border-radius: 5px;
   background: #2b3240;
-  #fff-space: pre-wrap;
+  white-space: pre-wrap;
   overflow-wrap: break-word;
   position: relative;
 }
