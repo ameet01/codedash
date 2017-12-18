@@ -201,7 +201,7 @@ class SingleGame extends Component {
         lineNumbers.push(i);
       }
       lineNumbers = <div className="linenumbers">
-        {lineNumbers.map(num => <span>{num}</span>)}
+        {lineNumbers.map((num, idx) => <span key={idx}>{num}</span>)}
       </div>;
       codeStyle = null;
     }
