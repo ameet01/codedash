@@ -23,17 +23,20 @@
 
 .stats-inner {
   position: relative;
+  width: max-content;
   padding: 25px;
   border-radius: 5px;
   background: #efefef;
+  font-size: 20px;
   color: #161925;
-  width: max-content;
   z-index: 4;
 }
 
 .stats-inner h1 {
   color: #161925;
   margin: 10px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #161925;
 }
 
 .stats-row {
@@ -41,6 +44,10 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+
+.stats-row span:first-child {
+  font-weight: bold;
 }
 
 .modal-close {
@@ -56,4 +63,20 @@
   border-radius: 25px;
   border: 1px solid #666;
   color: #666;
+}
+
+.game-stats button {
+  margin-top: 10px;
+  padding: 5px 20px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background: #00b39f;
+  color: #fff;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.game-stats button:first-of-type {
+  margin-top: 20px;
 }

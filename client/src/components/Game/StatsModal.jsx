@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class StatsModal extends React.Component {
   constructor(props) {
@@ -84,7 +85,7 @@ class StatsModal extends React.Component {
           style={this.state.style}
           onTransitionEnd={this.transitionEnd}>
           <div className="stats-inner">
-            <div className='race-result'>{raceResult}</div>
+            <div className="race-result">{raceResult}</div>
             <h1>Game Statistics</h1>
             <div className="modal-close" onClick={this.unmountStyle}>x</div>
             <div className="stats-row">
@@ -107,6 +108,8 @@ class StatsModal extends React.Component {
               <span>Collateral</span>
               <span>{this.props.collateral} keystrokes</span>
             </div>
+            <button onClick={() => this.props.history.push('/lobby')}>Back to Lobby</button>
+            <button onClick={this.unmountStyle}>View Code</button>
           </div>
           <div className="backdrop" onClick={this.unmountStyle}></div>
         </div>
@@ -117,4 +120,4 @@ class StatsModal extends React.Component {
   }
 }
 
-export default StatsModal;
+export default withRouter(StatsModal);
