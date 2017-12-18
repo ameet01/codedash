@@ -291,8 +291,15 @@ class MultiGame extends Component {
         codeStyle = null;
       }
 
+      let change;
+      if(this.props.match.params.language === 'non-code') {
+        change = 'changeMinWidth';
+      } else {
+        change = "";
+      }
+
       codeArea = <div className="code-area">
-        <pre>
+        <pre className={`${change}`}>
           {lineNumbers}
           <code style={codeStyle}>
             {this.code.split('').map((char, index) => {
@@ -351,12 +358,16 @@ class MultiGame extends Component {
             </code>
           </pre>
         </div>;
+
+
       }
 
         let warning;
         if (this.state.order.length > 0 && (this.state.order[0].username !== this.props.auth.username)) {
           warning = <div className="warning">You lost the game, but keep trying!</div>;
         }
+
+
 
         return <div className="game">
           <div className="game-header">

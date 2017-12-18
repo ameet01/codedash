@@ -268,3 +268,7 @@ code span {
   color: hsla(220, 20%, 20%, 0.8);
   border-right: 1px solid hsla(220, 20%, 20%, 0.8);
 }
+
+.changeMinWidth {
+  min-width: 80%;
+}

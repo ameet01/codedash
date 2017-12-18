@@ -3,15 +3,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import Game from '../components/Game/MultiGame';
-let javascript1 = `const Auth = ({component: Component, path, auth}) => (\n`
-//   <Route exact path={path} render={(props) => (
-//     !auth ? (
-//       <Component {...props} />
-//     ) : (
-//       <Redirect to='/lobby' />
-//     )
-//   )} />
-// );
+
+let javascript1 = `const Auth = ({component: Component, path, auth}) => (
+  <Route exact path={path} render={(props) => (
+    !auth ? (
+      <Component {...props} />
+    ) : (
+      <Redirect to='/lobby' />
+    )
+  )} />
+);
+`
 ;
 let javascript2 = `function binarySearch(array, value, key) {
     key = !key ? id : typeof key === 'string' ? get(key) : key;
@@ -867,64 +869,31 @@ let html6 = `<button class="snip1582">Submit</button>
 <button class="snip1582">Subscribe</button>
 `;
 
-let noncode1 = `In Harry Potter and the Sorcerer's Stone, Harry, an orphan, lives with the Dursleys, his horrible aunt and uncle,
-and their abominable son, Dudley.
+let noncode1 = `In Harry Potter and the Sorcerer's Stone, Harry, an orphan, lives with the Dursleys, his horrible aunt and uncle, and their abominable son, Dudley.
 
-One day just before his eleventh birthday, an owl tries to deliver a mysterious letter, the first of a
-sequence of events that end in Harry meeting a giant man named Hagrid. Hagrid explains Harry's history
-to him: When he was a baby, the Dark wizard, Lord Voldemort, attacked and killed his parents in an attempt
-to kill Harry; but the only mark on Harry was a mysterious lightning-bolt scar on his forehead.
+One day just before his eleventh birthday, an owl tries to deliver a mysterious letter, the first of a sequence of events that end in Harry meeting a giant man named Hagrid. Hagrid explains Harry's history to him: When he was a baby, the Dark wizard, Lord Voldemort, attacked and killed his parents in an attempt to kill Harry; but the only mark on Harry was a mysterious lightning-bolt scar on his forehead.
 `;
-let noncode2 = `Rubik's Cube is a mechanical puzzle invented in 1974. Originally called the
-"Magic Cube" by its inventor, this puzzle was renamed "Rubik's Cube". It is
-said to be the world's best-selling toy, with over 300,000,000 Rubik's
-Cubes and imitations sold worldwide. The puzzle consists of the twenty-six
-unique miniature cubes on the surface. In a typical Cube, each face is
-covered by nine stickers of one of six solid colours. When the puzzle is
-solved, each face of the Cube is a solid colour. A normal (3x3x3) Rubik's
-Cube can have forty-three trillion different positions (permutations). Many
-speedcubing competitions have been held to determine who can solve the
-Rubik's Cube in the shortest time.
+let noncode2 = `Rubik's Cube is a mechanical puzzle invented in 1974. Originally called the "Magic Cube" by its inventor, this puzzle was renamed "Rubik's Cube". It is said to be the world's best-selling toy, with over 300,000,000 Rubik's Cubes and imitations sold worldwide. The puzzle consists of the twenty-six unique miniature cubes on the surface.
+
+In a typical Cube, each face is covered by nine stickers of one of six solid colours. When the puzzle is solved, each face of the Cube is a solid colour. A normal (3x3x3) Rubik's Cube can have forty-three trillion different positions (permutations).
+
+Many speedcubing competitions have been held to determine who can solve the Rubik's Cube in the shortest time.
 `;
-let noncode3 = `A tornado is a violently rotating column of air that is in contact with
-both the surface of the earth and a cumulonimbus cloud or, in rare cases,
-the base of a cumulus cloud. They are often referred to as twisters or
-cyclones. Tornadoes come in many shapes and sizes, but they are typically
-in the form of a visible condensation funnel, whose narrow end touches the
-earth and is often encircled by a cloud of debris and dust. Most tornadoes
-have wind speeds less than 110 miles per hour (177 km/h), are about 250
-feet (76 m) across, and travel a few miles (several kilometers) before
-dissipating. The most extreme tornadoes can attain wind speeds of more
-than 300 miles per hour (483 km/h).
+let noncode3 = `A tornado is a violently rotating column of air that is in contact with both the surface of the earth and a cumulonimbus cloud or, in rare cases, the base of a cumulus cloud. They are often referred to as twisters or cyclones. Tornadoes come in many shapes and sizes, but they are typically in the form of a visible condensation funnel, whose narrow end touches the earth and is often encircled by a cloud of debris and dust.
+
+Most tornadoes have wind speeds less than 110 miles per hour (177 km/h), are about 250 feet (76 m) across, and travel a few miles (several kilometers) before dissipating. The most extreme tornadoes can attain wind speeds of more than 300 miles per hour (483 km/h).
 `;
-let noncode4 = `Independence Day, commonly known as the Fourth of July, is a federal
-holiday in the United States commemorating the adoption of the Declaration
-of Independence on July 4, 1776, declaring independence from the Kingdom
-of Great Britain. As a federal holiday, all non-essential federal
-institutions (like the postal service and federal courts) are closed on
-that day. Independence Day is commonly associated with fireworks, parades,
-barbecues, carnivals, fairs, picnics, concerts, baseball games, family
-reunions, political speeches and ceremonies, and various other public and
-private events celebrating the history, government, and traditions of the
-United States. Independence Day is the national day of the United States.
+let noncode4 = `Independence Day, commonly known as the Fourth of July, is a federal holiday in the United States commemorating the adoption of the Declaration of Independence on July 4, 1776, declaring independence from the Kingdom of Great Britain.
+
+As a federal holiday, all non-essential federal institutions (like the postal service and federal courts) are closed on that day. Independence Day is commonly associated with fireworks, parades, barbecues, carnivals, fairs, picnics, concerts, baseball games, family reunions, political speeches and ceremonies, and various other public and private events celebrating the history, government, and traditions of the United States. Independence Day is the national day of the United States.
 `;
-let noncode5 = `Sudoku is a logic-based number placement puzzle. The goal is to fill a
-9x9 grid so that each column, each row, and each of the nine 3x3 boxes
-(also called blocks or regions) contains the digits from 1 to 9 only one
-time each. The puzzle setter provides a partially completed grid. The
-modern puzzle was invented by an American architect, Howard Garns, in 1979
-and published by Dell Magazines under the name "Number Place". It became
-popular in Japan in 1986, after it was published by Nikoli and given the
-name Sudoku, meaning single number. The numerals in Sudoku puzzles are used
-for convenience; arithmetic relationships between numerals are irrelevant.
-Any set of distinct symbols will do, such as letters, shapes, or colours.
+let noncode5 = `Sudoku is a logic-based number placement puzzle. The goal is to fill a 9x9 grid so that each column, each row, and each of the nine 3x3 boxes (also called blocks or regions) contains the digits from 1 to 9 only one time each. The puzzle setter provides a partially completed grid. The modern puzzle was invented by an American architect, Howard Garns, in 1979 and published by Dell Magazines under the name "Number Place".
+
+It became popular in Japan in 1986, after it was published by Nikoli and given the name Sudoku, meaning single number. The numerals in Sudoku puzzles are used for convenience; arithmetic relationships between numerals are irrelevant. Any set of distinct symbols will do, such as letters, shapes, or colours.
 `;
-let noncode6 = `The first photosynthetic organisms probably evolved about 3,500 million years ago, early in the evolutionary
-history of life, when all forms of life on Earth were microorganisms and the atmosphere had much more carbon dioxide. They most
-likely used hydrogen or hydrogen sulfide as sources of electrons, rather than water. Cyanobacteria appeared later, around 3,000 million
-years ago, and drastically changed the Earth when they began to oxygenate the atmosphere, beginning about 2,400 million years ago. This
-new atmosphere allowed the evolution of complex life such as protists. Eventually, one of these protists formed a symbiotic relationship
-with a cyanobacterium, producing the ancestor of many plants and algae.
+let noncode6 = `The first photosynthetic organisms probably evolved about 3,500 million years ago, early in the evolutionary history of life, when all forms of life on Earth were microorganisms and the atmosphere had much more carbon dioxide. They most likely used hydrogen or hydrogen sulfide as sources of electrons, rather than water.
+
+Cyanobacteria appeared later, around 3,000 million years ago, and drastically changed the Earth when they began to oxygenate the atmosphere, beginning about 2,400 million years ago. This new atmosphere allowed the evolution of complex life such as protists. Eventually, one of these protists formed a symbiotic relationship with a cyanobacterium, producing the ancestor of many plants and algae.
 `;
 
 const LANGUAGES = {

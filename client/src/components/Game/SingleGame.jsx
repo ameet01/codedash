@@ -22,16 +22,15 @@ class SingleGame extends Component {
       loading: true
     };
 
-    this.registerKeyPress = this.registerKeyPress.bind(this);
-    this.backspace = this.backspace.bind(this);
     let language = this.props.languages[`${this.props.match.params.language}`];
-    this.code = language[0];
+    this.code = language[this.props.match.params.langnum];
     let spaces = 0;
     for(var i = 1; i < this.code.length; i++) {
       if (this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== '\n') {
         spaces += 1;
       }
     }
+
     this.codeLength = this.code.split('').filter(char => char !== " ").length + spaces;
     this.timer = undefined;
     this.startTime = undefined;
@@ -41,6 +40,8 @@ class SingleGame extends Component {
     this.accuracy = undefined;
     this.gameId = parseInt(this.props.match.params.gameId, 10);
 
+    this.registerKeyPress = this.registerKeyPress.bind(this);
+    this.backspace = this.backspace.bind(this);
     this.unmountModal = this.unmountModal.bind(this);
   }
 
@@ -204,12 +205,19 @@ class SingleGame extends Component {
       codeStyle = null;
     }
 
+    let change;
+    if(this.props.match.params.language === 'non-code') {
+      change = 'changeMinWidth';
+    } else {
+      change = "";
+    }
+
     if (this.state.loading) {
       codeArea = spinner;
     } else {
       codeArea = <div className="code-area">
 
-        <pre>
+        <pre className={`${change}`}>
           {lineNumbers}
           <code style={codeStyle}>{this.code.split('').map((char, index) => {
               let span;
