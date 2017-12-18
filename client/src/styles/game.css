@@ -188,7 +188,7 @@ code span {
 
 .code-area {
   display: flex;
-  width: 90%;
+  width: 80%;
   max-width: 1600px;
   animation-duration: 0.75s;
   animation-name: fadein;
@@ -206,7 +206,7 @@ code span {
 
 .sweet-loading {
   position: absolute;
-  top: 25%;
+  top: 250px;
 }
 
 .warning {
