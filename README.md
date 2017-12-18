@@ -24,7 +24,7 @@ Users can choose from several different languages, challenge a friend by creatin
 
 ## Features
 
-### Update Component Cursor During Game
+### Update Opponent Cursor During Game
 
 <img src='https://github.com/ameet01/codedash/blob/master/docs/cursor.gif' />
 
