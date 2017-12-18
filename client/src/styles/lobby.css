@@ -46,7 +46,6 @@
   width: 100%;
   border-radius: 40px;
   background: #454c5d;
-  margin-bottom: 20px;
   opacity: 0.85;
   transition: all 0.3s ease;
 }
@@ -55,11 +54,15 @@
   opacity: 1;
 }
 
-.room-item:last-of-type {
+.rooms-list a {
+  margin-bottom: 10px;
+}
+
+.rooms-list a:last-of-type {
   margin-bottom: 0;
 }
 
-.room-item a:hover {
+.rooms-list a:hover {
   text-decoration: none;
 }
 
@@ -89,11 +92,9 @@
   background: #00b39f;
   color: #fff;
   transition: all 0.3s ease;
-  opacity: 0.85;
 }
 
 .room-info button:hover {
-  opacity: 1;
   cursor: pointer;
 }
 

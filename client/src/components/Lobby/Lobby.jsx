@@ -92,23 +92,21 @@ class Lobby extends Component {
     if (users.length > 0) {
       rooms = users.map(
         (user, index) =>
-        <div className="room-item"
-          key={`${user}-${index}`}>
-          <Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>
-            <div className="room-title">{`${user.username}'`}s room</div>
-          </Link>
-          <div className="room-info">
-            <div
-              className="room-language"
-              style={{ background: colors[user.currentGameLang] }}
-            >
-              {user.currentGameLang}
+        <Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>
+          <div className="room-item"
+            key={`${user}-${index}`}>
+              <div className="room-title">{`${user.username}'`}s room</div>
+            <div className="room-info">
+              <div
+                className="room-language"
+                style={{ background: colors[user.currentGameLang] }}
+              >
+                {user.currentGameLang}
+              </div>
+                <button>Join</button>
             </div>
-            <Link to={`/game/${user.currentGameLang}/${user.currentGameLangNum}/${user.currentGameType}/${user.currentGame}`}>
-              <button>Join</button>
-            </Link>
           </div>
-        </div>
+        </Link>
       );
     } else {
       rooms = <div className="empty-message">
