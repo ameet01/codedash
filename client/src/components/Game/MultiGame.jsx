@@ -22,7 +22,7 @@ class MultiGame extends Component {
       wrongstreak: 0,
       key: undefined,
       mistakes: 0,
-      timer: 5,
+      timer: 10,
       gameStarted: false,
       gameEnded: false,
       users: [],
@@ -33,8 +33,7 @@ class MultiGame extends Component {
     };
 
     let language = this.props.languages[`${this.props.match.params.language}`];
-    this.code = language[0];
-    // this.props.match.params.langnum
+    this.code = language[this.props.match.params.langnum];
     let spaces = 0;
     for(var i = 1; i < this.code.length; i++) {
       if (this.code[i] === " " && this.code[i-1] !== " " && this.code[i-1] !== '\n') {
