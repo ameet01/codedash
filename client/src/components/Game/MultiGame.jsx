@@ -286,7 +286,7 @@ class MultiGame extends Component {
           lineNumbers.push(i);
         }
         lineNumbers = <div className="linenumbers">
-          {lineNumbers.map(num => <span>{num}</span>)}
+          {lineNumbers.map((num, index) => <span key={index}>{num}</span>)}
         </div>;
         codeStyle = null;
       }
