@@ -33,7 +33,7 @@ class Session extends Component {
     )
     .then(() => this.props.fetchUser()).then(() => this.setState({ error: '' }))
     .then(() => this.props.history.push('/lobby'))
-    .catch(error => { this.setState({ error: 'Invalid Credentials' }); });
+    .catch(error => { this.setState({ error: 'Invalid Inputs' }); });
   }
 
   update(property) {
