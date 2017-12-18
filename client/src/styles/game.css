@@ -197,6 +197,7 @@ code span {
 .bolded {
  /*font-weight: 700;*/
  color: #fff;
+ z-index: 40;
 }
 
 .player-left-modal {
