@@ -9,6 +9,7 @@
   background-image: url('https://images.pexels.com/photos/36990/pexels-photo.jpg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb');
   background-size: cover;
   background-position: 60% 50%;
+  filter: grayscale(20%);
 }
 
 .splash-container:before {
@@ -18,11 +19,21 @@
   height: 100%;
   width: 100%;
   display: block;
-  content: " ";
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9) 100%);
-  opacity: 0.3;
+  content: '';
+  background: linear-gradient(to right, #5f2c82, #49a09d);
+  opacity: 0.6;
+  animation: fadeBg 3s ease;
   -webkit-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
+}
+
+@keyframes fadeBg {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.6;
+  }
 }
 
 .tagline {
@@ -44,23 +55,37 @@
   color: #fff;
   text-shadow: 0 0 10px rgba(0, 0, 0, 1);
   font-style: italic;
+  animation: slideIn 1s ease-out;
+}
+
+@keyframes slideIn {
+  0%, 40% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .tagline button {
   padding: 5px 20px;
   font-size: 24px;
   font-weight: bold;
-  background: #579E29;
+  background: #00b39f;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 .tagline button:hover {
-  background: #7FB237;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
 }
 
 .splash-buttons {
@@ -70,8 +95,18 @@
 }
 
 .tagline button:first-of-type {
-  background: #666;
+  background: rgb(98, 64, 123);
 }
-.tagline button:first-of-type:hover {
-  background: #888;
+
+.tagline p, .splash-buttons {
+  animation: fadeIn 2s ease-in;
+}
+
+@keyframes fadeIn {
+  0%, 70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
