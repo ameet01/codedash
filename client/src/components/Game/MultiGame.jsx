@@ -382,7 +382,7 @@ class MultiGame extends Component {
                     }
 
                     return(
-                      <div className="user-item">
+                      <div key={idx} className="user-item">
                         <div className="progress-bar">
                           <span>{user.username}</span>
                           <span>{percentage}</span>
