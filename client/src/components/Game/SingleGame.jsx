@@ -10,6 +10,7 @@ class SingleGame extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showButton: false,
       showStats: false,
       pointer: 0,
       incorrect: false,
@@ -88,7 +89,7 @@ class SingleGame extends Component {
           this.timeElapsed = ((this.endTime - this.startTime)/1000).toPrecision(4);
           this.speed = ((this.codeLength / 5) / (this.timeElapsed / 60)).toPrecision(4);
           this.accuracy = ((this.codeLength - this.state.mistakes) * 100 / this.codeLength).toPrecision(4);
-          this.setState({ gameStarted: false, showStats: true });
+          this.setState({ gameStarted: false, showStats: true, showButton: true });
         }
         if (e.keyCode === (this.code[this.state.pointer].charCodeAt(0)) && this.state.incorrect === false) {
           this.setState({pointer: this.state.pointer + 1, incorrect: false, keystrokes: this.state.keystrokes + 1});
@@ -212,7 +213,7 @@ class SingleGame extends Component {
     }
 
     let codeOpacity;
-    if (this.state.gameStarted || this.state.gameEnded) {
+    if (this.state.gameStarted) {
       codeOpacity = { opacity: '1' };
     } else {
       codeOpacity = { opacity: '0' };
@@ -296,10 +297,20 @@ class SingleGame extends Component {
       timer = <div id="timer">Timer: {this.state.timer}</div>;
     }
 
+    let lobbyButton;
+    if (this.state.showButton) {
+      lobbyButton = <button
+        className="lobby-back"
+        onClick={() => this.props.history.push('/lobby')}>
+        Lobby
+      </button>;
+    }
+
     return <div className="game">
       <h1>Single Game</h1>
       {timer}
       {highlight}
+      {lobbyButton}
       <StatsModal
         mounted={this.state.showStats}
         onTransitionEnd={this.transitionEnd}

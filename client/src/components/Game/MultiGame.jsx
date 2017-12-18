@@ -406,6 +406,18 @@ class MultiGame extends Component {
         warning = <div className="warning">You lost the game, but keep trying!</div>;
       }
 
+      let lobbyButton;
+      if (this.state.gameEnded || (
+        this.state.order.length > 0 &&
+        (this.state.order[0].username !== this.props.auth.username)
+      )) {
+        lobbyButton = <button
+          className="lobby-back"
+          onClick={() => this.props.history.push('/lobby')}>
+          Lobby
+        </button>;
+      }
+
       return <div className="game">
         <div className="game-header">
           <div className="game-inner">
@@ -448,6 +460,7 @@ class MultiGame extends Component {
         </div>
         {highlight}
         {warning}
+        {lobbyButton}
       <StatsModal
         mounted={this.state.showStats}
         onTransitionEnd={this.transitionEnd}

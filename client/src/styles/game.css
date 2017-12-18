@@ -287,7 +287,9 @@ code span {
 }
 
 .warning {
+  margin-bottom: 10px;
   color: #f01b32;
+  animation: fadein 0.5s ease;
 }
 
 .linenumbers {
@@ -324,4 +326,19 @@ code span {
 
 .noncode {
   color: #efefef;
+}
+
+.lobby-back {
+  padding: 5px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #00b39f;
+  color: #fff;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.5s ease;
+}
+
+.lobby-back:hover {
+  opacity: 1;
 }
