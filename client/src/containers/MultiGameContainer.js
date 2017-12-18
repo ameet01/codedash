@@ -235,20 +235,29 @@ let ruby5 = `class TwoLabs < TkFrame
     }
   end
 `;
-let ruby6 = `capitals = {
-  :sindh => 'Karachi',
-  :punjab => 'Lahore'
-}
-capitals[:westbengal] = 'Kolkata'
-capitals[:karnataka] = 'Bengaluru'
-
-def kmp_search(substring)
-  Algorithms::Search.kmp_search(self, substring)
+let ruby6 = `describe "full rubydeque" do
+  before(:each) do
+    @deque = Containers::RubyDeque.new
+  end
+  it_should_behave_like "(non-empty deque)"
 end
 
 begin
-  require 'CString'
-rescue LoadError
+  Containers::CDeque
+  describe "empty cdeque" do
+    before(:each) do
+      @deque = Containers::CDeque.new
+    end
+    it_should_behave_like "(empty deque)"
+  end
+
+  describe "full cdeque" do
+    before(:each) do
+      @deque = Containers::CDeque.new
+    end
+    it_should_behave_like "(non-empty deque)"
+  end
+rescue Exception
 end
 `;
 
