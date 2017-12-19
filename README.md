@@ -1,10 +1,6 @@
 <img src="https://github.com/ameet01/codedash/blob/master/docs/header.png" />
 
-By: [Ameet Vadhia](https://github.com/ameet01), [Vickie Chen](https://github.com/PhishyFish)
-
-##### Check out the live [Application](http://www.code-dash.net//)!
-
-
+##### Check out the live [Application](http://www.code-dash.net/)!
 
 ## About
 
@@ -88,3 +84,5 @@ codeArea = <div className="code-area top">
 * Increase number of available coding languages
 * More in-depth user statistics
 * Add leaderboard
+
+By: [Ameet Vadhia](https://github.com/ameet01), [Vickie Chen](https://github.com/PhishyFish)
