@@ -224,7 +224,7 @@ class SingleGame extends Component {
     if (this.state.loading) {
       return (
         <div className="game">
-          <h1>Single Game</h1>
+          <h1>Solo Game</h1>
           {spinner}
         </div>
       );
