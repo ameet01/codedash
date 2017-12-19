@@ -70,7 +70,6 @@ class StatsModal extends React.Component {
       if (this.props.currentUser.currentGameType === 2) {
         if (this.props.order.length > 0) {
           if (this.props.order[0].username === this.props.currentUser.username) {
-            console.log('hi');
             raceResult = "You win! Congrats!";
           } else {
             raceResult = "Nice try!";
@@ -109,7 +108,7 @@ class StatsModal extends React.Component {
               <span>{this.props.collateral} keystrokes</span>
             </div>
             <button onClick={() => this.props.history.push('/lobby')}>Back to Lobby</button>
-            <button onClick={this.unmountStyle}>View Code</button>
+            <button onClick={this.unmountStyle}>View Snippet</button>
           </div>
           <div className="backdrop" onClick={this.unmountStyle}></div>
         </div>
