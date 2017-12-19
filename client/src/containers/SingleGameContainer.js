@@ -525,10 +525,10 @@ let cplusplus1 = `int main() {
 	cout << alg::CBase64::decodeBase64(base) << endl;
 }
 `;
-let cplusplus2 = `void merge(int a[], int temp[], int left, int mid, int right){
+let cplusplus2 = `void merge(int a[], int temp[], int left, int mid, int right) {
   int i = left, j = mid, k = left;
-  while (i <= mid - 1 && j <= right){
-    if (a[i] <= a[j]){
+  while (i <= mid - 1 && j <= right) {
+    if (a[i] <= a[j]) {
       temp[k++] = a[i++];
     } else {
       temp[k++] = a[j++];
@@ -540,32 +540,29 @@ let cplusplus2 = `void merge(int a[], int temp[], int left, int mid, int right){
   for (i = left; i <= right; i++) a[i] = temp[i];
 }
 
-void mergesort(int a[], int temp[], int left, int right){
-  int mid = left + (right - left)/2;
-  if (right > left){
+void mergesort(int a[], int temp[], int left, int right) {
+  int mid = left + (right - left) / 2;
+  if (right > left) {
     mergesort(a, temp, left, mid);
     mergesort(a, temp, mid + 1, right);
     merge(a, temp, left, mid + 1, right);
   }
 }
 `;
-let cplusplus3 = `quicksort(int s[], int left, int right)
-{
+let cplusplus3 = `quicksort(int s[], int left, int right) {
   int i = left, j = right, pivot;
   pivot = s[(left + right) / 2];
-  while (i <= j){
+  while (i <= j) {
     while (s[i] < pivot) i++;
     while (s[j] > pivot) j--;
-    if (i <= j)
-      swap(&s[i], &s[j]);
-      i++; j--;
+    if (i <= j) swap(&s[i], &s[j]);
+    i++; j--;
   }
   if (left < j) quicksort(s, left, j);
   if (right > i) quicksort(s, i, right);
 }
 `;
-let cplusplus4 = `int main()
-{
+let cplusplus4 = `int main() {
   int clear_i;
   int i, left_i, cur_sz, cur_num;
   n_obj **cl;
@@ -575,7 +572,7 @@ let cplusplus4 = `int main()
 
   cl = malloc(sizeof(n_obj*) * NUM_OBJECTS);
 
-  for(i = 0; i < NUM_OBJECTS; i++)
+  for (i = 0; i < NUM_OBJECTS; i++)
   {
     cl[i] = Q_OBJ;
     cl[i]->val = NULL;
@@ -589,66 +586,55 @@ let cplusplus4 = `int main()
     cl[i] = temp;
 
     cur_list = cl[i];
+  }
+}
 `;
-let cplusplus5 = `void StackLinkedList::destroyList()
-{
-  while(front != NULL)
-  {
+let cplusplus5 = `void StackLinkedList::destroyList() {
+  while(front != NULL) {
     NODE *temp = front;
     front = front->N;
     delete temp;
   }
 }
 
-void disp(NODE *N)
-{
-  if ( N == NULL )
-  {
-    cout << "Stack is Empty!!!" << endl;
-  }
-  else
-  {
+void disp(NODE *N) {
+  if ( N == NULL ) {
+    cout << "Stack is empty!" << endl;
+  } else {
     cout << "Id No.     : " << N->data.id <<" ";
     cout << "Full Name  : " << N->data.fname << " ";
     cout <<  N->data.mname << " ";
     cout <<  N->data.lname << endl;
     cout << "Address    : " << N->data.address << endl;
-    cout << "Salary     : " << setprecision(15)  << N->data.salary << endl;
+    cout << "Salary     : " << setprecision(15) << N->data.salary << endl;
     cout << "Tele_no    : " << N->data.tele_no<< endl << endl;
   }
 }
 `;
 let cplusplus6 = `#include <iostream>
 using namespace std;
-class x
-{
-  protected:
-  int x1;
-  public:
-  x(int a1):x1(a1){}
-};
-class y:public x
-{
-  private:
-  int y1;
-  public:
-  y(int a1, int a2):x::x(a1),y1(a2){ }
-  friend void disp(y&);
-};
-void disp(y &os)
-{
-  cout << "x1 = " << os.x1 << "  y1 = " << os.y1 << endl;
-}
 
-int main()
-{
-  y oop(12,24);
-  disp(oop);
-  return 0;
+class x {
+  protected:
+    int x1;
+  public:
+    x(int a1):x1(a1){}
+};
+
+class y {
+  private:
+    int y1;
+  public:
+    y(int a1, int a2):x::x(a1),y1(a2){ }
+    friend void disp(y&);
+};
+
+void disp(y &os) {
+  cout << "x1 = " << os.x1 << "  y1 = " << os.y1 << endl;
 }
 `;
 
-let css1 = `@import url(https://fonts.googleapis.com/css?family=Roboto:100,700;);
+let css1 = `@import url(https://fonts.googleapis.com/css?family=Roboto:100,700);
 .snip1585 {
   background-color: #000;
   color: #fff;
