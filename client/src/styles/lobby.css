@@ -183,11 +183,11 @@ button.activeLanguage {
   cursor: pointer;
   margin-bottom: 10px;
   border-radius: 20px;
-  background: #5e6576;
+  background: #454c5d;
 }
 
 button.active-game {
-  background: #5574a0;
+  background: #8755a0;
   opacity: 1;
 }
 
