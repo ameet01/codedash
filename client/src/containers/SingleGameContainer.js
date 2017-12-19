@@ -74,6 +74,7 @@ let javascript4 = `class Session extends Component {
     .then(() => this.props.history.push('/lobby'))
     .catch(error => { this.setState({error: 'Invalid Credentials'}); });
   }
+}
 `;
 let javascript5 = `function Node(data) {
   this.data = data;
@@ -101,40 +102,39 @@ DoublyLinkedList.prototype.add = function (data) {
 };
 `;
 let javascript6 = `exports.LinkedList.prototype.remove = function (data) {
-    if (this.first === null) {
-      return false;
-    }
-    var temp = this.first;
-    var next;
-    var prev;
-    while (temp) {
-      if (temp.data === data) {
-        next = temp.next;
-        prev = temp.prev;
-        if (next) {
-          next.prev = prev;
-        }
-        if (prev) {
-          prev.next = next;
-        }
-        if (temp === this.first) {
-          this.first = next;
-        }
-        if (temp === this.last) {
-          this.last = prev;
-        }
-        return true;
-      }
-      temp = temp.next;
-    }
+  if (this.first === null) {
     return false;
-  };
+  }
+  var temp = this.first;
+  var next;
+  var prev;
+  while (temp) {
+    if (temp.data === data) {
+      next = temp.next;
+      prev = temp.prev;
+      if (next) {
+        next.prev = prev;
+      }
+      if (prev) {
+        prev.next = next;
+      }
+      if (temp === this.first) {
+        this.first = next;
+      }
+      if (temp === this.last) {
+        this.last = prev;
+      }
+      return true;
+    }
+    temp = temp.next;
+  }
+  return false;
+};
 `;
 
 let ruby1 = `def push(key, value=key)
   raise ArgumentError, "Heap keys must not be nil." unless key
   node = Node.new(key, value)
-  # Add new node to the left of the @next node
   if @next
     node.right = @next
     node.left = @next.left
@@ -153,12 +153,13 @@ let ruby1 = `def push(key, value=key)
   until w == @next do
     arr << w.value
     w = w.right
+  end
 end
 `;
 let ruby2 = `def self.shell_sort(container)
-  increment = container.size/2
+  increment = container.size / 2
   while increment > 0 do
-    (increment..container.size-1).each do |i|
+    (increment..container.size - 1).each do |i|
       temp = container[i]
       j = i
       while j >= increment && container[j - increment] > temp do
@@ -174,8 +175,8 @@ end
 `;
 let ruby3 = `def self.mergesort(container)
   return container if container.size <= 1
-  mid   = container.size / 2
-  left  = container[0...mid]
+  mid = container.size / 2
+  left = container[0...mid]
   right = container[mid...container.size]
   merge(mergesort(left), mergesort(right))
 end
@@ -277,27 +278,31 @@ let java1 = `public class OracleJdbcTest {
     }
 
   public void fetch() throws SQLException, IOException {
-      PreparedStatement ps = con.prepareStatement("select SYSDATE from dual");
-        ResultSet rs = ps.executeQuery();
+    PreparedStatement ps = con.prepareStatement("select SYSDATE from dual");
+    ResultSet rs = ps.executeQuery();
+  }
+}
 `;
 let java2 = `import java.util.zip.*;
 import java.io.*;
 public class ZipIt {
-    public static void main(String args[]) throws IOException {
-        if (args.length < 2) {
-            System.err.println("usage: java ZipIt Zip.zip file1 file2 file3");
-            System.exit(-1);
-        }
-        File zipFile = new File(args[0]);
-        if (zipFile.exists()) {
-            System.err.println("Zip file already exists, please try another");
-            System.exit(-2);
-        }
-        FileOutputStream fos = new FileOutputStream(zipFile);
-        ZipOutputStream zos = new ZipOutputStream(fos);
-        int bytesRead;
-        byte[] buffer = new byte[1024];
-        CRC32 crc = new CRC32();
+  public static void main(String args[]) throws IOException {
+    if (args.length < 2) {
+        System.err.println("usage: java ZipIt Zip.zip file1 file2 file3");
+        System.exit(-1);
+    }
+    File zipFile = new File(args[0]);
+    if (zipFile.exists()) {
+        System.err.println("Zip file already exists, please try another");
+        System.exit(-2);
+    }
+    FileOutputStream fos = new FileOutputStream(zipFile);
+    ZipOutputStream zos = new ZipOutputStream(fos);
+    int bytesRead;
+    byte[] buffer = new byte[1024];
+    CRC32 crc = new CRC32();
+  }
+}
 `;
 let java3 = `import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -396,7 +401,6 @@ def sortByVotes():
   url = "http://www.commandlinefu.com/commands/browse/sort-by-votes/json"
   request = urllib2.Request(url)
   response = json.load(urllib2.urlopen(request))
-  #print json.dumps(response,indent=2)
   for c in response:
     print "-" * 60
     print c['command']
@@ -429,9 +433,8 @@ let python3 = `class FtpFileItem(object):
     self.dir = dir
     self.filepath = filepath
 
-    datetime_string = "%s %s" % (date_string, time_string)  # e.g.: 02-16-12 01:11PM
+    datetime_string = "%s %s" % (date_string, time_string)
     self.mtime = datetime.datetime.strptime(datetime_string, DATE_FORMAT)
-    # ~ print datetime_string, self.mtime
 
     self.size = size
 
@@ -457,7 +460,6 @@ def deinstall():
   OptParser.error("not supported yet!")
 
 def start_server():
-  # Ausgelagerte .py-Dateien in den Pfad aufnehmen
   sys.path.append( os.path.join( os.getcwd(), "routines" ) )
 
   from routines import PyAdminCGIHTTPServer
@@ -477,9 +479,7 @@ let python5 = `if __name__ == "__main__":
   action = args[0]
 
   if action == "install":
-    #~ install()
   elif action == "deinstall":
-    #~ deinstall()
   elif action == "start":
     start_server()
   elif action == "stop":
@@ -495,7 +495,7 @@ let python6 = `def scite_run():
     sys.exit(-1)
 
   script_file = os.path.abspath(os.path.normpath(script_file))
-  assert os.path.isfile(script_file), "Skipt %r doesn't exists!" % sys.argv[1]
+  assert os.path.isfile(script_file), "Script %r doesn't exist!" % sys.argv[1]
 
   filepath, filename = os.path.split(sys.argv[1])
   print("Start %r from %r:" % (filename, filepath))
@@ -508,8 +508,6 @@ let python6 = `def scite_run():
     '__builtins__': __builtins__,
     '__name__': '__main__',
     '__file__': filename,
-    #~ '__doc__': None,
-    #~ '__package__': None
   }
   sys.argv = [script_file]
 `;
@@ -546,8 +544,8 @@ void mergesort(int a[], int temp[], int left, int right){
   int mid = left + (right - left)/2;
   if (right > left){
     mergesort(a, temp, left, mid);
-    mergesort(a, temp, mid+1, right);
-    merge(a, temp, left, mid+1, right);
+    mergesort(a, temp, mid + 1, right);
+    merge(a, temp, left, mid + 1, right);
   }
 }
 `;
@@ -795,56 +793,74 @@ let html1 = `<div class="snip1517">
   <div class="plan">
     <header>
       <h4 class="plan-title">
-
         Starter
       </h4>
-      <div class="plan-cost"><span class="plan-price">$19</span><span class="plan-type">/month</span></div>
+      <div class="plan-cost">
+        <span class="plan-price">$19</span>
+        <span class="plan-type">/month</span>
+      </div>
     </header>
     <ul class="plan-features">
-      <li><i class="ion-android-remove"> </i>5GB Linux Web Space</li>
-      <li><i class="ion-android-remove"> </i>5 MySQL Databases</li>
-      <li><i class="ion-android-remove"> </i>Unlimited Email</li>
-      <li><i class="ion-android-remove"> </i>250Gb mo Transfer</li>
-      <li><i class="ion-android-remove"> </i>24/7 Tech Support</li>
-      <li><i class="ion-android-remove"> </i>Daily Backups</li>
+      <li><i class="ion-android-remove"></i>5GB Linux Web Space</li>
+      <li><i class="ion-android-remove"></i>5 MySQL Databases</li>
+      <li><i class="ion-android-remove"></i>Unlimited Email</li>
+      <li><i class="ion-android-remove"></i>250Gb mo Transfer</li>
+      <li><i class="ion-android-remove"></i>24/7 Tech Support</li>
+      <li><i class="ion-android-remove"></i>Daily Backups</li>
     </ul>
-    <div class="plan-select"><a href="">Select Plan</a></div>
+    <div class="plan-select">
+      <a href="">Select Plan</a>
+    </div>
+  </div>
+</div>
 `;
 let html2 = `<!DOCTYPE html>
 <html>
 <body>
 
-<h2>JavaScript Variables</h2>
+  <h2>JavaScript Variables</h2>
 
-<p id="demo"></p>
+  <p id="demo"></p>
 
-<script>
-var price1 = 5;
-var price2 = 6;
-var total = price1 + price2;
-document.getElementById("demo").innerHTML =
-"The total is: " + total;
-</script>
+  <script>
+    var price1 = 5;
+    var price2 = 6;
+    var total = price1 + price2;
+    document.getElementById("demo").innerHTML = "The total is: " + total;
+  </script>
 
 </body>
 </html>
 `;
-let html3 = `<figure class="snip1529 hover"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/pr-sample21.jpg" alt="pr-sample21" />
-  <div class="date"><span class="day">17</span><span class="month">May</span></div>
+let html3 = `<figure class="snip1529 hover">
+  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/pr-sample21.jpg" alt="pr-sample21" />
+  <div class="date">
+    <span class="day">17</span>
+    <span class="month">May</span>
+  </div>
   <figcaption>
     <h3>Down with this sort of thing</h3>
     <p>I'm killing time while I wait for life to shower me with meaning and happiness.</p>
   </figcaption>
-  <div class="hover"><i class="ion-android-open"></i></div>
+  <div class="hover">
+    <i class="ion-android-open"></i>
+  </div>
   <a href="#"></a>
 </figure>
-<figure class="snip1529"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/pr-sample23.jpg" alt="pr-sample23" />
-  <div class="date"><span class="day">08</span><span class="month">June</span></div>
+
+<figure class="snip1529">
+  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/pr-sample23.jpg" alt="pr-sample23" />
+  <div class="date">
+    <span class="day">08</span>
+    <span class="month">June</span>
+  </div>
   <figcaption>
     <h3>The World Ended Yesterday</h3>
-    <p>The only skills I have the patience to learn are those that have no real application in life. </p>
+    <p>The only skills I have the patience to learn are those that have no real application in life.</p>
   </figcaption>
-  <div class="hover"><i class="ion-android-open"></i></div>
+  <div class="hover">
+    <i class="ion-android-open"></i>
+  </div>
   <a href="#"></a>
 </figure>
 `;
