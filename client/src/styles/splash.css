@@ -104,11 +104,11 @@
 }
 
 .tagline p, .splash-buttons {
-  animation: fadeIn 2s ease-in;
+  animation: fadeIn 0.75s ease-in;
 }
 
 @keyframes fadeIn {
-  0%, 70% {
+  0% {
     opacity: 0;
   }
   100% {
