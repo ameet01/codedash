@@ -1,5 +1,7 @@
 <img src="https://github.com/ameet01/codedash/blob/master/docs/header.png" />
 
+### Check out the live [Application](http://www.code-dash.net//)!
+
 By: [Ameet Vadhia](https://github.com/ameet01), [Vickie Chen](https://github.com/PhishyFish)
 
 ## About
