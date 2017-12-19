@@ -304,17 +304,14 @@ class SingleGame extends Component {
       timer = <div id="timer">Timer: {this.state.timer}</div>;
     }
 
-    let lobbyButton;
-    if (this.state.showButton) {
-      lobbyButton = <button
-        className="lobby-back"
-        onClick={() => this.props.history.push('/lobby')}>
-        Lobby
-      </button>;
-    }
+    let lobbyButton = <button
+      className="lobby-back"
+      onClick={() => this.props.history.push('/lobby')}>
+      Lobby
+    </button>;
 
     return <div className="game">
-      <h1>Single Game</h1>
+      <h1>Solo Game</h1>
       {timer}
       {highlight}
       {lobbyButton}
