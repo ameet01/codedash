@@ -17,6 +17,10 @@ class NavBar extends Component {
     this.props.fetchUser();
   }
 
+  componentWillReceiveProps(newProps) {
+    this.setState({error: ""});
+  }
+
   update(property) {
     return (e) => this.setState({[property]: e.target.value});
   }
