@@ -413,11 +413,11 @@ class MultiGame extends Component {
         warning = <div className="warning">You lost the game, but keep trying!</div>;
       }
 
-      let lobbyButton = <button
+      let lobbyButton = <div
         className="lobby-back"
         onClick={() => this.props.history.push('/lobby')}>
         Lobby
-      </button>;
+      </div>;
 
       return <div className="game">
         <div className="game-header">
