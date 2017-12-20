@@ -1,6 +1,6 @@
 <img src="https://github.com/ameet01/codedash/blob/master/docs/header.png" />
 
-##### Check out the live [Application](http://www.code-dash.net/)!
+#### Check out the live [Application](http://www.code-dash.net/)!
 
 ## About
 
