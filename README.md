@@ -2,6 +2,8 @@
 
 #### Check out the live [Application](http://www.code-dash.net/)!
 
+<img src="https://github.com/ameet01/codedash/blob/master/docs/codedash.gif” />
+
 ## About
 
 Code Dash is an interactive, real-time multiplayer typing speed game for coders.
