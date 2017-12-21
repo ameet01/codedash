@@ -2,7 +2,7 @@
 
 #### Check out the live [Application](http://www.code-dash.net/)!
 
-<img src="https://github.com/ameet01/codedash/blob/master/docs/codedash.gif” />
+<img src="https://github.com/ameet01/codedash/blob/master/docs/codedash.gif" />
 
 ## About
 
