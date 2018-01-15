@@ -45,7 +45,7 @@ class Session extends Component {
       <div className="session">
         <div className="inner-session">
           <h1>Sign Up</h1>
-          <div className='signup-errors'>{this.state.error}</div>
+          <div className="signup-errors">{this.state.error}</div>
           <form method="post" onSubmit={(e) => this.handleSubmit(e)}>
             <span>Username</span>
             <input type="text"

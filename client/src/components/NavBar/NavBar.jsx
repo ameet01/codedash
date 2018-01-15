@@ -71,11 +71,11 @@ class NavBar extends Component {
 
   render() {
     return (
-      <div className='navbar' props={this.props}>
-        <div className='inside-navbar'>
+      <div className="navbar" props={this.props}>
+        <div className="inside-navbar">
           <h1 onClick={this.redirect}>CodeDash</h1>
           {this.renderContent()}
-          <div className='navbar-error'>{this.state.error}</div>
+          <div className="navbar-error">{this.state.error}</div>
         </div>
       </div>
     );
