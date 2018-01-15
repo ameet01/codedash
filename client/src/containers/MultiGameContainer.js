@@ -48,7 +48,7 @@ function newMake() {
 }
 
 function doIt() {
-  for (var i = 1; i <= slen ; i++) {
+  for (var i = 1; i <= slen; i++) {
     setTimeout("document.z.textdisplay.value = newMake()", i * 300);
     setTimeout("window.status = newMake()", i * 300);
   }
