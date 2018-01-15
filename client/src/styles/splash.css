@@ -119,7 +119,7 @@
   background: rgb(98, 64, 123);
 }
 
-.tagline p, .splash-buttons {
+.tagline p, .splash-buttons, .splash-image {
   animation: fadeIn 0.75s ease-in;
 }
 
