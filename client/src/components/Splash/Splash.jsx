@@ -37,6 +37,9 @@ class Splash extends Component {
       <div className="splash-container">
         <div className="tagline">
           <h2>Dash to the finish</h2>
+          <div className="splash-image">
+            <img src="codedash-editor.svg" alt="JavaScript code snippet" />
+          </div>
           <p>Hone your code typing skills and race head to head against your friends</p>
           <div className="splash-buttons">
             <button onClick={() => this.props.history.push('/signup')}>Sign Up</button>
