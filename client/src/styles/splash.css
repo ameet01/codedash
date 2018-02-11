@@ -17,6 +17,7 @@
   left: 0;
   top: 0;
   height: 100%;
+  min-height: 760px;
   width: 100%;
   display: block;
   content: '';
@@ -130,4 +131,8 @@
   100% {
     opacity: 1;
   }
+}
+
+.minheight815 {
+  min-height: 815px;
 }
