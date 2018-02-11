@@ -13,14 +13,14 @@ class Splash extends Component {
     document.querySelector('html').classList.add('height100');
     document.querySelector('body').classList.add('height100');
     document.querySelector('#root').classList.add('height100');
-    document.querySelector('.app-container').classList.add('height100 minheight815');
+    document.querySelector('.app-container').classList.add('height100', 'minheight815');
   }
 
   componentWillUnmount() {
     document.querySelector('html').classList.remove('height100');
     document.querySelector('body').classList.remove('height100');
     document.querySelector('#root').classList.remove('height100');
-    document.querySelector('.app-container').classList.remove('height100 minheight815');
+    document.querySelector('.app-container').classList.remove('height100', 'minheight815');
   }
 
   demoLogin() {
