@@ -21,7 +21,7 @@ h1, h2, h3, h4 {
     'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
-.navbar ,footer {
+.navbar, footer {
   flex: 0 0;
   z-index: 2;
 }

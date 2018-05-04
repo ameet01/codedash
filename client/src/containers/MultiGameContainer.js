@@ -696,7 +696,7 @@ h1, h2, h3, h4 {
   font-family: Raleway;
 }
 
-.navbar ,footer {
+.navbar, footer {
   flex: 0 0;
   z-index: 2;
 }
