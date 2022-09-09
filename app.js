@@ -8,7 +8,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 // mongodb://localhost/flexproject
-mongoose.connect('mongodb://flexproject:vickiesucks@ds059207.mlab.com:59207/flexproject', {useMongoClient: true})
+mongoose.connect('mongodb+srv://ameet:Test1234@cluster0.urjejdk.mongodb.net/?retryWrites=true&w=majority', {useMongoClient: true})
   .then(() => console.log('connection successful'))
   .catch((err) => console.log(err));
 
