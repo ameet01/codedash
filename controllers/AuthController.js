@@ -44,9 +44,10 @@ userController.doLogin = function(req, res) {
 
 // logout
 userController.logout = function(req, res) {
-  req.logout();
-  req.session.destroy();
-  res.redirect('/');
+  req.logout(function(err) {
+    req.session.destroy();
+    res.redirect('/');
+  });
 };
 
 //currentuser
