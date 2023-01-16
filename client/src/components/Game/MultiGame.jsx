@@ -8,7 +8,7 @@ import { ClipLoader } from 'react-spinners';
 
 
 import socketIOClient from "socket.io-client";
-const socket = socketIOClient("https://flexproject.herokuapp.com");
+const socket = socketIOClient("https://codedashback.onrender.com");
 // http://127.0.0.1:5000");
 
 let Highlight = require('react-syntax-highlight');
