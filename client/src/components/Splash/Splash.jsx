@@ -28,7 +28,7 @@ class Splash extends Component {
     api.post('/api/login', {
       username: `player${randomNumber}`, password: "password"
     })
-    .then(() => this.props.history.go('/lobby'))
+    .then(() => this.props.history.push('/lobby'))
     .then(() => this.props.fetchUser());
   }
 
@@ -42,7 +42,7 @@ class Splash extends Component {
           </div>
           <p>Hone your code typing skills and race head to head against your friends</p>
           <div className="splash-buttons">
-            <button onClick={() => this.props.history.go('/signup')}>Sign Up</button>
+            <button onClick={() => this.props.history.push('/signup')}>Sign Up</button>
             <button onClick={() => this.demoLogin()}>Play Now</button>
           </div>
         </div>

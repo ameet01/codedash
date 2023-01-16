@@ -39,7 +39,7 @@ class Lobby extends Component {
       let langNum = Math.floor(Math.random() * 6);
       this.setState({error: undefined});
       socket.emit('lobby');
-      this.props.history.go(`/game/${languages[this.state.index]}/${langNum}/${this.state.gameType}/${gameId}`);
+      this.props.history.push(`/game/${languages[this.state.index]}/${langNum}/${this.state.gameType}/${gameId}`);
     } else {
       this.setState({error: "Incomplete Inputs"});
     }

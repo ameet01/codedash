@@ -306,7 +306,7 @@ class SingleGame extends Component {
 
     let lobbyButton = <div
       className="lobby-back"
-      onClick={() => this.props.history.go('/lobby')}>
+      onClick={() => this.props.history.push('/lobby')}>
       Lobby
     </div>;
 

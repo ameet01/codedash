@@ -32,7 +32,7 @@ class Session extends Component {
       { username: this.state.username, password: this.state.password }
     )
     .then(() => this.props.fetchUser()).then(() => this.setState({ error: '' }))
-    .then(() => this.props.history.go('/lobby'))
+    .then(() => this.props.history.push('/lobby'))
     .catch(error => { this.setState({ error: 'Invalid Inputs' }); });
   }
 

@@ -32,14 +32,14 @@ class NavBar extends Component {
       _id: user.data._id,
       username: this.state.username
     }))
-    .then(() => this.props.history.go('/lobby'))
+    .then(() => this.props.history.push('/lobby'))
     .then(() => this.setState({error: ''}))
     .catch(error => { this.setState({error: 'Invalid Credentials'}); });
   }
 
   logout() {
     api.get('/api/logout').then(() => this.props.receiveUser(null)).then(() => this.setState({username: "", password: "", error: ""}))
-    .then(() => this.props.history.go('/'));
+    .then(() => this.props.history.push('/'));
   }
 
   renderContent() {
@@ -62,9 +62,9 @@ class NavBar extends Component {
 
   redirect() {
     if (this.props.auth) {
-      this.props.history.go('/lobby');
+      this.props.history.push('/lobby');
     } else {
-      this.props.history.go('/');
+      this.props.history.push('/');
     }
   }
 
