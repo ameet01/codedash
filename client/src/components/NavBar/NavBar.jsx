@@ -39,7 +39,7 @@ class NavBar extends Component {
 
   logout() {
     api.get('/api/logout').then(() => this.props.receiveUser(null)).then(() => this.setState({username: "", password: "", error: ""}))
-    .then(() => this.props.history.push('/'));
+    .then(() => this.props.history.go('/'));
   }
 
   renderContent() {
