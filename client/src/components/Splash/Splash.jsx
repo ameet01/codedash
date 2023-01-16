@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import axios from 'axios';
+import api from "../../api";
 
 class Splash extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class Splash extends Component {
 
   demoLogin() {
     let randomNumber = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
-    axios.post('/api/login', {
+    api.post('/api/login', {
       username: `player${randomNumber}`, password: "password"
     })
     .then(() => this.props.history.push('/lobby'))

@@ -1,10 +1,10 @@
-import axios from 'axios';
+import api from "../../api";
 
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_USERS = 'FETCH_USERS';
 
 export const fetchUser = () => (dispatch) => {
-  axios.get('/api/current_user')
+  api.get('/api/current_user')
     .then(res => {
       dispatch(receiveUser(res.data));
     });
