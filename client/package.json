@@ -4,7 +4,7 @@
   "private": true,
   "proxy": {
     "/api/*": {
-      "target": "https://codedashback.onrender.com/"
+      "target": "http://localhost:5000"
     }
   },
   "dependencies": {
