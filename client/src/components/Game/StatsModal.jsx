@@ -107,7 +107,7 @@ class StatsModal extends React.Component {
               <span>Collateral</span>
               <span>{this.props.collateral} keystrokes</span>
             </div>
-            <button onClick={() => this.props.history.push('/lobby')}>Back to Lobby</button>
+            <button onClick={() => this.props.history.go('/lobby')}>Back to Lobby</button>
             <button onClick={this.unmountStyle}>View Snippet</button>
           </div>
           <div className="backdrop" onClick={this.unmountStyle}></div>

@@ -250,7 +250,7 @@ class MultiGame extends Component {
       playerLeft = <div className="player-left-modal">
         <span>Your opponent has disconnected from the game.</span>
         <span>Please return to the lobby.</span>
-        <button onClick={() => this.props.history.push('/lobby')}>Lobby</button>
+        <button onClick={() => this.props.history.go('/lobby')}>Lobby</button>
       </div>;
     }
 
@@ -415,7 +415,7 @@ class MultiGame extends Component {
 
       let lobbyButton = <div
         className="lobby-back"
-        onClick={() => this.props.history.push('/lobby')}>
+        onClick={() => this.props.history.go('/lobby')}>
         Lobby
       </div>;
 
