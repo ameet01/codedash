@@ -2,7 +2,7 @@ import StatsModal from './StatsModal';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import api from '../../../api';
+import api from '../../api';
 import { ClipLoader } from 'react-spinners';
 let Highlight = require('react-syntax-highlight');
 
