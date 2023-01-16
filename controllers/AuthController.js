@@ -2,6 +2,10 @@ var mongoose = require("mongoose");
 var passport = require("passport");
 var User = require("../models/User");
 
+[ ...Array(10) ].forEach((e, i) => {
+  User.register(new User({ username : "player" + i }), "password", function(err, user) {});
+});
+
 var userController = {};
 
 // Restrict access to root page
