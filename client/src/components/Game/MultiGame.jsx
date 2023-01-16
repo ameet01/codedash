@@ -2,7 +2,7 @@ import StatsModal from './StatsModal';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import axios from 'axios';
+import api from '../../../api';
 import uniqBy from 'lodash/uniqBy';
 import { ClipLoader } from 'react-spinners';
 
@@ -87,7 +87,7 @@ class MultiGame extends Component {
 
   componentDidMount() {
     window.onbeforeunload = (e) => {
-      axios.put('/api/updateuser/', {
+      api.put('/api/updateuser/', {
         id: this.props.auth._id,
         currentGame: null,
         currentGameType: null,
@@ -96,7 +96,7 @@ class MultiGame extends Component {
       }).then(socket.emit('lobby'));
     };
 
-    axios.put('/api/updateuser/', {
+    api.put('/api/updateuser/', {
       id: this.props.auth._id,
       currentGame: this.gameId,
       currentGameType: 2,
@@ -119,7 +119,7 @@ class MultiGame extends Component {
     if (this.state.gameEnded === false) {
       socket.emit('remove user', {game: this.gameId, user: this.props.auth});
     }
-    axios.put('/api/updateuser/', {
+    api.put('/api/updateuser/', {
       id: this.props.auth._id,
       currentGame: null,
       currentGameType: null,

@@ -2,7 +2,7 @@ import StatsModal from './StatsModal';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import axios from 'axios';
+import api from '../../../api';
 import { ClipLoader } from 'react-spinners';
 let Highlight = require('react-syntax-highlight');
 
@@ -48,7 +48,7 @@ class SingleGame extends Component {
   }
 
   componentDidMount() {
-    axios.put('/api/updateuser/', {
+    api.put('/api/updateuser/', {
       id: this.props.auth._id, currentGame: this.gameId, currentGameType: 1, currentGameLang: this.props.match.params.language, currentGameLangNum: this.props.match.params.langnum
     });
 
@@ -72,7 +72,7 @@ class SingleGame extends Component {
   }
 
   componentWillUnmount() {
-    axios.put('/api/updateuser/', {
+    api.put('/api/updateuser/', {
       id: this.props.auth._id, currentGame: null, currentGameType: null, currentGameLang: null, currentGameLangNum: null
     });
     clearInterval(this.timer);

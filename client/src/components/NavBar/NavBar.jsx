@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import axios from 'axios';
-
+import api from '../../../api';
 
 class NavBar extends Component {
   constructor(props) {
@@ -27,7 +26,7 @@ class NavBar extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    axios.post('/api/login', {username: this.state.username, password: this.state.password})
+    api.post('/api/login', {username: this.state.username, password: this.state.password})
     .then(user =>
       this.props.receiveUser({
       _id: user.data._id,
@@ -39,7 +38,7 @@ class NavBar extends Component {
   }
 
   logout() {
-    axios.get('/api/logout').then(() => this.props.receiveUser(null)).then(() => this.setState({username: "", password: "", error: ""}))
+    api.get('/api/logout').then(() => this.props.receiveUser(null)).then(() => this.setState({username: "", password: "", error: ""}))
     .then(() => this.props.history.push('/'));
   }
 

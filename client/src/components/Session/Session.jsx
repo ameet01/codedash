@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
-import axios from 'axios';
+import api from '../../../api';
 
 class Session extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class Session extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    axios.post(
+    api.post(
       '/api/register',
       { username: this.state.username, password: this.state.password }
     )

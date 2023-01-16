@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../../api';
 
 import socketIOClient from "socket.io-client";
 const socket = socketIOClient("https://codedashback.onrender.com");
@@ -21,13 +21,13 @@ class Lobby extends Component {
 
     socket.on('update room list', () => {
       setTimeout(() => {
-        axios.get('/api/indexusers').then(users => this.props.receiveUsers(users.data));
+        api.get('/api/indexusers').then(users => this.props.receiveUsers(users.data));
       }, 150);
     });
   }
 
   componentDidMount() {
-    axios.get('/api/indexusers')
+    api.get('/api/indexusers')
       .then(users => this.props.receiveUsers(users.data));
 
     document.querySelector('.solo').classList.add('active-game');
