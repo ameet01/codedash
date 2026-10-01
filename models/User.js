@@ -1,22 +1,22 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var passportLocalMongoose = require('passport-local-mongoose');
+const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
-var UserSchema = new Schema({
-    username: { type: String, required: true, index: { unique: true } },
-    password: {
-      type: String,
-      min: [6, 'Password too short'],
-    },
+const UserSchema = new mongoose.Schema(
+  {
+    username: { type: String, required: true, unique: true, trim: true },
     bestSpeed: { type: Number, default: 0 },
     averageSpeed: { type: Number, default: 0 },
     totalGames: { type: Number, default: 0 },
-    currentGame: { type: Number },
-    currentGameType: { type: Number },
-    currentGameLang: { type: String },
-    currentGameLangNum: { type: Number }
-});
+    currentGame: { type: Number, default: null },
+    currentGameType: { type: Number, default: null },
+    currentGameLang: { type: String, default: null },
+    currentGameLangNum: { type: Number, default: null },
+  },
+  { timestamps: true }
+);
 
+// Adds username/hash/salt fields + register/authenticate/serialize helpers.
+// Passwords are stored as salted PBKDF2 hashes (never plaintext).
 UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', UserSchema);

@@ -1,18 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var auth = require("../controllers/AuthController.js");
+const express = require('express');
 
-// restrict index for logged in user only
-router.get('/', auth.home);
+const router = express.Router();
+const auth = require('../controllers/AuthController.js');
 
-// route to register page
-router.get('/api/register', auth.register);
+// Service info (the React frontend is served separately as a static site).
+router.get('/', (req, res) => {
+  res.json({ ok: true, service: 'codedash-api' });
+});
 
 // route for register action
 router.post('/api/register', auth.doRegister);
-
-// route to login page
-router.get('/api/login', auth.login);
 
 // route for login action
 router.post('/api/login', auth.doLogin);
@@ -20,16 +17,13 @@ router.post('/api/login', auth.doLogin);
 // route for logout action
 router.get('/api/logout', auth.logout);
 
-//currentuser
+// current user
 router.get('/api/current_user', auth.current_user);
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
+// save game stats
 router.put('/api/updateuser', auth.update_user);
 
+// users currently in a multiplayer game (lobby list)
 router.get('/api/indexusers', auth.indexusers);
 
 module.exports = router;
